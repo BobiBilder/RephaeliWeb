@@ -1,0 +1,56 @@
+﻿body {
+    background-image: url('/Content/Images/background.jpg');
+    margin: 0px;
+}
+body::-webkit-scrollbar {
+        display: none;
+    }
+
+/*wrapper*/
+.wrapper {
+    display: flex;
+    justify-content: center;
+}
+/*wrapper*/
+
+
+/*form*/
+.personal-input input[type=text],  input[type=tel], textarea {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: 'Suez One', serif;
+}
+div.personal-input {
+    margin-top:132px;
+    direction: rtl;
+    border-radius: 5px;
+    background-color: rgb(120, 120, 120);
+    padding: 20px;
+    font-family: 'Suez One', serif;
+    width: 1000px;
+}
+textarea{
+    height:150px;
+}
+input[type=submit] {
+    font-family: 'Suez One', serif;
+}
+small {
+    font-size: 15px;
+}
+.span {
+    position: absolute;
+    color: white;
+    background-color: red;
+    border: solid 1px white;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-right: 10px;
+    visibility: hidden;
+}
+/*form*/

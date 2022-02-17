@@ -1,0 +1,46 @@
+﻿@using MasterProject.Models;
+@{
+    ViewBag.Title = "Wanted";
+    Layout = "~/Views/Share/View.cshtml";
+}
+
+<script src="~/Content/Scripts/Wanted-Script.js"></script>
+<link href="~/Content/Styles/Style-Wanted.css" rel="stylesheet" />
+<div class="wrapper">
+    <div class="personal-input">
+        <form id="loginForm" method="post" action="~/User/Register">
+            <label for="fname">שם פרטי</label>
+            <span class="span" id="errorFname">צריך לכתוב רק אותיות</span>
+            <span class="span" id="emptyFname">צריך למלא</span>
+            <input type="text" id="fname" placeholder="השם הפרטי שלך..." value="" name="FirstName">
+
+            <label for="lname">שם משפחה</label>
+            <span class="span" id="errorLname">צריך לכתוב רק אותיות</span>
+            <span class="span" id="emptyLname">צריך למלא</span>
+            <input type="text" id="lname" placeholder="שם המשפחה שלך..." value="" name="LastName">
+
+            <label for="phone">טלפון</label>
+            <span class="span" id="errorPhone">צריך לכתוב לפי התבנית</span>
+            <span class="span" id="emptyPhone">צריך למלא</span>
+            <input type="tel" id="phone" placeholder="הטלפון שלך..." value="" name="PhoneNumber">
+            <small>תבנית: 05X-XXX-XXXX, לא צריך את ה"-"</small><br><br>
+
+            <label for="email">מייל</label>
+            <span class="span" id="errorEmail">צריך לכתוב לפי התבנית</span>
+            <span class="span" id="emptyEmail">צריך למלא</span>
+            <input type="email" id="email" placeholder="המייל שלך..." value="" name="Email">
+            <small>תבנית: example@example.com</small><br><br>
+
+            <label for="ID">תעודת זהות</label>
+            <span class="span" id="errorID1">צריך לכתוב רק ספרות</span>
+            <span class="span" id="emptyID1">צריך למלא</span>
+            <input type="text" id="ID" placeholder="תעודת הזהות שלך..." value="" name="IDnum">
+
+            <label for="pass1">סיסמא</label>
+            <span class="span" id="emptyPass1">צריך למלא</span>
+            <input type="text" id="pass1" placeholder="הסיסמא..." value="" name="Password">
+
+            <input class="signInButton" type="button" onclick="checkSignIn()" value="הרשמה">
+        </form>
+    </div>
+</div>

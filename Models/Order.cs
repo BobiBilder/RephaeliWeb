@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace MasterProject.Models
+{
+    public class Order:BaseModel
+    {
+        public int ClientID { get; set; }
+        public string OrderDate { get; set; }
+        public List<Employee> Employees { get; set; }
+        public bool IsPayed { get; set; }
+        public string OrderTime { get; set; }
+    }
+}

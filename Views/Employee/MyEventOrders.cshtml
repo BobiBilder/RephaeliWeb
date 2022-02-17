@@ -1,0 +1,82 @@
+﻿@using MasterProject.ViewModels
+@using MasterProject.Models
+@using MasterProject.BLL
+@using MasterProject.DAL
+@model EventOrderViewModel
+@{
+    ViewBag.Title = "EventOrders";
+    Layout = "~/Views/Share/ViewWorker.cshtml";
+    LoginUser user = Session["User"] as LoginUser;
+}
+<link href="~/Content/Styles/Style-Food.css" rel="stylesheet" />
+<script src="~/Content/Scripts/Events-Script.js"></script>
+<div class="wrapper">
+    @if (!user.IsManager)
+    {
+        <form class="EventWrapper" method="post" action="~/Employee/RemoveWorkEvent">
+            @for (int i = 0; i < Model.Events.Count(); i++)
+            {
+                Event events = Model.Events[i];
+                Order order = Model.Orders[events.OrderID - 2];
+                Clients client = Model.Clients[(order.ClientID - 1)];
+                events.EventType.EventTypeName = Model.EventTypes[events.EventType.id - 1].EventTypeName;
+                <div class="eventBlock">
+                    <label class="container">
+                        <input type="checkbox" id="orderID" name="orderID" value="@order.id">
+                        <span class="checkmark"></span>
+                        <h1 class="eventInfo">@events.EventType.EventTypeName</h1>
+                        <h2 class="eventInfo">מוזמנים:@events.Invitations</h2>
+                        <h2 class="eventInfo">האירוע של:@client.FirstName @client.LastName</h2>
+                        <h2 class="eventInfo">תאריך:@order.OrderDate</h2>
+                        <h2 class="eventInfo">בשעה:@order.OrderTime</h2>
+                    </label>
+                </div>
+            }
+            <br>
+            <span class="span" id="emptyCheckbox">נא לבחור אירוע בכדי לצאת מהעבודה</span>
+            <br>
+            <input type="button" onclick="WorkAssign()" class="button-order" value="יציאה מהעבודה">
+
+        </form>
+    }
+    else
+    {
+    <div class="EventWrapper">
+        @for (int i = 0; i < Model.Events.Count(); i++)
+        {
+            Event events = Model.Events[i];
+            Order order = Model.Orders[events.OrderID - 2];
+            Clients client = Model.Clients[(order.ClientID - 1)];
+            events.EventType.EventTypeName = Model.EventTypes[events.EventType.id - 1].EventTypeName;
+            <div class="eventBlock">
+                <label class="container">
+                    <h1 class="eventInfo">@events.EventType.EventTypeName</h1>
+                    <h2 class="eventInfo">מוזמנים:@events.Invitations</h2>
+                    <h2 class="eventInfo">האירוע של:@client.FirstName @client.LastName</h2>
+                    <h2 class="eventInfo">תאריך:@order.OrderDate</h2>
+                    <h2 class="eventInfo">בשעה:@order.OrderTime</h2>
+                </label>
+            </div>
+        }
+    </div>
+    }
+    <div class="eventTypesBlock">
+        <a href="~/Employee/EventOrders">
+            <h1 class="typesTitle">האירועים:</h1>
+        </a>
+        @foreach (EventType eventType in Model.EventTypes)
+        {
+            <div class="eventTypes">
+                <a href="~/Employee/EventOrderByOrderType?typeID=@eventType.id">
+                    <p class="types">@eventType.EventTypeName</p>
+                </a>
+            </div>
+        }
+        <div class="eventTypes">
+            <a href="~/Employee/MyEventOrders">
+                <p class="types">להם נרשמתי:</p>
+            </a>
+        </div>
+    </div>
+
+</div>

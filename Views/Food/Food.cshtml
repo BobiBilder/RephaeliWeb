@@ -1,0 +1,87 @@
+﻿@using MasterProject.ViewModels
+@using MasterProject.Models
+@using MasterProject.BLL
+@using MasterProject.DAL
+
+@model FoodViewModel
+@{
+    ViewBag.Title = "Food";
+    if (Session["User"] != null)
+    {
+        LoginUser user = Session["User"] as LoginUser;
+        if (user.IsWorker)
+        {
+            Layout = "~/Views/Share/ViewWorker.cshtml";
+        }
+        else
+        {
+            Layout = "~/Views/Share/View.cshtml";
+        }
+    }
+    else
+    {
+        Layout = "~/Views/Share/View.cshtml";
+    }
+}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="~/Content/Scripts/SortFoodType-Script.js"></script>
+<link href="~/Content/Styles/Style-Food.css" rel="stylesheet" />
+<div class="wrapper">
+    <div class="loader hidden">
+        <img src="~/Content/Images/GIFs/FoodLoading.gif" />
+    </div>
+    @if (Session["User"] == null)
+    {
+        <div class="foodWrapper">
+            @foreach (Food food in Model.Food)
+            {
+                <a class="link" href="~/SpecificFood/SpecificFood?foodID=@food.id">
+                    <div class="foodBlock">
+                        <div>
+                            <h1 class="foodName">@food.FoodName</h1>
+                            <img class="foodPicture" src="~/Content/Images/Food/@food.FoodPicture" />
+                            <h3 class="foodPrice">@food.FoodPrice ₪ לקילו </h3>
+                        </div>
+                    </div>
+                </a>
+            }
+        </div>
+    }
+    else
+    {
+        <form class="foodWrapper" method="post" action="~/Order/OrderedFood">
+            @foreach (Food food in Model.Food)
+            {
+                <div class="foodBlock">
+                    <a class="link" href="~/SpecificFood/SpecificFood?foodID=@food.id">
+                        <div>
+                            <h1 class="foodName">@food.FoodName</h1>
+                            <img class="foodPicture" src="~/Content/Images/Food/@food.FoodPicture" />
+                            <h3 class="foodPrice">@food.FoodPrice ₪ לקילו </h3>
+                        </div>
+                    </a>
+                    <label class="quantity" for="quantity">משקל בין 1 ל-20 קילו:</label>
+                    <input class="range" type="number" id="quantity" name="quantity" min="0" max="20">
+                    <input class="hidden" type="text" value="@food.id" name="foodID" />
+                </div>
+            }
+            <br>
+            <input type="button" onclick="checkOrder()" class="button-order" value="הזמנה">
+        </form>
+    }
+
+    <div class="typesBlock">
+        <a data-foodTypeID="0" class="SortFoodType">
+            <h1 class="typesTitle">כל הסוגים:</h1>
+        </a>
+        @foreach (FoodType foodType in Model.FoodTypes)
+        {
+            <div class="foodTypes">
+                <span id="foodType" data-foodTypeID="@foodType.id" class="SortFoodType">
+                    <p class="types">@foodType.FoodTypeName</p>
+                </span>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,52 @@
+﻿@using MasterProject.ViewModels
+@using MasterProject.Models
+@using MasterProject.BLL
+@using MasterProject.DAL
+
+@model SpecificFoodViewModel
+@{
+    ViewBag.Title = "SpecificFood";
+    if (Session["User"] != null)
+    {
+        LoginUser user = Session["User"] as LoginUser;
+        if (user.IsWorker)
+        {
+            Layout = "~/Views/Share/ViewWorker.cshtml";
+        }
+        else
+        {
+            Layout = "~/Views/Share/View.cshtml";
+        }
+    }
+    else
+    {
+        Layout = "~/Views/Share/View.cshtml";
+    }
+}
+
+<link href="~/Content/Styles/Style-Food.css" rel="stylesheet" />
+<div class="wrapper">
+        <div class="foodWrapper">
+            <div class="foodBlock">
+                <h1 class="foodName">@Model.food.FoodName</h1>
+                <h2 class="foodType">@Model.FoodTypes[Model.food.FoodType.id - 1].FoodTypeName</h2>
+                <img class="foodPicture" src="~/Content/Images/Food/@Model.food.FoodPicture" />
+                <h2 class="foodDescription">@Model.food.FoodDescription</h2>
+                <h3 class="foodPrice">@Model.food.FoodPrice ₪ לקילו </h3>
+            </div>
+        </div>
+    <div class="typesBlock">
+        <a href="~/Food/Food">
+            <h1 class="typesTitle">כל הסוגים:</h1>
+        </a>
+        @foreach (FoodType foodType in Model.FoodTypes)
+        {
+            <div class="foodTypes">
+                <a href="~/FoodByFoodType/FoodByFoodType?typeID=@foodType.id">
+                    <p class="types">@foodType.FoodTypeName</p>
+                </a>
+            </div>
+        }
+    </div>
+</div>
+

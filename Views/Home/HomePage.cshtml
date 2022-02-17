@@ -1,0 +1,150 @@
+﻿@using MasterProject.Models;
+@{
+    ViewBag.Title = "HomePage";
+    if (Session["User"] != null)
+    {
+        LoginUser user = Session["User"] as LoginUser;
+        if (user.IsWorker)
+        {
+            Layout = "~/Views/Share/ViewWorker.cshtml";
+        }
+        else
+        {
+            Layout = "~/Views/Share/View.cshtml";
+        }
+    }
+    else
+    {
+        Layout = "~/Views/Share/View.cshtml";
+    }
+}
+<div class="middle">
+    <img class="big-picture" src="~/Content/Images/Rephaeli2.jpg" />
+    <p class="info">
+        מרכז אירועים מעוצב ויוקרתי,מטבח גורמה איכותי לאירועים, שירותי קיטרינג ואוכל מוכן לשבת וחג.
+        <br>
+        <br>
+        שעות פתיחה:
+        <br>
+        ‏יום ראשון‏:
+        ‏‏9:00‏ - ‏21:00
+        <br>
+        ‏יום שני‏:
+        ‏‏9:00‏ - ‏21:00‏‏
+        <br>
+        ‏יום שלישי‏:
+        ‏‏9:00‏ - ‏21:00‏‏
+        <br>
+        ‏יום רביעי‏:
+        ‏‏9:00‏ - ‏21:00‏‏
+        <br>
+        ‏יום חמישי‏:
+        ‏‏9:00‏ - ‏21:00‏‏
+        <br>
+        ‏יום שישי‏:
+        ‏‏9:00‏ - ‏13:00‏‏
+        <br>
+        ‏שבת‏:
+        סגור
+    </p>
+    <iframe class="location" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3396.220820794481!2d34.55871292053428!3d31.65517784773187!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15029cfc249e3051%3A0x3cb29fd60aa8920!2z157XqNeb15Yg15DXqNeV16LXmdedINeo16TXkNec15k!5e0!3m2!1siw!2sil!4v1629805505100!5m2!1siw!2sil" width="425" height="417" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    <aside class="contact1">
+        <p class="phone1">צרו קשר:<br>08-6640450</p>
+        <p class="phone1">תוכלו למצוא אותנו פה:</p>
+        <a href="https://www.facebook.com/rafaelievents" class="fa fa-facebook"></a>
+        <a href="https://www.instagram.com/refaellievents/" class="fa fa-instagram"></a>
+    </aside>
+</div>
+<div class="photo-gallery">
+    <p class="photos-title">
+        גלריה
+    </p>
+    <div class="gallery">
+        <div class="photos">
+            <img src="~/Content/Images/display4.jpg" width="280" height="200">
+            <div class="dropdown-photos">
+                <img src="~/Content/Images/display4.jpg" width="400" height="542">
+            </div>
+        </div>
+
+        <div class="photos">
+            <img src="~/Content/Images/food6.jpg" width="280" height="200">
+            <div class="dropdown-photos">
+                <img src="~/Content/Images/food6.jpg" width="400" height="690">
+            </div>
+        </div>
+
+        <div class="photos">
+            <img src="~/Content/Images/display3.jpg" width="280" height="200">
+            <div class="dropdown-photos">
+                <img src="~/Content/Images/display3.jpg" width="400" height="690">
+            </div>
+        </div>
+
+        <div class="photos">
+            <img src="~/Content/Images/food1.jpg" width="280" height="200">
+            <div class="dropdown-photos">
+                <img src="~/Content/Images/food1.jpg" width="400" height="300">
+            </div>
+        </div>
+
+    </div>
+    <div class="gallery">
+        <div class="photos">
+            <img src="~/Content/Images/display5.jpg" width="280" height="200">
+            <div class="dropdown-photos">
+                <img src="~/Content/Images/display5.jpg" width="400" height="300">
+            </div>
+        </div>
+
+        <div class="photos">
+            <img src="~/Content/Images/display1.jpg" width="280" height="200">
+            <div class="dropdown-photos">
+                <img src="~/Content/Images/display1.jpg" width="400" height="300">
+            </div>
+        </div>
+
+        <div class="photos">
+            <img src="~/Content/Images/food2.jpg" width="280" height="200">
+            <div class="dropdown-photos">
+                <img src="~/Content/Images/food2.jpg" width="400" height="266">
+            </div>
+        </div>
+
+        <div class="photos">
+            <img src="~/Content/Images/food3.jpg" width="280" height="200">
+            <div class="dropdown-photos">
+                <img src="~/Content/Images/food3.jpg" width="400" height="263">
+            </div>
+        </div>
+    </div>
+    <div class="gallery">
+        <div class="photos">
+            <img src="~/Content/Images/food4.jpg" width="280" height="200">
+            <div class="dropdown-photos">
+                <img src="~/Content/Images/food4.jpg" width="667" height="300">
+            </div>
+        </div>
+
+        <div class="photos">
+            <img src="~/Content/Images/food7.jpg" width="280" height="200">
+            <div class="dropdown-photos">
+                <img src="~/Content/Images/food7.jpg" width="400" height="267">
+            </div>
+        </div>
+
+        <div class="photos">
+            <img src="~/Content/Images/display2.jpg" width="280" height="200">
+            <div class="dropdown-photos">
+                <img src="~/Content/Images/display2.jpg" width="400" height="300">
+            </div>
+        </div>
+
+        <div class="photos">
+            <img src="~/Content/Images/food5.jpg" width="280" height="200">
+            <div class="dropdown-photos">
+                <img src="~/Content/Images/food5.jpg" width="400" height="298">
+            </div>
+        </div>
+    </div>
+</div>

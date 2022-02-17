@@ -1,0 +1,66 @@
+﻿@using MasterProject.Models;
+@{
+    Layout = null;
+    LoginUser user = Session["User"] as LoginUser;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Suez+One&display=swap" rel="stylesheet">
+    <title>View</title>
+    <link href="~/Content/Styles/Style-Home.css" rel="stylesheet" />
+    <script src="~/Content/Scripts/Home-Script.js"></script>
+</head>
+<body>
+    <header>
+        <div class="menu1">
+            <a href="~/Home/HomePage">
+                <img class="logo" src="~/Content/Images/Rephaeli1.png" />
+            </a>
+            <ul class="list">
+                <li class="dropdown">
+                    <div class="dropbtn">הזמנות</div>
+                    <div class="dropdown-list">
+                        <ul class="drop-list">
+                            <li class="drop-option"><a href="~/Food/Food">תפריט/הזמנה</a></li>
+                            <li class="drop-option"><a href="~/EventRequests/EventRequests">קביעת אירוע</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <div class="dropbtn">עבודה</div>
+                    <div class="dropdown-list">
+                        <ul class="drop-list">
+                            <li class="drop-option"><a href="#">הזמנות</a></li>
+                            <li class="drop-option"><a href="~/Employee/EventOrders">אירועים</a></li>
+                            @if (user.IsManager)
+                            {
+                                <li class="drop-option"><a href="~/Employee/AddFoodForm">הוסף אוכל</a></li>
+                            }
+                        </ul>
+                    </div>
+                </li>
+                <li class="option"><form action="~/User/Logout"><input class="logout" type="submit" value="התנתק"></form></li>
+                <li class="option">שלום @user.FirstName @user.LastName</li>
+            </ul>
+        </div>
+    </header>
+    <div>
+        @RenderBody()
+    </div>
+    <footer class="footer">
+        מרכז אירועים רפאלי | ההסתדרות, 40 אשקלון | 08-6640450
+    </footer>
+    @if (TempData["message"] != null)
+    {
+        <script type="text/javascript">
+                alert("@TempData["message"].ToString()");
+        </script>
+    }
+</body>
+</html>

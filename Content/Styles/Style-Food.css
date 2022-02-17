@@ -1,0 +1,222 @@
+﻿body {
+    background-image: url('/Content/Images/background.jpg');
+    margin: 0px;
+}
+body::-webkit-scrollbar {
+    display: none;
+}
+.wrapper {
+    margin-top:210px;
+    width: 1340px;
+    text-align: center;
+}
+.foodWrapper, .EventWrapper {
+    width: 1340px;
+    display: inline-block;
+    direction:rtl;
+}
+.foodBlock, .eventBlock {
+    text-align: center;
+    display: inline-block;
+    direction: rtl;
+    color: white;
+    margin: 5px;
+    border-radius: 5px;
+    background: rgba(20,20,20,0.8);
+    padding: 20px;
+    font-size: 1.2em;
+    font-family: 'Suez One', serif;
+    width: 280px;
+    border: solid 1px yellow;
+}
+.foodBlock:hover , .eventBlock:hover{
+    background: rgba(80, 80, 80,0.6);
+    border: solid 1px white;
+}
+.foodPicture {
+    height: 240px;
+    width: 280px;
+}
+.foodName, .foodType, .foodDescription, .foodPrice, .eventInfo {
+    display: flex;
+    justify-content: center;
+    width: 280px;
+    height: auto;
+}
+.typesBlock {
+    direction: rtl;
+    text-align: right;
+    display: inline-block;
+    position: fixed;
+    margin-left: 8px;
+    margin-top: 5px;
+    height: 387px;
+    background: rgba(20,20,20,0.8);
+    border: solid 1px yellow;
+    border-radius: 5px; 
+}
+.eventTypesBlock {
+    direction: rtl;
+    text-align: right;
+    display: inline-block;
+    position: fixed;
+    margin-left: 8px;
+    margin-top: 5px;
+    height: 337px;
+    background: rgba(20,20,20,0.8);
+    border: solid 1px yellow;
+    border-radius: 5px;
+}
+.eventTypesBlock a{
+    text-decoration:none;
+}
+.foodTypes, .eventTypes {
+    list-style: none;
+}
+.foodTypes a, .eventTypes a{
+    text-decoration:none;
+}
+.types {
+    margin: 0;
+    text-align: center;
+    color: white;
+    padding: 10px;
+    font-size: 1.3em;
+    font-family: 'Suez One', serif;
+    width: 119px;
+}
+.types:hover{
+    background: rgba(80, 80, 80, 0.6);
+    border-top: solid 1px white;
+    border-bottom: solid 1px white; 
+    cursor:pointer;
+}
+.foodTypes:last-child .types, .eventTypes:last-child .types {
+    border-bottom: none;
+}
+.eventTypes:last-child .types {
+    text-decoration: underline;
+}
+.typesTitle {
+    margin: 0;
+    text-align: center;
+    color: white;
+    padding: 10px;
+    font-size: 1.5em;
+    font-family: 'Suez One', serif;
+    width: 119px;
+    text-decoration:underline;
+}
+.typesTitle:hover{
+    background: rgba(80, 80, 80, 0.6);
+    border-bottom: solid 1px white;
+    cursor:pointer;
+}
+.typesTitle a{
+    text-decoration:none;
+}
+.hidden{
+    visibility : hidden;
+}
+.quantity {
+    font-family: 'Suez One', serif;
+    color: white;
+    font-size: 1.2em;
+}
+.link {
+    text-decoration: none;
+    font-size: 1.2em;
+    font-family: 'Suez One', serif;
+    color: white;
+}
+.range {
+    font-family: 'Suez One', serif;
+    color: black;
+    font-size: 1.2em;
+    border-radius: 5px;
+}
+.button-order {
+    color: white;
+    background: rgba(20,20,20,0.8);
+    font-family: 'Suez One', serif;
+    font-size: 1.8em;
+    width: 200px;
+    border-radius: 5px;
+    border: solid 1px yellow;
+}
+.button-order:hover {
+    cursor: pointer;
+    background: rgba(80, 80, 80,0.6);
+    border: solid 1px white;
+}
+.hidden {
+    visibility:hidden;
+}
+.loader {
+    position: absolute;
+    left: 30%;
+    top: 10%;
+    background: rgba(80, 80, 80, 0.4);
+}
+
+
+.span {
+    color: white;
+    background-color: red;
+    font-family: 'Suez One', serif;
+    font-size: 1.8em;
+    border: solid 1px white;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-right: 10px;
+    visibility: hidden;
+}
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: white;
+}
+.container input:checked ~ .checkmark {
+    background-color: yellow;
+}
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+.container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}

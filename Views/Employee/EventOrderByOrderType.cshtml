@@ -1,0 +1,46 @@
+﻿@using MasterProject.ViewModels
+@using MasterProject.Models
+@using MasterProject.BLL
+@using MasterProject.DAL
+@model EventOrderViewModel
+@{
+    ViewBag.Title = "EventOrders";
+    Layout = "~/Views/Share/ViewWorker.cshtml";
+}
+<link href="~/Content/Styles/Style-Food.css" rel="stylesheet" />
+<div class="wrapper">
+    <div class="EventWrapper">
+        @for (int i = 0; i < Model.Events.Count(); i++)
+        {
+            Event events = Model.Events[i];
+            Order order = Model.Orders[events.OrderID - 2];
+            Clients client = Model.Clients[(order.ClientID - 1)];
+            events.EventType.EventTypeName = Model.EventTypes[events.EventType.id - 1].EventTypeName;
+            <div class="eventBlock">
+                <div>
+                    <h1 class="eventInfo">@events.EventType.EventTypeName</h1>
+                    <h1 class="eventInfo">מוזמנים:@events.Invitations</h1>
+                    <h1 class="eventInfo">האירוע של:@client.FirstName @client.LastName</h1>
+                </div>
+            </div>
+        }
+        <div class="eventTypesBlock">
+            <a href="~/Employee/EventOrders">
+                <h1 class="typesTitle">האירועים:</h1>
+            </a>
+            @foreach (EventType eventType in Model.EventTypes)
+            {
+                <div class="eventTypes">
+                    <a href="~/Employee/EventOrderByOrderType?typeID=@eventType.id">
+                        <p class="types">@eventType.EventTypeName</p>
+                    </a>
+                </div>
+            }
+            <div class="eventTypes">
+                <a href="~/Employee/MyEventOrders">
+                    <p class="types">להם נרשמתי:</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+﻿@using MasterProject.Models;
+@{
+    Layout = null;
+    LoginUser user = null;
+    if(Session["User"] != null)
+    {
+        user = Session["User"] as LoginUser;
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Suez+One&display=swap" rel="stylesheet">
+    <title>View</title>
+    <link href="~/Content/Styles/Style-Home.css" rel="stylesheet" />
+    <script src="~/Content/Scripts/Home-Script.js"></script>
+</head>
+<body>
+    <header>
+        <div class="menu1">
+            <a href="~/Home/HomePage">
+                <img class="logo" src="~/Content/Images/Rephaeli1.png" />
+            </a>
+            <ul class="list">
+                <li class="option"><a href="~/Food/Food">תפריט/הזמנה</a></li>
+                <li class="option"><a href="~/EventRequests/EventRequests">קביעת אירוע</a></li>
+                @if (Session["User"] != null)
+                {
+                    <li class="option"><form action="~/User/Logout"><input class="logout" type="submit" value="התנתק"></form></li>
+                }
+                else
+                {
+                    <li class="option"><a href="~/Wanted/Wanted">הרשמה</a></li>
+                }
+                @if (Session["User"] == null)
+                {
+                    <li class="dropdown">
+                        <div class="dropbtn">התחבר</div>
+                        <div class="dropdown-form">
+                            <form class="form" id="loginForm" method="post" action="~/User/Login">
+                                <span class="message" id="errorUser">תעודת זהות שגויה</span>
+                                <span class="message" id="emptyUser">צריך למלא</span>
+                                <input id="user" class="login" type="text" placeholder="תעודת זהות" name="IDnum" value="">
+                                <span class="message" id="emptyPass">צריך למלא</span>
+                                <input id="pass" class="login" type="password" placeholder="סיסמא" name="userPass" value="">
+                                <input id="client" class="radio" type="radio" name="isWorker" value="false" checked>
+                                <label for="client" class="label">לקוח</label>
+                                <input id="worker" class="radio" type="radio" name="isWorker" value="true">
+                                <label for="worker" class="label">עובד</label>
+                                <input type="button" onclick="Login()" class="button-login" value="כניסה">
+                            </form>
+                        </div>
+                    </li>
+                }
+                else
+                {
+                    <li class="option">שלום @user.FirstName @user.LastName</li>
+                }
+            </ul>
+        </div>
+    </header>
+    <div>
+        @RenderBody()
+    </div>
+    <footer class="footer">
+        מרכז אירועים רפאלי | ההסתדרות, 40 אשקלון | 08-6640450
+    </footer>
+    @if (TempData["message"] != null)
+    {
+        <script type="text/javascript">
+                alert("@TempData["message"].ToString()");
+        </script>
+    }
+</body>
+</html>

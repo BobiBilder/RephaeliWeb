@@ -1,0 +1,48 @@
+﻿@using MasterProject.ViewModels
+@using MasterProject.Models
+@using MasterProject.BLL
+@using MasterProject.DAL
+@model AddFoodViewModel
+@{
+    ViewBag.Title = "AddFood";
+    Layout = "~/Views/Share/ViewWorker.cshtml";
+}
+<script src="~/Content/Scripts/Wanted-Script.js"></script>
+<link href="~/Content/Styles/Style-Wanted.css" rel="stylesheet" />
+<div class="wrapper">
+    <div class="personal-input">
+        <form id="AddFoodForm" method="post" action="~/Employee/AddFood" enctype="multipart/form-data">
+            <label for="fname">שם אוכל</label>
+            <span class="span" id="errorFname">צריך לכתוב רק אותיות</span>
+            <span class="span" id="emptyFname">צריך למלא</span>
+            <input type="text" id="fname" placeholder="שם האוכל..." value="" name="FoodName">
+
+            <label for="fdescription">תיאור באוכל</label>
+            <span class="span" id="emptyFDescription">צריך למלא</span>
+            <textarea id="fdescription" placeholder="תיאור האוכל..." name="FoodDescription"></textarea>
+
+            <label for="fprice">מכיר האוכל לקילו</label>
+            <span class="span" id="errorFPrice">צריך לכתוב רק מספרים</span>
+            <span class="span" id="emptyFPrice">צריך למלא</span>
+            <input type="text" id="fprice" placeholder="מחיר האוכל לקילו..." value="" name="FoodPrice"><br><br>
+            
+            <label class="custom-file-upload">
+                <input type="file" id="fpicture" value="" name="FoodPicture">
+                <i class="fa fa-cloud-upload"></i> תמונת האוכל
+            </label>
+            <span class="span" id="emptyFPicture">נא להוסיף תמונה</span><br><br>
+
+            <label for="ftype">סוג האוכל</label>
+            <span class="span" id="emptyType">צריך לבחור</span>
+            <select id="ftype" name="FoodTypeID">
+                <option value="0" selected disabled hidden>סוגים:</option>
+                @foreach (FoodType type in Model.FoodTypes)
+                {
+                    <option value="@type.id">@type.FoodTypeName</option>
+                }
+            </select>
+
+            <input class="signInButton" type="button" onclick="checkAddition()" value="הוספה">
+        </form>
+    </div>
+</div>
