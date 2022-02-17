@@ -25,7 +25,7 @@ namespace MasterProject.BLL
                 user.IsWorker = isWorker;
                 if (isWorker)
                 {
-                    user.id = int.Parse(dt.Rows[0]["EmployeeID"].ToString());
+                    user.id = int.Parse(dt.Rows[0]["EmployeeID"].ToString()); 
                     user.IsManager = bool.Parse(dt.Rows[0]["IsManager"].ToString());
                 }
                 else

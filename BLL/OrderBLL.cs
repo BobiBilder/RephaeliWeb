@@ -268,7 +268,7 @@ namespace MasterProject.BLL
         public bool AssignedWork(int[] orderID, LoginUser user)
         {
             EventDB eventDB = new EventDB();
-            return eventDB.AssignWork(orderID, user) > 0;
+            return eventDB.AssignWork(orderID, user) > 0; 
         }
         public bool RemoveWork(int[] orderID, LoginUser user)
         {
