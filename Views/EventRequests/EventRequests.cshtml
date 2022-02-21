@@ -1,4 +1,5 @@
 ﻿@using MasterProject.Models;
+@using MasterProject.ViewModels;
 @{
     ViewBag.Title = "EventRequests";
     LoginUser user = null;
@@ -7,12 +8,10 @@
         user = Session["User"] as LoginUser;
         if (user.IsWorker)
         {
-            user = Session["User"] as Employee;
             Layout = "~/Views/Share/ViewWorker.cshtml";
         }
         else
         {
-            user = Session["User"] as Clients;
             Layout = "~/Views/Share/View.cshtml";
         }
     }
@@ -21,6 +20,7 @@
         Layout = "~/Views/Share/View.cshtml";
     }
 }
+@model EventRequestViewModel
 <link href="~/Content/Styles/Style-EventsRequest.css" rel="stylesheet" />
 <script src="~/Content/Scripts/Events-Script.js"></script>
 <div class="wrapper">
@@ -43,48 +43,47 @@
                 <span class="span" id="emptyEvent">צריך לבחור</span>
                 <select id="event">
                     <option value="" selected disabled hidden>אירועים</option>
-                    <option value="חתונה">חתונה</option>
-                    <option value="בר">בר מצווה</option>
-                    <option value="בת">בת מצווה</option>
-                    <option value="ברית">ברית מילה</option>
-                    <option value="הולדת">יום הולדת</option>
+                    @foreach (EventType eventType in Model.EventTypes)
+                    {
+                        <option value="@eventType.id">@eventType.EventTypeName</option>
+                    }
                 </select>
 
                 <label for="order">הערות</label>
                 <textarea id="order" placeholder="אם יש משהו שאנחנו צריכים לדעת..."></textarea>
 
-                <small>בכדי לקבוע אירוע צריך</small>
-                <a href="~/Wanted/Wanted">להירשם</a>
-                <a href="#" id="my_button">/ להתחבר</a>
+                <small class="noneUser">בכדי לקבוע אירוע צריך</small>
+                <a class="noneUserBtn" href="~/Wanted/Wanted">להירשם</a>
+                <small class="noneUser">ואו</small>
+                <small class="noneUserBtn" onclick="Focus()">להתחבר</small>
             }
             else
             {
                 <label for="name">שם</label>
                 <span class="span" id="errorName">צריך לכתוב רק אותיות</span>
                 <span class="span" id="emptyName">צריך למלא</span>
-                <input type="text" id="name" placeholder="השם שלך..." value="">
+                <input type="text" id="name" placeholder="השם שלך..." value="@user.FirstName @user.LastName">
 
                 <label for="tel">טלפון</label>
                 <span class="span" id="errorTel">צריך לכתוב לפי התבנית</span>
                 <span class="span" id="emptyTel">צריך למלא</span>
-                <input type="tel" id="tel" placeholder="הטלפון שלך..." value="">
+                <input type="tel" id="tel" placeholder="הטלפון שלך..." value="@user.PhoneNumber">
                 <small>תבנית: 05X-XXX-XXXX, לא צריך את ה"-"</small><br><br>
 
                 <label for="event">סוג האירוע</label>
                 <span class="span" id="emptyEvent">צריך לבחור</span>
                 <select id="event">
                     <option value="" selected disabled hidden>אירועים</option>
-                    <option value="חתונה">חתונה</option>
-                    <option value="בר">בר מצווה</option>
-                    <option value="בת">בת מצווה</option>
-                    <option value="ברית">ברית מילה</option>
-                    <option value="הולדת">יום הולדת</option>
+                    @foreach(EventType eventType in Model.EventTypes)
+                    {
+                        <option value="@eventType.id">@eventType.EventTypeName</option>
+                    }
                 </select>
 
                 <label for="order">הערות</label>
                 <textarea id="order" placeholder="אם יש משהו שאנחנו צריכים לדעת..."></textarea>
 
-                <input type="button" onclick="checkRequest()" value="שליחה">
+                <input type="button" class="eventBtn" onclick="checkRequest()" value="שליחה">
             }
 
         </form>

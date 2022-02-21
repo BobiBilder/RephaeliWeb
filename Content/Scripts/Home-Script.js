@@ -1,6 +1,7 @@
 ﻿function Login() {
     var noError = (CheckUser() && CheckPass());
     if (noError) {
+        document.getElementById('dropdown-form').style.display = "none";
         document.forms[0].submit();
     }
 }

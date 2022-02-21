@@ -10,6 +10,7 @@ namespace MasterProject.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string IDnum { get; set; }
+        public string PhoneNumber { get; set; }
         public bool IsWorker { get; set; }
         public bool IsManager { get; set; }
     }

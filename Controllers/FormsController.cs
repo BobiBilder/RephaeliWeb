@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MasterProject.BLL;
+using MasterProject.ViewModels;
+using MasterProject.Models;
 
 namespace MasterProject.Controllers
 {
@@ -27,7 +30,9 @@ namespace MasterProject.Controllers
         //GET: EventRequests
         public ActionResult EventRequests()
         {
-            return View();
+            OrderBLL eventBLL = new OrderBLL();
+            EventRequestViewModel eventRequestViewModel = eventBLL.GetEventTypes();
+            return View(eventRequestViewModel);
         }
     }
 }

@@ -13,4 +13,8 @@ namespace MasterProject.ViewModels
         public List<Event> Events { get; set; }
         public List<EventType> EventTypes { get; set; }
     }
+    public class EventRequestViewModel
+    {
+        public List<EventType> EventTypes { get; set; }
+    }
 }

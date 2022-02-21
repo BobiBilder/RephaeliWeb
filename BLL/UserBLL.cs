@@ -22,6 +22,7 @@ namespace MasterProject.BLL
                 user.FirstName = dt.Rows[0]["FirstName"].ToString();
                 user.LastName = dt.Rows[0]["LastName"].ToString();
                 user.IDnum = dt.Rows[0]["IDnum"].ToString();
+                user.PhoneNumber = dt.Rows[0]["PhoneNumber"].ToString();
                 user.IsWorker = isWorker;
                 if (isWorker)
                 {

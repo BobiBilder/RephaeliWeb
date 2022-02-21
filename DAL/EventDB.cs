@@ -38,6 +38,13 @@ namespace MasterProject.DAL
             selectSQLs.Add(select3);
             return this.Select(selectSQLs);
         }
+        public DataTable GetAllEventTypes()
+        {
+            SelectSQL selectType = new SelectSQL();
+            selectType.Sql = "select * from [EventType]";
+            selectType.TableName = "EventTypes";
+            return this.Select(selectType);
+        }
 
         public DataTable helper1(LoginUser user)
         {
@@ -68,7 +75,7 @@ namespace MasterProject.DAL
             selectSQLs.Add(select3);
             return this.Select(selectSQLs);
         }
-
+        
 
 
         public int AssignWork(int[] orderID, LoginUser user)

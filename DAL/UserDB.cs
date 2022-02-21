@@ -14,12 +14,12 @@ namespace MasterProject.DAL
             if (isWorker)
             {
                 this.selectSql.TableName = "Employee";
-                this.selectSql.Sql = @"Select Employee.IDnum, Employee.FirstName, Employee.LastName, Employee.EmployeeID, Employee.IsManager FROM Employee Where IDnum ='" + IDnum + "' AND Password ='" + userPass + "'";
+                this.selectSql.Sql = @"Select Employee.IDnum, Employee.FirstName, Employee.LastName, Employee.EmployeeID, Employee.PhoneNumber,Employee.IsManager FROM Employee Where IDnum ='" + IDnum + "' AND Password ='" + userPass + "'";
             }
             else
             {
                 this.selectSql.TableName = "Clients";
-                this.selectSql.Sql = @"Select Clients.IDnum, Clients.FirstName, Clients.LastName, Clients.ClientID FROM Clients Where IDnum ='" + IDnum + "' AND Password ='" + userPass + "'";
+                this.selectSql.Sql = @"Select Clients.IDnum, Clients.FirstName, Clients.LastName, Clients.ClientID, Clients.PhoneNumber FROM Clients Where IDnum ='" + IDnum + "' AND Password ='" + userPass + "'";
             }
             return this.Select(this.selectSql);
         }

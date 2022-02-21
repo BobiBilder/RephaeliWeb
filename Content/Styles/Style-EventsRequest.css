@@ -24,6 +24,7 @@ body::-webkit-scrollbar {
     border-radius: 4px;
     box-sizing: border-box;
     font-family: 'Suez One', serif;
+    font-size:0.8em;
 }
 div.personal-input {
     direction: rtl;
@@ -32,6 +33,7 @@ div.personal-input {
     background-color: rgb(120, 120, 120);
     padding: 20px;
     font-family: 'Suez One', serif;
+    font-size:1.4em;
     width: 1000px;
 }
 textarea {
@@ -43,6 +45,16 @@ input[type=submit] {
 small {
     font-size: 15px;
 }
+.noneUser, .noneUserBtn {
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+}
+.noneUserBtn {
+    cursor: pointer;
+    font-size: 24px;
+    text-decoration: underline;
+}
 .span {
     position: absolute;
     color: white;
@@ -52,5 +64,19 @@ small {
     padding-left: 10px;
     margin-right: 10px;
     visibility: hidden;
+}
+.eventBtn {
+    color: white;
+    background: rgba(80,80,80,0.6);
+    font-family: 'Suez One', serif;
+    font-size: 1.2em;
+    width: 200px;
+    border-radius: 5px;
+    border: solid 1px white;
+}
+.eventBtn:hover{
+    cursor: pointer;
+    background: rgba(20, 20, 20,0.8);
+    border: solid 1px yellow;
 }
 /*form*/

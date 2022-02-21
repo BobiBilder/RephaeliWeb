@@ -263,7 +263,21 @@ namespace MasterProject.BLL
             return eventOrderViewModel;
         }
         
-
+        public EventRequestViewModel GetEventTypes()
+        {
+            EventDB eventDB = new EventDB();
+            DataTable dt = eventDB.GetAllEventTypes();
+            EventRequestViewModel eventRequestViewModel = new EventRequestViewModel();
+            eventRequestViewModel.EventTypes = new List<EventType>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                EventType eventType = new EventType();
+                eventType.EventTypeName = dr["EventTypeName"].ToString();
+                eventType.id = int.Parse(dr["EventTypeID"].ToString());
+                eventRequestViewModel.EventTypes.Add(eventType);
+            }
+            return eventRequestViewModel;
+        }
 
         public bool AssignedWork(int[] orderID, LoginUser user)
         {

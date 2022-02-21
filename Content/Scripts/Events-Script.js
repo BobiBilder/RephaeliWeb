@@ -78,6 +78,7 @@ function CheckAssign() {
     return false;
 }
 
-document.getElementById('my_button').onclick = function () {
+function Focus() {
+    document.getElementById('dropdown-form').style.display= "block";
     document.getElementById('user').focus();
-};
+}
