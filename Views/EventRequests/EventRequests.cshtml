@@ -1,15 +1,18 @@
 ﻿@using MasterProject.Models;
 @{
     ViewBag.Title = "EventRequests";
+    LoginUser user = null;
     if (Session["User"] != null)
     {
-        LoginUser user = Session["User"] as LoginUser;
+        user = Session["User"] as LoginUser;
         if (user.IsWorker)
         {
+            user = Session["User"] as Employee;
             Layout = "~/Views/Share/ViewWorker.cshtml";
         }
         else
         {
+            user = Session["User"] as Clients;
             Layout = "~/Views/Share/View.cshtml";
         }
     }
@@ -19,36 +22,71 @@
     }
 }
 <link href="~/Content/Styles/Style-EventsRequest.css" rel="stylesheet" />
-<script src="~/Content/Scripts/EventsRequest-Script.js"></script>
+<script src="~/Content/Scripts/Events-Script.js"></script>
 <div class="wrapper">
     <div class="personal-input">
         <form>
-            <label for="name">שם</label>
-            <span class="span" id="errorName">צריך לכתוב רק אותיות</span>
-            <span class="span" id="emptyName">צריך למלא</span>
-            <input type="text" id="name" placeholder="השם שלך..." value="">
+            @if (Session["User"] == null)
+            {
+                <label for="name">שם</label>
+                <span class="span" id="errorName">צריך לכתוב רק אותיות</span>
+                <span class="span" id="emptyName">צריך למלא</span>
+                <input type="text" id="name" placeholder="השם שלך..." value="">
 
-            <label for="tel">טלפון</label>
-            <span class="span" id="errorTel">צריך לכתוב לפי התבנית</span>
-            <span class="span" id="emptyTel">צריך למלא</span>
-            <input type="tel" id="tel" placeholder="הטלפון שלך..." value="">
-            <small>תבנית: 05X-XXX-XXXX, לא צריך את ה"-"</small><br><br>
+                <label for="tel">טלפון</label>
+                <span class="span" id="errorTel">צריך לכתוב לפי התבנית</span>
+                <span class="span" id="emptyTel">צריך למלא</span>
+                <input type="tel" id="tel" placeholder="הטלפון שלך..." value="">
+                <small>תבנית: 05X-XXX-XXXX, לא צריך את ה"-"</small><br><br>
 
-            <label for="event">סוג האירוע</label>
-            <span class="span" id="emptyEvent">צריך לבחור</span>
-            <select id="event">
-                <option value="" selected disabled hidden>אירועים</option>
-                <option value="חתונה">חתונה</option>
-                <option value="בר">בר מצווה</option>
-                <option value="בת">בת מצווה</option>
-                <option value="ברית">ברית מילה</option>
-                <option value="הולדת">יום הולדת</option>
-            </select>
+                <label for="event">סוג האירוע</label>
+                <span class="span" id="emptyEvent">צריך לבחור</span>
+                <select id="event">
+                    <option value="" selected disabled hidden>אירועים</option>
+                    <option value="חתונה">חתונה</option>
+                    <option value="בר">בר מצווה</option>
+                    <option value="בת">בת מצווה</option>
+                    <option value="ברית">ברית מילה</option>
+                    <option value="הולדת">יום הולדת</option>
+                </select>
 
-            <label for="order">הערות</label>
-            <textarea id="order" placeholder="אם יש משהו שאנחנו צריכים לדעת..."></textarea>
+                <label for="order">הערות</label>
+                <textarea id="order" placeholder="אם יש משהו שאנחנו צריכים לדעת..."></textarea>
 
-            <input type="button" onclick="checkRequest()" value="שליחה">
+                <small>בכדי לקבוע אירוע צריך</small>
+                <a href="~/Wanted/Wanted">להירשם</a>
+                <a href="#" id="my_button">/ להתחבר</a>
+            }
+            else
+            {
+                <label for="name">שם</label>
+                <span class="span" id="errorName">צריך לכתוב רק אותיות</span>
+                <span class="span" id="emptyName">צריך למלא</span>
+                <input type="text" id="name" placeholder="השם שלך..." value="">
+
+                <label for="tel">טלפון</label>
+                <span class="span" id="errorTel">צריך לכתוב לפי התבנית</span>
+                <span class="span" id="emptyTel">צריך למלא</span>
+                <input type="tel" id="tel" placeholder="הטלפון שלך..." value="">
+                <small>תבנית: 05X-XXX-XXXX, לא צריך את ה"-"</small><br><br>
+
+                <label for="event">סוג האירוע</label>
+                <span class="span" id="emptyEvent">צריך לבחור</span>
+                <select id="event">
+                    <option value="" selected disabled hidden>אירועים</option>
+                    <option value="חתונה">חתונה</option>
+                    <option value="בר">בר מצווה</option>
+                    <option value="בת">בת מצווה</option>
+                    <option value="ברית">ברית מילה</option>
+                    <option value="הולדת">יום הולדת</option>
+                </select>
+
+                <label for="order">הערות</label>
+                <textarea id="order" placeholder="אם יש משהו שאנחנו צריכים לדעת..."></textarea>
+
+                <input type="button" onclick="checkRequest()" value="שליחה">
+            }
+
         </form>
     </div>
 </div>

@@ -77,3 +77,7 @@ function CheckAssign() {
     document.getElementById("emptyCheckbox").style.visibility = "visible";
     return false;
 }
+
+document.getElementById('my_button').onclick = function () {
+    document.getElementById('user').focus();
+};
