@@ -28,6 +28,13 @@
         <form>
             @if (Session["User"] == null)
             {
+                <div class="noneUserWrapper">
+                    <small class="noneUser">בכדי להזמין אירוע צריך</small>
+                    <a class="noneUserBtn" href="~/Wanted/Wanted">להירשם</a>
+                    <small class="noneUser">ואו</small>
+                    <small class="noneUserBtn" onclick="Focus()">להתחבר</small>
+                </div>
+
                 <label for="name">שם</label>
                 <span class="span" id="errorName">צריך לכתוב רק אותיות</span>
                 <span class="span" id="emptyName">צריך למלא</span>
@@ -49,13 +56,13 @@
                     }
                 </select>
 
+                <label for="guests">מוזמנים</label>
+                <span class="span" id="errorGuests">צריך לכתוב רק ספרות</span>
+                <span class="span" id="emptyGuests">צריך למלא</span>
+                <input type="text" id="Guests" placeholder="מספר המוזמנים..." value="">
+
                 <label for="order">הערות</label>
                 <textarea id="order" placeholder="אם יש משהו שאנחנו צריכים לדעת..."></textarea>
-
-                <small class="noneUser">בכדי לקבוע אירוע צריך</small>
-                <a class="noneUserBtn" href="~/Wanted/Wanted">להירשם</a>
-                <small class="noneUser">ואו</small>
-                <small class="noneUserBtn" onclick="Focus()">להתחבר</small>
             }
             else
             {
@@ -74,11 +81,55 @@
                 <span class="span" id="emptyEvent">צריך לבחור</span>
                 <select id="event">
                     <option value="" selected disabled hidden>אירועים</option>
-                    @foreach(EventType eventType in Model.EventTypes)
+                    @foreach (EventType eventType in Model.EventTypes)
                     {
                         <option value="@eventType.id">@eventType.EventTypeName</option>
                     }
-                </select>
+                </select><br><br>
+                
+                <label for="guests">מוזמנים</label>
+                <span class="span" id="errorGuests">צריך לכתוב רק ספרות</span>
+                <span class="span" id="emptyGuests">צריך למלא</span>
+                <input type="text" id="Guests" placeholder="מספר המוזמנים..." value=""><br><br>
+
+                <label for="calendar">תאריך</label>
+                <div class="calendar">
+                    <label for="year">שנה:</label>
+                    <select class="date" id="year">
+                        <option selected disabled hidden>שנה</option>
+                        <option id="year1"></option>
+                        <option id="year2"></option>
+                        <option id="year3"></option>
+                        <option id="year4"></option>
+                    </select>
+                    <script>
+                        date = new Date();
+                        year = date.getFullYear();
+                        document.getElementById("year1").innerHTML = year;
+                        document.getElementById("year2").innerHTML = year + 1;
+                        document.getElementById("year3").innerHTML = year + 2;
+                        document.getElementById("year4").innerHTML = year + 3;
+                    </script>
+                    <br>
+                    <label for="month">חודש:</label>
+                    <select class="date" id="month">
+                        <option selected disabled hidden>חודש</option>
+                        @for (int i = 1; i < 13; i++)
+                        {
+                            <option>@i</option>
+                        }
+                    </select>
+                    <br>
+                    <label for="day">יום:</label>
+                    <select class="date" id="day">
+                        <option selected disabled hidden>יום</option>
+                        @for (int i = 1; i < 32; i++)
+                        {
+                            <option>@i</option>
+                        }
+                    </select>
+                </div>
+                <br>
 
                 <label for="order">הערות</label>
                 <textarea id="order" placeholder="אם יש משהו שאנחנו צריכים לדעת..."></textarea>

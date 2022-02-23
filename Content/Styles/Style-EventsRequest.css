@@ -55,6 +55,10 @@ small {
     font-size: 24px;
     text-decoration: underline;
 }
+.noneUserBtn:hover{
+    color:white;
+    background: rgba(20, 20, 20,0.8);
+}
 .span {
     position: absolute;
     color: white;
@@ -64,6 +68,17 @@ small {
     padding-left: 10px;
     margin-right: 10px;
     visibility: hidden;
+}
+.noneUserWrapper {
+    margin-right: 305px;
+    padding: 0 5px 0 5px;
+    border-radius: 5px;
+    border: solid 3px black;
+    width: fit-content;
+    background: rgba(80,80,80,0.6);
+}
+.noneUserWrapper:hover{
+    border: solid 3px white;
 }
 .eventBtn {
     color: white;
@@ -78,5 +93,9 @@ small {
     cursor: pointer;
     background: rgba(20, 20, 20,0.8);
     border: solid 1px yellow;
+}
+.date{
+    padding:0;
+    width:70px;
 }
 /*form*/
