@@ -56,8 +56,7 @@ small {
     text-decoration: underline;
 }
 .noneUserBtn:hover{
-    color:white;
-    background: rgba(20, 20, 20,0.8);
+    color:white
 }
 .span {
     position: absolute;
