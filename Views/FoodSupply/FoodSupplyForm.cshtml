@@ -1,0 +1,31 @@
+﻿
+@*@{
+    ViewBag.Title = "FoodSupplyForm";
+    Layout = "~/Views/Share/ViewWorker.cshtml";
+}*@
+
+@model double
+<link href="~/Content/Styles/Style-EventsRequest.css" rel="stylesheet" />
+
+<div class="wrapper">
+    <div class="personal-input">
+        <form class="supplyForm" action="~/FoodSupply/PutSupply" method="post">
+            <label>first number</label><br><br>
+            <input type="text" name="num1" /><br><br><br><br>
+            <label>second number</label><br><br>
+            <input type="text" name="num2" /><br><br>
+            <label>Action</label><br><br>
+            <select name="operator">
+                <option value="1">+</option>
+                <option value="2">-</option>
+                <option value="3">*</option>
+                <option value="4s">/</option>
+            </select><br><br>
+            <button type="submit">Calculate</button>
+        </form>
+        @if(Model != 0)
+            {
+                <h1>=@Model</h1>
+            }
+    </div>
+</div>

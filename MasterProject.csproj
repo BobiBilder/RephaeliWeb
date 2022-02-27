@@ -44,6 +44,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -89,6 +91,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Rephaeli.accdb" />
+    <None Include="Connected Services\FoodSupplier\Service.disco" />
+    <None Include="Connected Services\FoodSupplier\configuration91.svcinfo" />
+    <None Include="Connected Services\FoodSupplier\configuration.svcinfo" />
+    <None Include="Connected Services\FoodSupplier\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Content\Images\background.jpg" />
     <Content Include="Content\Images\display1.jpg" />
     <Content Include="Content\Images\display2.jpg" />
@@ -143,8 +152,14 @@
     <Compile Include="BLL\FoodBLL.cs" />
     <Compile Include="BLL\OrderBLL.cs" />
     <Compile Include="BLL\UserBLL.cs" />
+    <Compile Include="Connected Services\FoodSupplier\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\FoodController.cs" />
+    <Compile Include="Controllers\FoodSupplyController.cs" />
     <Compile Include="Controllers\FormsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
@@ -178,6 +193,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
+    <None Include="Connected Services\FoodSupplier\Service.wsdl" />
+    <None Include="Connected Services\FoodSupplier\Service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\FoodSupplier\Service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <Content Include="Views\Share\View.cshtml" />
     <Content Include="Views\Home\HomePage.cshtml" />
@@ -192,12 +214,19 @@
     <Content Include="Views\Employee\AddFoodForm.cshtml" />
     <Content Include="Views\Employee\MyEventOrders.cshtml" />
     <Content Include="Views\FoodByFoodType\GetFoodByType.cshtml" />
+    <Content Include="Views\FoodSupply\FoodSupplyForm.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\FoodSupplier\" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

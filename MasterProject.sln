@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasterProject", "MasterProject.csproj", "{E84CA45F-4504-46E2-A2A0-E747D64C3B29}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F09DBB21-8051-43C9-B615-EF8A3124C1BD} = {F09DBB21-8051-43C9-B615-EF8A3124C1BD}
+	EndProjectSection
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Supplier", "..\Supplier\", "{F09DBB21-8051-43C9-B615-EF8A3124C1BD}"
 	ProjectSection(WebsiteProperties) = preProject
@@ -23,6 +26,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Supplier", "..\Supplier\", 
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "49762"
+		SlnRelativePath = "..\Supplier\"
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 EndProject
