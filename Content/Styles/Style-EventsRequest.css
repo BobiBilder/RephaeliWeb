@@ -97,4 +97,7 @@ small {
     padding:0;
     width:70px;
 }
+.hidden{
+    display:none;
+}
 /*form*/

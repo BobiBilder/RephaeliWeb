@@ -1,8 +1,25 @@
 ﻿@using MasterProject.Models;
 @using MasterProject.ViewModels;
+@using System;
+@using System.Linq;
 @{
     ViewBag.Title = "EventRequests";
     LoginUser user = null;
+    int month = int.Parse(DateTime.Now.Month.ToString());
+    int day = int.Parse(DateTime.Now.Day.ToString());
+    int currentLastDay = 0;
+    switch (month)
+    {
+        case 2:
+            currentLastDay = 28;
+            break;
+        case 4: case 6: case 9: case 11:
+            currentLastDay = 30;
+            break;
+        case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+            currentLastDay = 31;
+            break;
+    }
     if (Session["User"] != null)
     {
         user = Session["User"] as LoginUser;
@@ -59,7 +76,99 @@
                 <label for="guests">מוזמנים</label>
                 <span class="span" id="errorGuests">צריך לכתוב רק ספרות</span>
                 <span class="span" id="emptyGuests">צריך למלא</span>
-                <input type="text" id="Guests" placeholder="מספר המוזמנים..." value="">
+                <input type="text" id="Guests" placeholder="מספר המוזמנים..." value=""><br><br>
+
+                <label for="calendar">תאריך</label>
+                <span class="span" id="emptyDate">צריך לבחור</span>
+                <div class="calendar">
+
+                    <div class="year">
+                        <label for="year" id="year-date">שנה:</label>
+                        <select class="date" id="year" onchange="SelectYear()">
+                            <option selected disabled hidden>שנה</option>
+                            <option id="year1"></option>
+                            <option id="year2"></option>
+                            <option id="year3"></option>
+                        </select>
+                        <script>
+                            date = new Date();
+                            year = date.getFullYear();
+                            document.getElementById("year1").innerHTML = year;
+                            document.getElementById("year2").innerHTML = year + 1;
+                            document.getElementById("year3").innerHTML = year + 2;
+                        </script>
+                    </div>
+
+
+                    <div class="hidden" id="current-month-date">
+                        <label for="month">חודש:</label>
+                        <select class="date" id="current-month" onchange="SelectMonth()">
+                            <option selected disabled hidden>חודש</option>
+                            @for (int i = month; i < 13; i++)
+                            {
+                                <option>@i</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="hidden" id="other-month-date">
+                        <label for="month">חודש:</label>
+                        <select class="date" id="other-month" onchange="SelectMonth()">
+                            <option selected disabled hidden>חודש</option>
+                            @for (int i = 1; i < 13; i++)
+                            {
+                                <option>@i</option>
+                            }
+                        </select>
+                    </div>
+
+
+                    <div class="hidden" id="current-day-date">
+                        <label for="day">יום:</label>
+                        <select class="date" id="day">
+                            <option selected disabled hidden>יום</option>
+                            @for (int i = day; i < currentLastDay + 1; i++)
+                            {
+                                <option>@i</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="hidden" id="short-day-date">
+                        <label for="day">יום:</label>
+                        <select class="date" id="day">
+                            <option selected disabled hidden>יום</option>
+                            @for (int i = 1; i < 31; i++)
+                            {
+                                <option>@i</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="hidden" id="long-day-date">
+                        <label for="day">יום:</label>
+                        <select class="date" id="day">
+                            <option selected disabled hidden>יום</option>
+                            @for (int i = 1; i < 32; i++)
+                            {
+                                <option>@i</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="hidden" id="feb-day-date">
+                        <label for="day">יום:</label>
+                        <select class="date" id="day">
+                            <option selected disabled hidden>יום</option>
+                            @for (int i = 1; i < 29; i++)
+                            {
+                                <option>@i</option>
+                            }
+                        </select>
+                    </div>
+
+                </div><br>
+
 
                 <label for="order">הערות</label>
                 <textarea id="order" placeholder="אם יש משהו שאנחנו צריכים לדעת..."></textarea>
@@ -86,57 +195,108 @@
                         <option value="@eventType.id">@eventType.EventTypeName</option>
                     }
                 </select><br><br>
-                
+
                 <label for="guests">מוזמנים</label>
                 <span class="span" id="errorGuests">צריך לכתוב רק ספרות</span>
                 <span class="span" id="emptyGuests">צריך למלא</span>
                 <input type="text" id="Guests" placeholder="מספר המוזמנים..." value=""><br><br>
 
                 <label for="calendar">תאריך</label>
+                <span class="span" id="emptyDate">צריך לבחור</span>
                 <div class="calendar">
-                    <label for="year">שנה:</label>
-                    <select class="date" id="year">
-                        <option selected disabled hidden>שנה</option>
-                        <option id="year1"></option>
-                        <option id="year2"></option>
-                        <option id="year3"></option>
-                        <option id="year4"></option>
-                    </select>
-                    <script>
-                        date = new Date();
-                        year = date.getFullYear();
-                        document.getElementById("year1").innerHTML = year;
-                        document.getElementById("year2").innerHTML = year + 1;
-                        document.getElementById("year3").innerHTML = year + 2;
-                        document.getElementById("year4").innerHTML = year + 3;
-                    </script>
-                    <br>
-                    <label for="month">חודש:</label>
-                    <select class="date" id="month">
-                        <option selected disabled hidden>חודש</option>
-                        @for (int i = 1; i < 13; i++)
-                        {
-                            <option>@i</option>
-                        }
-                    </select>
-                    <br>
-                    <label for="day">יום:</label>
-                    <select class="date" id="day">
-                        <option selected disabled hidden>יום</option>
-                        @for (int i = 1; i < 32; i++)
-                        {
-                            <option>@i</option>
-                        }
-                    </select>
-                </div>
-                <br>
+
+                    <div class="year">
+                        <label for="year" id="year-date">שנה:</label>
+                        <select class="date" id="year" onchange="SelectYear()">
+                            <option selected disabled hidden>שנה</option>
+                            <option id="year1"></option>
+                            <option id="year2"></option>
+                            <option id="year3"></option>
+                        </select>
+                        <script>
+                            date = new Date();
+                            year = date.getFullYear();
+                            document.getElementById("year1").innerHTML = year;
+                            document.getElementById("year2").innerHTML = year + 1;
+                            document.getElementById("year3").innerHTML = year + 2;
+                        </script>
+                    </div>
+
+
+                    <div class="hidden" id="current-month-date">
+                        <label for="month">חודש:</label>
+                        <select class="date" id="current-month" onchange="SelectMonth()">
+                            <option selected disabled hidden>חודש</option>
+                            @for (int i = month; i < 13; i++)
+                            {
+                                <option>@i</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="hidden" id="other-month-date">
+                        <label for="month">חודש:</label>
+                        <select class="date" id="other-month" onchange="SelectMonth()">
+                            <option selected disabled hidden>חודש</option>
+                            @for (int i = 1; i < 13; i++)
+                            {
+                                <option>@i</option>
+                            }
+                        </select>
+                    </div>
+
+
+                    <div class="hidden" id="current-day-date">
+                        <label for="day">יום:</label>
+                        <select class="date" id="day">
+                            <option selected disabled hidden>יום</option>
+                            @for (int i = day; i < currentLastDay + 1; i++)
+                            {
+                                <option>@i</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="hidden" id="short-day-date">
+                        <label for="day">יום:</label>
+                        <select class="date" id="day">
+                            <option selected disabled hidden>יום</option>
+                            @for (int i = 1; i < 31; i++)
+                            {
+                                <option>@i</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="hidden" id="long-day-date">
+                        <label for="day">יום:</label>
+                        <select class="date" id="day">
+                            <option selected disabled hidden>יום</option>
+                            @for (int i = 1; i < 32; i++)
+                            {
+                                <option>@i</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="hidden" id="feb-day-date">
+                        <label for="day">יום:</label>
+                        <select class="date" id="day">
+                            <option selected disabled hidden>יום</option>
+                            @for (int i = 1; i < 29; i++)
+                            {
+                                <option>@i</option>
+                            }
+                        </select>
+                    </div>
+
+                </div><br>
 
                 <label for="order">הערות</label>
                 <textarea id="order" placeholder="אם יש משהו שאנחנו צריכים לדעת..."></textarea>
 
                 <input type="button" class="eventBtn" onclick="checkRequest()" value="שליחה">
             }
-
         </form>
     </div>
 </div>

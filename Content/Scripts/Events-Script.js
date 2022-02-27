@@ -82,3 +82,56 @@ function Focus() {
     document.getElementById('dropdown-form').style.display= "block";
     document.getElementById('user').focus();
 }
+
+function SelectYear() {
+    document.getElementById('short-day-date').style.display = "none";
+    document.getElementById('feb-day-date').style.display = "none";
+    document.getElementById('long-day-date').style.display = "none";
+    document.getElementById('current-day-date').style.display = "none";
+    var years = document.getElementById('year');
+    var selectedYear = years.options[years.selectedIndex].value;
+    var date = new Date();
+    var currentYear = date.getFullYear();
+    if (selectedYear == currentYear) {
+        document.getElementById('other-month-date').style.display = "none";
+        document.getElementById('current-month-date').style.display = "block";
+    } else {
+        document.getElementById('current-month-date').style.display = "none";
+        document.getElementById('other-month-date').style.display = "block";
+    }
+}
+
+function SelectMonth() {
+    var years = document.getElementById('year');
+    var selectedYear = years.options[years.selectedIndex].value;
+    var date = new Date();
+    var currentYear = date.getFullYear();
+    if (selectedYear == currentYear) {
+        var months = document.getElementById('current-month');
+    } else {
+        var months = document.getElementById('other-month');
+    }
+    var selectedMonth = months.options[months.selectedIndex].value;
+    var currentMonth = date.getMonth() + 1;
+    if (selectedMonth == currentMonth && selectedYear == currentYear) {
+        document.getElementById('short-day-date').style.display = "none";
+        document.getElementById('feb-day-date').style.display = "none";
+        document.getElementById('long-day-date').style.display = "none";
+        document.getElementById('current-day-date').style.display = "block";
+    } else if (selectedMonth == 1 || selectedMonth == 3 || selectedMonth == 5 || selectedMonth == 7 || selectedMonth == 8 || selectedMonth == 10 || selectedMonth == 12) {
+        document.getElementById('short-day-date').style.display = "none";
+        document.getElementById('feb-day-date').style.display = "none";
+        document.getElementById('current-day-date').style.display = "none";
+        document.getElementById('long-day-date').style.display = "block";
+    } else if (selectedMonth == 4 || selectedMonth == 6 || selectedMonth == 9 || selectedMonth == 11) {
+        document.getElementById('long-day-date').style.display = "none";
+        document.getElementById('feb-day-date').style.display = "none";
+        document.getElementById('current-day-date').style.display = "none";
+        document.getElementById('short-day-date').style.display = "block";
+    } else{
+        document.getElementById('long-day-date').style.display = "none";
+        document.getElementById('short-day-date').style.display = "none";
+        document.getElementById('current-day-date').style.display = "none";
+        document.getElementById('feb-day-date').style.display = "block";
+    }
+}
