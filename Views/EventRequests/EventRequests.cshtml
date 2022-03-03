@@ -1,7 +1,6 @@
 ﻿@using MasterProject.Models;
 @using MasterProject.ViewModels;
 @using System;
-@using System.Linq;
 @{
     ViewBag.Title = "EventRequests";
     LoginUser user = null;
@@ -13,10 +12,19 @@
         case 2:
             currentLastDay = 28;
             break;
-        case 4: case 6: case 9: case 11:
+        case 4:
+        case 6:
+        case 9:
+        case 11:
             currentLastDay = 30;
             break;
-        case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+        case 1:
+        case 3:
+        case 5:
+        case 7:
+        case 8:
+        case 10:
+        case 12:
             currentLastDay = 31;
             break;
     }
@@ -39,10 +47,11 @@
 }
 @model EventRequestViewModel
 <link href="~/Content/Styles/Style-EventsRequest.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="~/Content/Scripts/Events-Script.js"></script>
 <div class="wrapper">
     <div class="personal-input">
-        <form>
+        <form method="post" action="~/EventRequests/EventForm">
             @if (Session["User"] == null)
             {
                 <div class="noneUserWrapper">
@@ -57,244 +66,136 @@
                 <span class="span" id="emptyName">צריך למלא</span>
                 <input type="text" id="name" placeholder="השם שלך..." value="">
 
-                <label for="tel">טלפון</label>
+                <label for="phone">טלפון</label>
                 <span class="span" id="errorTel">צריך לכתוב לפי התבנית</span>
                 <span class="span" id="emptyTel">צריך למלא</span>
-                <input type="tel" id="tel" placeholder="הטלפון שלך..." value="">
+                <input type="tel" id="text" placeholder="הטלפון שלך..." value="">
                 <small>תבנית: 05X-XXX-XXXX, לא צריך את ה"-"</small><br><br>
-
-                <label for="event">סוג האירוע</label>
-                <span class="span" id="emptyEvent">צריך לבחור</span>
-                <select id="event">
-                    <option value="" selected disabled hidden>אירועים</option>
-                    @foreach (EventType eventType in Model.EventTypes)
-                    {
-                        <option value="@eventType.id">@eventType.EventTypeName</option>
-                    }
-                </select>
-
-                <label for="guests">מוזמנים</label>
-                <span class="span" id="errorGuests">צריך לכתוב רק ספרות</span>
-                <span class="span" id="emptyGuests">צריך למלא</span>
-                <input type="text" id="Guests" placeholder="מספר המוזמנים..." value=""><br><br>
-
-                <label for="calendar">תאריך</label>
-                <span class="span" id="emptyDate">צריך לבחור</span>
-                <div class="calendar">
-
-                    <div class="year">
-                        <label for="year" id="year-date">שנה:</label>
-                        <select class="date" id="year" onchange="SelectYear()">
-                            <option selected disabled hidden>שנה</option>
-                            <option id="year1"></option>
-                            <option id="year2"></option>
-                            <option id="year3"></option>
-                        </select>
-                        <script>
-                            date = new Date();
-                            year = date.getFullYear();
-                            document.getElementById("year1").innerHTML = year;
-                            document.getElementById("year2").innerHTML = year + 1;
-                            document.getElementById("year3").innerHTML = year + 2;
-                        </script>
-                    </div>
-
-
-                    <div class="hidden" id="current-month-date">
-                        <label for="month">חודש:</label>
-                        <select class="date" id="current-month" onchange="SelectMonth()">
-                            <option selected disabled hidden>חודש</option>
-                            @for (int i = month; i < 13; i++)
-                            {
-                                <option>@i</option>
-                            }
-                        </select>
-                    </div>
-
-                    <div class="hidden" id="other-month-date">
-                        <label for="month">חודש:</label>
-                        <select class="date" id="other-month" onchange="SelectMonth()">
-                            <option selected disabled hidden>חודש</option>
-                            @for (int i = 1; i < 13; i++)
-                            {
-                                <option>@i</option>
-                            }
-                        </select>
-                    </div>
-
-
-                    <div class="hidden" id="current-day-date">
-                        <label for="day">יום:</label>
-                        <select class="date" id="day">
-                            <option selected disabled hidden>יום</option>
-                            @for (int i = day; i < currentLastDay + 1; i++)
-                            {
-                                <option>@i</option>
-                            }
-                        </select>
-                    </div>
-
-                    <div class="hidden" id="short-day-date">
-                        <label for="day">יום:</label>
-                        <select class="date" id="day">
-                            <option selected disabled hidden>יום</option>
-                            @for (int i = 1; i < 31; i++)
-                            {
-                                <option>@i</option>
-                            }
-                        </select>
-                    </div>
-
-                    <div class="hidden" id="long-day-date">
-                        <label for="day">יום:</label>
-                        <select class="date" id="day">
-                            <option selected disabled hidden>יום</option>
-                            @for (int i = 1; i < 32; i++)
-                            {
-                                <option>@i</option>
-                            }
-                        </select>
-                    </div>
-
-                    <div class="hidden" id="feb-day-date">
-                        <label for="day">יום:</label>
-                        <select class="date" id="day">
-                            <option selected disabled hidden>יום</option>
-                            @for (int i = 1; i < 29; i++)
-                            {
-                                <option>@i</option>
-                            }
-                        </select>
-                    </div>
-
-                </div><br>
-
-
-                <label for="order">הערות</label>
-                <textarea id="order" placeholder="אם יש משהו שאנחנו צריכים לדעת..."></textarea>
             }
-            else
-            {
+            else{
+
                 <label for="name">שם</label>
                 <span class="span" id="errorName">צריך לכתוב רק אותיות</span>
                 <span class="span" id="emptyName">צריך למלא</span>
                 <input type="text" id="name" placeholder="השם שלך..." value="@user.FirstName @user.LastName">
 
-                <label for="tel">טלפון</label>
+                <label for="phone">טלפון</label>
                 <span class="span" id="errorTel">צריך לכתוב לפי התבנית</span>
                 <span class="span" id="emptyTel">צריך למלא</span>
-                <input type="tel" id="tel" placeholder="הטלפון שלך..." value="@user.PhoneNumber">
+                <input type="text" id="phone" placeholder="הטלפון שלך..." value="@user.PhoneNumber">
                 <small>תבנית: 05X-XXX-XXXX, לא צריך את ה"-"</small><br><br>
+            }
 
-                <label for="event">סוג האירוע</label>
-                <span class="span" id="emptyEvent">צריך לבחור</span>
-                <select id="event">
-                    <option value="" selected disabled hidden>אירועים</option>
-                    @foreach (EventType eventType in Model.EventTypes)
-                    {
-                        <option value="@eventType.id">@eventType.EventTypeName</option>
-                    }
-                </select><br><br>
+            <label for="event">סוג האירוע</label>
+            <span class="span" id="emptyEvent">צריך לבחור</span>
+            <select id="event" name="EventTypeID">
+                <option value="0" selected disabled hidden>אירועים</option>
+                @foreach (EventType eventType in Model.EventTypes)
+                {
+                    <option value="@eventType.id">@eventType.EventTypeName</option>
+                }
+            </select><br><br>
 
-                <label for="guests">מוזמנים</label>
-                <span class="span" id="errorGuests">צריך לכתוב רק ספרות</span>
-                <span class="span" id="emptyGuests">צריך למלא</span>
-                <input type="text" id="Guests" placeholder="מספר המוזמנים..." value=""><br><br>
+            <label for="guests">מוזמנים</label>
+            <span class="span" id="errorGuests">צריך לכתוב רק ספרות</span>
+            <span class="span" id="emptyGuests">צריך למלא</span>
+            <input type="text" id="Guests" placeholder="מספר המוזמנים..." value="" name="Invitations"><br><br>
 
-                <label for="calendar">תאריך</label>
-                <span class="span" id="emptyDate">צריך לבחור</span>
-                <div class="calendar">
+            <label for="calendar">תאריך</label>
+            <span class="span" id="emptyDate">צריך לבחור תאריך מלא</span>
+            <div class="calendar">
 
-                    <div class="year">
-                        <label for="year" id="year-date">שנה:</label>
-                        <select class="date" id="year" onchange="SelectYear()">
-                            <option selected disabled hidden>שנה</option>
-                            <option id="year1"></option>
-                            <option id="year2"></option>
-                            <option id="year3"></option>
-                        </select>
-                        <script>
-                            date = new Date();
-                            year = date.getFullYear();
-                            document.getElementById("year1").innerHTML = year;
-                            document.getElementById("year2").innerHTML = year + 1;
-                            document.getElementById("year3").innerHTML = year + 2;
-                        </script>
-                    </div>
-
-
-                    <div class="hidden" id="current-month-date">
-                        <label for="month">חודש:</label>
-                        <select class="date" id="current-month" onchange="SelectMonth()">
-                            <option selected disabled hidden>חודש</option>
-                            @for (int i = month; i < 13; i++)
-                            {
-                                <option>@i</option>
-                            }
-                        </select>
-                    </div>
-
-                    <div class="hidden" id="other-month-date">
-                        <label for="month">חודש:</label>
-                        <select class="date" id="other-month" onchange="SelectMonth()">
-                            <option selected disabled hidden>חודש</option>
-                            @for (int i = 1; i < 13; i++)
-                            {
-                                <option>@i</option>
-                            }
-                        </select>
-                    </div>
+                <div class="year">
+                    <label for="year">שנה:</label>
+                    <select class="date-year" id="year" onchange="SelectYear()" name="year">
+                        <option selected disabled hidden>שנה</option>
+                        <option id="year1"></option>
+                        <option id="year2"></option>
+                        <option id="year3"></option>
+                    </select>
+                    <script>
+                        date = new Date();
+                        year = date.getFullYear();
+                        document.getElementById("year1").innerHTML = year;
+                        document.getElementById("year2").innerHTML = year + 1;
+                        document.getElementById("year3").innerHTML = year + 2;
+                    </script>
+                </div>
 
 
-                    <div class="hidden" id="current-day-date">
-                        <label for="day">יום:</label>
-                        <select class="date" id="day">
-                            <option selected disabled hidden>יום</option>
-                            @for (int i = day; i < currentLastDay + 1; i++)
-                            {
-                                <option>@i</option>
-                            }
-                        </select>
-                    </div>
+                <div class="hidden" id="current-month-date">
+                    <label for="month">חודש:</label>
+                    <select class="date-month" id="current-month" onchange="SelectMonth()" name="month">
+                        <option selected disabled hidden>חודש</option>
+                        @for (int i = month; i < 13; i++)
+                        {
+                            <option value="@i">@i</option>
+                        }
+                    </select>
+                </div>
 
-                    <div class="hidden" id="short-day-date">
-                        <label for="day">יום:</label>
-                        <select class="date" id="day">
-                            <option selected disabled hidden>יום</option>
-                            @for (int i = 1; i < 31; i++)
-                            {
-                                <option>@i</option>
-                            }
-                        </select>
-                    </div>
+                <div class="hidden" id="other-month-date">
+                    <label for="month">חודש:</label>
+                    <select class="date-month" id="other-month" onchange="SelectMonth()" name="month">
+                        <option selected disabled hidden>חודש</option>
+                        @for (int i = 1; i < 13; i++)
+                        {
+                            <option value="@i">@i</option>
+                        }
+                    </select>
+                </div>
 
-                    <div class="hidden" id="long-day-date">
-                        <label for="day">יום:</label>
-                        <select class="date" id="day">
-                            <option selected disabled hidden>יום</option>
-                            @for (int i = 1; i < 32; i++)
-                            {
-                                <option>@i</option>
-                            }
-                        </select>
-                    </div>
 
-                    <div class="hidden" id="feb-day-date">
-                        <label for="day">יום:</label>
-                        <select class="date" id="day">
-                            <option selected disabled hidden>יום</option>
-                            @for (int i = 1; i < 29; i++)
-                            {
-                                <option>@i</option>
-                            }
-                        </select>
-                    </div>
+                <div class="hidden" id="current-day-date">
+                    <label for="day">יום:</label>
+                    <select class="date-day" id="current-day" name="day">
+                        <option selected disabled hidden value="0">יום</option>
+                        @for (int i = day; i < currentLastDay + 1; i++)
+                        {
+                            <option value="@i">@i</option>
+                        }
+                    </select>
+                </div>
 
-                </div><br>
+                <div class="hidden" id="short-day-date">
+                    <label for="day">יום:</label>
+                    <select class="date-day" id="short-day" name="day">
+                        <option selected disabled hidden value="0">יום</option>
+                        @for (int i = 1; i < 31; i++)
+                        {
+                            <option value="@i">@i</option>
+                        }
+                    </select>
+                </div>
 
-                <label for="order">הערות</label>
-                <textarea id="order" placeholder="אם יש משהו שאנחנו צריכים לדעת..."></textarea>
+                <div class="hidden" id="long-day-date">
+                    <label for="day">יום:</label>
+                    <select class="date-day" id="long-day" name="day">
+                        <option selected disabled hidden value="0">יום</option>
+                        @for (int i = 1; i < 32; i++)
+                        {
+                            <option value="@i">@i</option>
+                        }
+                    </select>
+                </div>
 
+                <div class="hidden" id="feb-day-date">
+                    <label for="day">יום:</label>
+                    <select class="date-day" id="feb-day" name="day">
+                        <option selected disabled hidden value="0">יום</option>
+                        @for (int i = 1; i < 29; i++)
+                        {
+                            <option value="@i">@i</option>
+                        }
+                    </select>
+                </div>
+
+            </div><br>
+
+            <label for="order">הערות</label>
+            <textarea id="order" placeholder="אם יש משהו שאנחנו צריכים לדעת..." name="notes"></textarea>
+            @if (Session["User"] != null)
+            {
                 <input type="button" class="eventBtn" onclick="checkRequest()" value="שליחה">
             }
         </form>

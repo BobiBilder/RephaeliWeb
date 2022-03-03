@@ -34,5 +34,31 @@ namespace MasterProject.Controllers
             EventRequestViewModel eventRequestViewModel = eventBLL.GetEventTypes();
             return View(eventRequestViewModel);
         }
+        
+        [HttpPost]
+        public ActionResult EventForm(string EventTypeID, string Invitations, string year, string month, string day, string notes)
+        {
+            string date = day + "/" + month + "/" + year;
+            Order order = new Order();
+            LoginUser user = Session["User"] as LoginUser;
+            order.ClientID = user.id;
+            order.IsPayed = false;
+            order.OrderDate = date;
+            order.OrderTime = DateTime.Now.ToString("HH:mm");
+            NewEvent events = new NewEvent();
+            events.EventType = new EventType();
+            events.EventType.id = int.Parse(EventTypeID);
+            events.Invitations = int.Parse(Invitations);
+            events.Notes = notes;
+            OrderBLL eventBLL = new OrderBLL();
+            if (eventBLL.NewEvent(events, order))
+            {
+                TempData["message"] = "ההזמנת האירוע התקבלה בהצלחה";
+                return RedirectToAction("HomePage", "HomePage");
+            }
+            TempData["message"] = "אירעה שגיאה בהזמנת האירוע";
+            return RedirectToAction("HomePage", "HomePage");
+        }
+
     }
 }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using System.Data.OleDb;
 
 namespace MasterProject.BLL
 {
@@ -289,10 +290,12 @@ namespace MasterProject.BLL
             EventDB eventDB = new EventDB();
             return eventDB.RemoveWork(orderID, user) > 0;
         }
-        public bool OrderedFood(string[] quantity, string[] foodID, string userID)
+        public bool NewEvent(NewEvent newEvent, Order order)
         {
-
-            return false;
+            BaseModel[] baseModels = new BaseModel[] { order, newEvent };
+            EventDB eventDB = new EventDB();
+            OleDbCommand command = new OleDbCommand();
+            return eventDB.AddBaseModel(baseModels, command) > 0;
         }
     }
 }

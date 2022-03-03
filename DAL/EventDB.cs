@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using MasterProject.Models;
+using System.Data.OleDb;
 
 namespace MasterProject.DAL
 {
@@ -100,6 +101,32 @@ namespace MasterProject.DAL
                 sqls.Add(sql);
             }
             return this.ChangeData(sqls);
+        }
+
+
+        public override int AddBaseModel(BaseModel[] baseModels, OleDbCommand command)
+        {
+            //Insert to Food
+            //get foodID
+            //Insert FoodType
+            Order order = baseModels[0] as Order;
+            int rows = 0;
+            string orderSQL = string.Format(@"Insert into Order(
+                                         ClientID, OrderDate, IsPayed, OrderTime)
+                                         values('{0}', '{1}', '{2}', '{3}')",
+                                         order.ClientID, order.OrderDate, order.IsPayed, order.OrderTime);
+            command.CommandText = orderSQL;
+            rows = rows + command.ExecuteNonQuery();
+            orderSQL = "select @@Identity";
+            string orderID = command.ExecuteScalar().ToString();
+            NewEvent events = baseModels[1] as NewEvent;
+            string eventSQL = string.Format(@"Insert into Event(
+                                             OrderID, Invitations, EventTypeID, Notes)
+                                             values('{0}', '{1}', '{2}', '{3}')",
+                                             orderID, events.Invitations, events.EventType, events.Notes);
+            command.CommandText = eventSQL;
+            rows = rows + command.ExecuteNonQuery();
+            return rows;
         }
     }
 }

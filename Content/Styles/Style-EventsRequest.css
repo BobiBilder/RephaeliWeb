@@ -93,11 +93,19 @@ small {
     background: rgba(20, 20, 20,0.8);
     border: solid 1px yellow;
 }
-.date{
-    padding:0;
-    width:70px;
+.date-day, .date-month, .date-year{
+    padding: 0;
+    width: 70px;
 }
-.hidden{
-    display:none;
+.hidden {
+    width:150px;
+    display: none;
+}
+.year{
+    width:140px;
+}
+.calendar {
+    display:flex;
+    justify-content:right;
 }
 /*form*/

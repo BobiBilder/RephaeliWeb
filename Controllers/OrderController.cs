@@ -12,16 +12,16 @@ namespace MasterProject.Controllers
     public class OrderFoodController : Controller
     {
         //Get: Order
-        [HttpPost]
-        public ActionResult OrderedFood(string[] quantity, string[] foodID)
-        {
-            OrderBLL orderBLL = new OrderBLL();
-            LoginUser user = Session["User"] as LoginUser;
-            if (orderBLL.OrderedFood(quantity,foodID, user.id.ToString()))
-            {
-                return View();
-            }
-            return View();
-        }
+        //[HttpPost]
+        //public ActionResult OrderedFood(string[] quantity, string[] foodID)
+        //{
+        //    OrderBLL orderBLL = new OrderBLL();
+        //    LoginUser user = Session["User"] as LoginUser;
+        //    if (orderBLL.OrderedFood(quantity,foodID, user.id.ToString()))
+        //    {
+        //        return View();
+        //    }
+        //    return View();
+        //}
     }
 }

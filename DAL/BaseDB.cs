@@ -171,5 +171,9 @@ namespace MasterProject.DAL
         {
             return 0;
         }
+        public virtual int AddBaseModel(BaseModel[] baseModels, OleDbCommand command)
+        {
+            return 0;
+        }
     }
 }
