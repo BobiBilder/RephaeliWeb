@@ -5,7 +5,7 @@
     {
         LoginUser user = Session["User"] as LoginUser;
         if (user.IsWorker)
-        {
+        {   
             Layout = "~/Views/Share/ViewWorker.cshtml";
         }
         else

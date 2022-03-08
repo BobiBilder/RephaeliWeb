@@ -166,9 +166,9 @@ function WorkAssign() {
     }
 }
 function CheckAssign() {
-    var orderID = document.getElementsByName("orderID");
+    var EventID = document.getElementsByName("EventID");
     for (var i = 0; i < orderID.length; i++) {
-        if (orderID[i].checked) {
+        if (EventID[i].checked) {
             document.getElementById("emptyCheckbox").style.visibility = "hidden";
             return true;
         }

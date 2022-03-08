@@ -13,7 +13,7 @@
         @for (int i = 0; i < Model.Events.Count(); i++)
         {
             Event events = Model.Events[i];
-            Order order = Model.Orders[events.OrderID - 2];
+            Order order = Model.Orders[events.id - 8];
             Clients client = Model.Clients[(order.ClientID - 1)];
             events.EventType.EventTypeName = Model.EventTypes[events.EventType.id - 1].EventTypeName;
             <div class="eventBlock">

@@ -23,6 +23,7 @@ namespace MasterProject.BLL
             {
                 Event events = new Event();
                 events.OrderID = int.Parse(dr["OrderID"].ToString());
+                events.id = int.Parse(dr["EventID"].ToString());
                 events.Invitations = int.Parse(dr["Invitations"].ToString());
                 events.Notes = dr["Notes"].ToString();
                 events.EventType = new EventType();
@@ -65,24 +66,24 @@ namespace MasterProject.BLL
 
             return eventOrderViewModel;
         }
-        private bool helper1(int OrderID, LoginUser user)
+        private bool helper1(int EventID, LoginUser user)
         {
             EventDB eventDB = new EventDB();
             DataTable dt = eventDB.helper1(user);
             bool isOK = true;
             foreach (DataRow dr in dt.Rows)
             {
-                isOK = isOK && OrderID != int.Parse(dr["OrderID"].ToString());
+                isOK = isOK && EventID != int.Parse(dr["EventID"].ToString());
             }
             return isOK;
         }
-        private bool helper2(int OrderID, LoginUser user)
+        private bool helper2(int EventID, LoginUser user)
         {
             EventDB eventDB = new EventDB();
             DataTable dt = eventDB.helper1(user);
             foreach (DataRow dr in dt.Rows)
             {
-                if(OrderID == int.Parse(dr["OrderID"].ToString()))
+                if(EventID == int.Parse(dr["EventID"].ToString()))
                 {
                     return true;
                 }
@@ -110,26 +111,17 @@ namespace MasterProject.BLL
             eventOrderViewModel.Events = new List<Event>();
             foreach (DataRow dr in dsEvent.Tables["Events"].Rows)
             {
-                if (helper1(int.Parse(dr["OrderID"].ToString()), user))
+                if (helper1(int.Parse(dr["EventID"].ToString()), user))
                 {
                     Event events = new Event();
                     events.OrderID = int.Parse(dr["OrderID"].ToString());
+                    events.id = int.Parse(dr["EventID"].ToString());
                     events.Invitations = int.Parse(dr["Invitations"].ToString());
                     events.Notes = dr["Notes"].ToString();
                     events.EventType = new EventType();
                     events.EventType.id = int.Parse(dr["EventTypeID"].ToString());
                     eventOrderViewModel.Events.Add(events);
                 }
-                //if (helper2(int.Parse(dr["OrderID"].ToString()), user))
-                //{
-                //    Event events = new Event();
-                //    events.OrderID = int.Parse(dr["OrderID"].ToString());
-                //    events.Invitations = int.Parse(dr["Invitations"].ToString());
-                //    events.Notes = dr["Notes"].ToString();
-                //    events.EventType = new EventType();
-                //    events.EventType.id = int.Parse(dr["EventTypeID"].ToString());
-                //    eventOrderViewModel.Events.Add(events);
-                //}
             }
 
             eventOrderViewModel.Clients = new List<Clients>();
@@ -176,10 +168,11 @@ namespace MasterProject.BLL
             eventOrderViewModel.Events = new List<Event>();
             foreach (DataRow dr in dsEvent.Tables["Events"].Rows)
             {
-                if (helper2(int.Parse(dr["OrderID"].ToString()), user))
+                if (helper2(int.Parse(dr["EventID"].ToString()), user))
                 {
                     Event events = new Event();
                     events.OrderID = int.Parse(dr["OrderID"].ToString());
+                    events.id = int.Parse(dr["EventID"].ToString());
                     events.Invitations = int.Parse(dr["Invitations"].ToString());
                     events.Notes = dr["Notes"].ToString();
                     events.EventType = new EventType();
@@ -222,6 +215,7 @@ namespace MasterProject.BLL
             {
                 Event events = new Event();
                 events.OrderID = int.Parse(dr["OrderID"].ToString());
+                events.id = int.Parse(dr["EventID"].ToString());
                 events.Invitations = int.Parse(dr["Invitations"].ToString());
                 events.Notes = dr["Notes"].ToString();
                 events.EventType = new EventType();
@@ -280,22 +274,20 @@ namespace MasterProject.BLL
             return eventRequestViewModel;
         }
 
-        public bool AssignedWork(int[] orderID, LoginUser user)
+        public bool AssignedWork(int[] EventID, LoginUser user)
         {
             EventDB eventDB = new EventDB();
-            return eventDB.AssignWork(orderID, user) > 0; 
+            return eventDB.AssignWork(EventID, user) > 0; 
         }
-        public bool RemoveWork(int[] orderID, LoginUser user)
+        public bool RemoveWork(int[] EventID, LoginUser user)
         {
             EventDB eventDB = new EventDB();
-            return eventDB.RemoveWork(orderID, user) > 0;
+            return eventDB.RemoveWork(EventID, user) > 0;
         }
-        public bool NewEvent(NewEvent newEvent, Order order)
+        public bool NewEvent(OrderEvent order)
         {
-            BaseModel[] baseModels = new BaseModel[] { order, newEvent };
             EventDB eventDB = new EventDB();
-            OleDbCommand command = new OleDbCommand();
-            return eventDB.AddBaseModel(baseModels, command) > 0;
+            return eventDB.AddBaseModel(order) > 0;
         }
     }
 }

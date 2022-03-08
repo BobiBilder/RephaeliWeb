@@ -13,4 +13,13 @@ namespace MasterProject.Models
         public bool IsPayed { get; set; }
         public string OrderTime { get; set; }
     }
+
+    public class OrderEvent : Order
+    {
+        public NewEvent Event { get; set; }
+    }
+    public class OrderFood : Order
+    {
+        List<Food> food;
+    }
 }

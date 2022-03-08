@@ -50,8 +50,8 @@ namespace MasterProject.DAL
         public DataTable helper1(LoginUser user)
         {
             SelectSQL select= new SelectSQL();
-            select.Sql = "select EmployeeEvent.OrderID from EmployeeEvent WHERE EmployeeID = " + user.id;
-            select.TableName = "OrderIDs";
+            select.Sql = "select EmployeeEvent.EventID from EmployeeEvent WHERE EmployeeID = " + user.id;
+            select.TableName = "EventIDs";
             return this.Select(select);
         }
         public DataSet GetAllEventByType(int typeID)
@@ -79,51 +79,51 @@ namespace MasterProject.DAL
         
 
 
-        public int AssignWork(int[] orderID, LoginUser user)
+        public int AssignWork(int[] EventID, LoginUser user)
         {
             List<string> sqls = new List<string>();
-            foreach (int ordersID in orderID)
+            foreach (int eventsID in EventID)
             {
-                string sql = string.Format(@"insert into EmployeeEvent(EmployeeID, OrderID)
-                                           values({0} , {1})",
-                                           user.id, ordersID);
+                string sql = string.Format(@"insert into EmployeeEvent(EmployeeID, EventID)
+                                           values({0} , {1})",  
+                                           user.id, eventsID);
                 sqls.Add(sql);
             }
             return this.ChangeData(sqls);
         }
-        public int RemoveWork(int[] orderID, LoginUser user)
+        public int RemoveWork(int[] EventID, LoginUser user)
         {
             List<string> sqls = new List<string>();
-            foreach (int ordersID in orderID)
+            foreach (int eventsID in EventID)
             {
-                string sql = string.Format(@"Delete from EmployeeEvent where EmployeeID in ({0}) and OrderID in ({1}) ",
-                                           user.id, ordersID);
+                string sql = string.Format(@"Delete from EmployeeEvent where EmployeeID in ({0}) and EventID in ({1}) ",
+                                           user.id, eventsID);
                 sqls.Add(sql);
             }
             return this.ChangeData(sqls);
         }
 
 
-        public override int AddBaseModel(BaseModel[] baseModels, OleDbCommand command)
+        public override int AddModel(BaseModel baseModels)
         {
             //Insert to Food
             //get foodID
             //Insert FoodType
-            Order order = baseModels[0] as Order;
+            OrderEvent order = baseModels as OrderEvent;
             int rows = 0;
-            string orderSQL = string.Format(@"Insert into Order(
+            string orderSQL = string.Format(@"Insert into [Order](
                                          ClientID, OrderDate, IsPayed, OrderTime)
-                                         values('{0}', '{1}', '{2}', '{3}')",
+                                         values({0}, '{1}', {2}, '{3}')",
                                          order.ClientID, order.OrderDate, order.IsPayed, order.OrderTime);
             command.CommandText = orderSQL;
             rows = rows + command.ExecuteNonQuery();
             orderSQL = "select @@Identity";
+            command.CommandText = orderSQL;
             string orderID = command.ExecuteScalar().ToString();
-            NewEvent events = baseModels[1] as NewEvent;
-            string eventSQL = string.Format(@"Insert into Event(
+            string eventSQL = string.Format(@"Insert into [Event](
                                              OrderID, Invitations, EventTypeID, Notes)
-                                             values('{0}', '{1}', '{2}', '{3}')",
-                                             orderID, events.Invitations, events.EventType, events.Notes);
+                                             values('{0}', {1}, {2}, '{3}')",
+                                             orderID, order.Event.Invitations, order.Event.EventType.id, order.Event.Notes);
             command.CommandText = eventSQL;
             rows = rows + command.ExecuteNonQuery();
             return rows;

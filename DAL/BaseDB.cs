@@ -15,7 +15,7 @@ namespace MasterProject.DAL
         OleDbConnection connection;//קשר למסד נתונים
 
         //connected
-        OleDbCommand command;//פקודות למסד נתונים
+        protected OleDbCommand command;//פקודות למסד נתונים
         OleDbDataReader reader;//אובייקט לשמירת נתונים שהגיעו ממסד נתונים
 
 
@@ -150,7 +150,7 @@ namespace MasterProject.DAL
                 this.connection.Open();
                 transaction = this.connection.BeginTransaction();
                 this.command.Transaction = transaction;
-                AddBaseModel(baseModel, this.command);
+                AddBaseModel(baseModel);
                 transaction.Commit();
             }
             catch (Exception ex)
@@ -167,11 +167,32 @@ namespace MasterProject.DAL
             return rows;
         }
 
-        public virtual int AddBaseModel(BaseModel baseModel, OleDbCommand command)
+        public int AddBaseModel(BaseModel baseModel)
         {
-            return 0;
+            OleDbTransaction transaction = null;
+            try
+            {
+
+                this.connection.Open();
+                transaction = this.connection.BeginTransaction();
+                this.command.Transaction = transaction;
+                
+                int x = AddModel(baseModel);
+                transaction.Commit();
+                return x;
+            }
+            catch(Exception ex)
+            {
+                transaction.Rollback();
+                return 0;
+            }
+            finally
+            {
+                this.connection.Close();
+            }
         }
-        public virtual int AddBaseModel(BaseModel[] baseModels, OleDbCommand command)
+
+        public virtual int AddModel(BaseModel baseModel)
         {
             return 0;
         }

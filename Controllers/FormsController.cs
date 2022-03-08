@@ -39,25 +39,25 @@ namespace MasterProject.Controllers
         public ActionResult EventForm(string EventTypeID, string Invitations, string year, string month, string day, string notes)
         {
             string date = day + "/" + month + "/" + year;
-            Order order = new Order();
+            OrderEvent order = new OrderEvent();
             LoginUser user = Session["User"] as LoginUser;
             order.ClientID = user.id;
             order.IsPayed = false;
             order.OrderDate = date;
             order.OrderTime = DateTime.Now.ToString("HH:mm");
-            NewEvent events = new NewEvent();
-            events.EventType = new EventType();
-            events.EventType.id = int.Parse(EventTypeID);
-            events.Invitations = int.Parse(Invitations);
-            events.Notes = notes;
+            order.Event = new NewEvent();
+            order.Event.EventType = new EventType();
+            order.Event.EventType.id = int.Parse(EventTypeID);
+            order.Event.Invitations = int.Parse(Invitations);
+            order.Event.Notes = notes;
             OrderBLL eventBLL = new OrderBLL();
-            if (eventBLL.NewEvent(events, order))
+            if (eventBLL.NewEvent(order))
             {
                 TempData["message"] = "ההזמנת האירוע התקבלה בהצלחה";
-                return RedirectToAction("HomePage", "HomePage");
+                return RedirectToAction("HomePage", "Home");
             }
             TempData["message"] = "אירעה שגיאה בהזמנת האירוע";
-            return RedirectToAction("HomePage", "HomePage");
+            return RedirectToAction("HomePage", "Home");
         }
 
     }

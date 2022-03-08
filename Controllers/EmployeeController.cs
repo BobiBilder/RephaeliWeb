@@ -43,12 +43,12 @@ namespace MasterProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult AssignWorkEvent(int[] orderID)
+        public ActionResult AssignWorkEvent(int[] EventID)
         {
             OrderBLL orderBLL = new OrderBLL();
             LoginUser user = Session["User"] as LoginUser;
             
-            if (orderBLL.AssignedWork(orderID, user))
+            if (orderBLL.AssignedWork(EventID, user))
             {
                 TempData["message"] = "ההרשמה לעבודה נעשתה בהצלחה";
                 return RedirectToAction("EventOrders", "Employee");
@@ -57,12 +57,12 @@ namespace MasterProject.Controllers
             return RedirectToAction("EventOrders", "Employee");
         }
         [HttpPost]
-        public ActionResult RemoveWorkEvent(int[] orderID)
+        public ActionResult RemoveWorkEvent(int[] EventID)
         {
             OrderBLL orderBLL = new OrderBLL();
             LoginUser user = Session["User"] as LoginUser;
 
-            if (orderBLL.RemoveWork(orderID, user))
+            if (orderBLL.RemoveWork(EventID, user))
             {
                 TempData["message"] = "היציאה מהעבודה נעשתה בהצלחה";
                 return RedirectToAction("MyEventOrders", "Employee");
