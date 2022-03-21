@@ -8,6 +8,7 @@ namespace MasterProject.Models
     public class Order:BaseModel
     {
         public int ClientID { get; set; }
+        public bool IsWorker { get; set; }
         public string OrderDate { get; set; }
         public List<Employee> Employees { get; set; }
         public bool IsPayed { get; set; }

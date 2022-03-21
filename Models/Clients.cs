@@ -7,7 +7,6 @@ namespace MasterProject.Models
 {
     public class Clients: LoginUser
     {
-        public string Email { get; set; }
-        public string Password { get; set; }
+        
     }
 }

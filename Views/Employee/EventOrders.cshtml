@@ -23,7 +23,14 @@
             {
                 Event events = Model.Events[i];
                 Order order = Model.Orders[events.id - 8];
-                Clients client = Model.Clients[(order.ClientID - 1)];
+                LoginUser client = new LoginUser();
+                if (order.IsWorker) {
+                    client = Model.employees[(order.ClientID - 1)];
+                }
+                else
+                {
+                    client = Model.Clients[(order.ClientID - 1)];
+                }
                 events.EventType.EventTypeName = Model.EventTypes[events.EventType.id - 1].EventTypeName;
                 <div class="eventBlock">
                     <label class="container">
@@ -33,7 +40,7 @@
                         <h2 class="eventInfo">מוזמנים:@events.Invitations</h2>
                         <h2 class="eventInfo">האירוע של:@client.FirstName @client.LastName</h2>
                         <h2 class="eventInfo">תאריך:@order.OrderDate</h2>
-                        <h2 class="eventInfo">בשעה:@order.OrderTime</h2>
+                        <h2 class="eventInfo">בשעה-@order.OrderTime</h2>
                     </label>
                 </div>
             }
@@ -51,15 +58,26 @@
             {
                 Event events = Model.Events[i];
                 Order order = Model.Orders[events.id - 8];
-                Clients client = Model.Clients[(order.ClientID - 1)];
+                LoginUser client = new LoginUser();
+                if (order.IsWorker)
+                {
+                    client = Model.employees[(order.ClientID - 1)];
+                }
+                else
+                {
+                    client = Model.Clients[(order.ClientID - 1)];
+                }
                 events.EventType.EventTypeName = Model.EventTypes[events.EventType.id - 1].EventTypeName;
                 <div class="eventBlock">
                     <label class="container">
+                        <input type="checkbox" id="orderID" name="EventID" value="@events.id">
+                        <span class="checkmark"></span>
                         <h1 class="eventInfo">@events.EventType.EventTypeName</h1>
                         <h2 class="eventInfo">מוזמנים:@events.Invitations</h2>
                         <h2 class="eventInfo">האירוע של:@client.FirstName @client.LastName</h2>
                         <h2 class="eventInfo">תאריך:@order.OrderDate</h2>
-                        <h2 class="eventInfo">בשעה:@order.OrderTime</h2>
+                        <h2 class="eventInfo">בשעה-@order.OrderTime</h2>
+                        <h2 class="eventInfo">@events.Notes</h2>
                     </label>
                 </div>
             }

@@ -42,6 +42,7 @@ namespace MasterProject.Controllers
             OrderEvent order = new OrderEvent();
             LoginUser user = Session["User"] as LoginUser;
             order.ClientID = user.id;
+            order.IsWorker = user.IsWorker;
             order.IsPayed = false;
             order.OrderDate = date;
             order.OrderTime = DateTime.Now.ToString("HH:mm");

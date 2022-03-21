@@ -37,6 +37,12 @@ namespace MasterProject.DAL
             select3.Sql = "select * from [EventType]";
             select3.TableName = "EventTypes";
             selectSQLs.Add(select3);
+            
+            SelectSQL select4 = new SelectSQL();
+            select4.Sql = "select * from Employee";
+            select4.TableName = "Employees";
+            selectSQLs.Add(select4);
+
             return this.Select(selectSQLs);
         }
         public DataTable GetAllEventTypes()
@@ -74,7 +80,14 @@ namespace MasterProject.DAL
             select3.Sql = "select * from [EventType]";
             select3.TableName = "EventTypes";
             selectSQLs.Add(select3);
+
+            SelectSQL select4 = new SelectSQL();
+            select4.Sql = "select * from Employee";
+            select4.TableName = "Employees";
+            selectSQLs.Add(select4);
+
             return this.Select(selectSQLs);
+
         }
         
 
@@ -112,9 +125,9 @@ namespace MasterProject.DAL
             OrderEvent order = baseModels as OrderEvent;
             int rows = 0;
             string orderSQL = string.Format(@"Insert into [Order](
-                                         ClientID, OrderDate, IsPayed, OrderTime)
-                                         values({0}, '{1}', {2}, '{3}')",
-                                         order.ClientID, order.OrderDate, order.IsPayed, order.OrderTime);
+                                         ClientID, OrderDate, IsPayed, OrderTime, IsWorker)
+                                         values({0}, '{1}', {2}, '{3}', {4})",
+                                         order.ClientID, order.OrderDate, order.IsPayed, order.OrderTime, order.IsWorker);
             command.CommandText = orderSQL;
             rows = rows + command.ExecuteNonQuery();
             orderSQL = "select @@Identity";

@@ -40,6 +40,7 @@ namespace MasterProject.BLL
                 order.ClientID = int.Parse(dr["ClientID"].ToString());
                 order.id = int.Parse(dr["OrderID"].ToString());
                 order.OrderTime = dr["OrderTime"].ToString();
+                order.IsWorker = bool.Parse(dr["IsWorker"].ToString());
                 eventOrderViewModel.Orders.Add(order);
             }
 
@@ -53,6 +54,18 @@ namespace MasterProject.BLL
                 client.id = int.Parse(dr["ClientID"].ToString());
                 client.Password = dr["Password"].ToString();
                 eventOrderViewModel.Clients.Add(client);
+            }
+
+            eventOrderViewModel.employees = new List<Employee>();
+            foreach (DataRow dr in dsEvent.Tables["Employees"].Rows)
+            {
+                Employee employee = new Employee();
+                employee.FirstName = dr["FirstName"].ToString();
+                employee.LastName = dr["LastName"].ToString();
+                employee.Email = dr["Email"].ToString();
+                employee.id = int.Parse(dr["EmployeeID"].ToString());
+                employee.Password = dr["Password"].ToString();
+                eventOrderViewModel.employees.Add(employee);
             }
 
             eventOrderViewModel.EventTypes = new List<EventType>();
@@ -105,6 +118,7 @@ namespace MasterProject.BLL
                 order.ClientID = int.Parse(dr["ClientID"].ToString());
                 order.id = int.Parse(dr["OrderID"].ToString());
                 order.OrderTime = dr["OrderTime"].ToString();
+                order.IsWorker = bool.Parse(dr["IsWorker"].ToString());
                 eventOrderViewModel.Orders.Add(order);
             }
 
@@ -136,6 +150,18 @@ namespace MasterProject.BLL
                 eventOrderViewModel.Clients.Add(client);
             }
 
+            eventOrderViewModel.employees = new List<Employee>();
+            foreach (DataRow dr in dsEvent.Tables["Employees"].Rows)
+            {
+                Employee employee = new Employee();
+                employee.FirstName = dr["FirstName"].ToString();
+                employee.LastName = dr["LastName"].ToString();
+                employee.Email = dr["Email"].ToString();
+                employee.id = int.Parse(dr["EmployeeID"].ToString());
+                employee.Password = dr["Password"].ToString();
+                eventOrderViewModel.employees.Add(employee);
+            }
+
             eventOrderViewModel.EventTypes = new List<EventType>();
             foreach (DataRow dr in dsEvent.Tables["EventTypes"].Rows)
             {
@@ -162,6 +188,7 @@ namespace MasterProject.BLL
                 order.ClientID = int.Parse(dr["ClientID"].ToString());
                 order.id = int.Parse(dr["OrderID"].ToString());
                 order.OrderTime = dr["OrderTime"].ToString();
+                order.IsWorker = bool.Parse(dr["IsWorker"].ToString());
                 eventOrderViewModel.Orders.Add(order);
             }
 
@@ -191,6 +218,18 @@ namespace MasterProject.BLL
                 client.id = int.Parse(dr["ClientID"].ToString());
                 client.Password = dr["Password"].ToString();
                 eventOrderViewModel.Clients.Add(client);
+            }
+
+            eventOrderViewModel.employees = new List<Employee>();
+            foreach (DataRow dr in dsEvent.Tables["Employees"].Rows)
+            {
+                Employee employee = new Employee();
+                employee.FirstName = dr["FirstName"].ToString();
+                employee.LastName = dr["LastName"].ToString();
+                employee.Email = dr["Email"].ToString();
+                employee.id = int.Parse(dr["EmployeeID"].ToString());
+                employee.Password = dr["Password"].ToString();
+                eventOrderViewModel.employees.Add(employee);
             }
 
             eventOrderViewModel.EventTypes = new List<EventType>();
@@ -231,6 +270,7 @@ namespace MasterProject.BLL
                 order.OrderDate = dr["OrderDate"].ToString();
                 order.ClientID = int.Parse(dr["ClientID"].ToString());
                 order.id = int.Parse(dr["OrderID"].ToString());
+                order.IsWorker = bool.Parse(dr["IsWorker"].ToString());
                 eventOrderViewModel.Orders.Add(order);
             }
 
@@ -244,6 +284,18 @@ namespace MasterProject.BLL
                 client.id = int.Parse(dr["ClientID"].ToString());
                 client.Password = dr["Password"].ToString();
                 eventOrderViewModel.Clients.Add(client);
+            }
+
+            eventOrderViewModel.employees = new List<Employee>();
+            foreach (DataRow dr in dsEvent.Tables["Employees"].Rows)
+            {
+                Employee employee = new Employee();
+                employee.FirstName = dr["FirstName"].ToString();
+                employee.LastName = dr["LastName"].ToString();
+                employee.Email = dr["Email"].ToString();
+                employee.id = int.Parse(dr["EmployeeID"].ToString());
+                employee.Password = dr["Password"].ToString();
+                eventOrderViewModel.employees.Add(employee);
             }
 
             eventOrderViewModel.EventTypes = new List<EventType>();
