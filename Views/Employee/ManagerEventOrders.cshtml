@@ -4,16 +4,17 @@
 @using MasterProject.DAL
 @model EventOrderViewModel
 @{
-    ViewBag.Title = "EventOrders";
+    ViewBag.Title = "ManagerEventOrders";
     Layout = "~/Views/Share/ViewWorker.cshtml";
     LoginUser user = Session["User"] as LoginUser;
 }
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <link href="~/Content/Styles/Style-Food.css" rel="stylesheet" />
+<script src="~/Content/Scripts/SortEventType-Script.js"></script>
 <script src="~/Content/Scripts/Events-Script.js"></script>
+
 <div class="wrapper">
-    @if (!user.IsManager)
-    {
-    <form class="EventWrapper" method="post" action="~/Employee/RemoveWorkEvent">
+    <div class="EventWrapper">
         @for (int i = 0; i < Model.Events.Count(); i++)
         {
             Event events = Model.Events[i];
@@ -30,44 +31,31 @@
             events.EventType.EventTypeName = Model.EventTypes[events.EventType.id - 1].EventTypeName;
             <div class="eventBlock">
                 <label class="container">
-                    <input type="checkbox" id="orderID" name="EventID" value="@events.id">
-                    <span class="checkmark"></span>
                     <h1 class="eventInfo">@events.EventType.EventTypeName</h1>
                     <h2 class="eventInfo">מוזמנים:@events.Invitations</h2>
                     <h2 class="eventInfo">האירוע של:@client.FirstName @client.LastName</h2>
                     <h2 class="eventInfo">תאריך:@order.OrderDate</h2>
                     <h2 class="eventInfo">בשעה-@order.OrderTime</h2>
-                </label>
-            </div>
-        }
-        <br>
-        <span class="span" id="emptyCheckbox">נא לבחור אירוע בכדי לצאת מהעבודה</span>
-        <br>
-        <input type="button" onclick="WorkAssign()" class="button-order" value="יציאה מהעבודה">
-
-    </form>
-    }
-    else
-    {
-    <div class="EventWrapper">
-        @for (int i = 0; i < Model.Events.Count(); i++)
-        {
-            Event events = Model.Events[i];
-            Order order = Model.Orders[events.id - 8];
-            Clients client = Model.Clients[(order.ClientID - 1)];
-            events.EventType.EventTypeName = Model.EventTypes[events.EventType.id - 1].EventTypeName;
-            <div class="eventBlock">
-                <label class="container">
-                    <h1 class="eventInfo">@events.EventType.EventTypeName</h1>
-                    <h2 class="eventInfo">מוזמנים:@events.Invitations</h2>
-                    <h2 class="eventInfo">האירוע של:@client.FirstName @client.LastName</h2>
-                    <h2 class="eventInfo">תאריך:@order.OrderDate</h2>
-                    <h2 class="eventInfo">בשעה:@order.OrderTime</h2>
+                    @if (order.EmployeeIDs.Count != 0)
+                    {
+                        <h2>עובדים:</h2>
+                        foreach (Employee employee in Model.employees)
+                        {
+                            if (order.EmployeeIDs.Contains(employee.id))
+                                {
+                                <h2 class="eventInfo">@employee.FirstName @employee.LastName</h2>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <h2>לא נרשמו לעבוד.</h2>
+                    }
                 </label>
             </div>
         }
     </div>
-    }
+
     <div class="eventTypesBlock">
         <a href="~/Employee/EventOrders">
             <h1 class="typesTitle">האירועים:</h1>
@@ -81,19 +69,9 @@
             </div>
         }
         <div class="eventTypes">
-            @if (!user.IsManager)
-            {
-                <a href="~/Employee/MyEventOrders">
-                    <p class="types">להם נרשמתי:</p>
-                </a>
-            }
-            else
-            {
-                <a href="~/Employee/MyEventOrders">
-                    <p class="types">להם נרשמו:</p>
-                </a>
-            }
+            <a href="~/Employee/ManagerEventOrders">
+                <p class="types">להם נרשמו:</p>
+            </a>
         </div>
     </div>
-
 </div>

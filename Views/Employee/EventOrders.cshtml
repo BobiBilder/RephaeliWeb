@@ -13,9 +13,6 @@
 <script src="~/Content/Scripts/SortEventType-Script.js"></script>
 <script src="~/Content/Scripts/Events-Script.js"></script>
 <div class="wrapper">
-    <div class="loader hidden">
-        <img src="~/Content/Images/GIFs/FoodLoading.gif" />
-    </div>
     @if (!user.IsManager)
     {
         <form class="EventWrapper" method="post" action="~/Employee/AssignWorkEvent">
@@ -24,7 +21,8 @@
                 Event events = Model.Events[i];
                 Order order = Model.Orders[events.id - 8];
                 LoginUser client = new LoginUser();
-                if (order.IsWorker) {
+                if (order.IsWorker)
+                {
                     client = Model.employees[(order.ClientID - 1)];
                 }
                 else
@@ -70,8 +68,6 @@
                 events.EventType.EventTypeName = Model.EventTypes[events.EventType.id - 1].EventTypeName;
                 <div class="eventBlock">
                     <label class="container">
-                        <input type="checkbox" id="orderID" name="EventID" value="@events.id">
-                        <span class="checkmark"></span>
                         <h1 class="eventInfo">@events.EventType.EventTypeName</h1>
                         <h2 class="eventInfo">מוזמנים:@events.Invitations</h2>
                         <h2 class="eventInfo">האירוע של:@client.FirstName @client.LastName</h2>
@@ -97,9 +93,18 @@
             </div>
         }
         <div class="eventTypes">
-            <a href="~/Employee/MyEventOrders">
-                <p class="types">להם נרשמתי:</p>
-            </a>
+            @if (!user.IsManager)
+            {
+                <a href="~/Employee/MyEventOrders">
+                    <p class="types">להם נרשמתי:</p>
+                </a>
+            }
+            else
+            {
+                <a href="~/Employee/ManagerEventOrders">
+                    <p class="types">להם נרשמו:</p>
+                </a>
+            }
         </div>
     </div>
 </div>

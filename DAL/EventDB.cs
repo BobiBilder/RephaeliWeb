@@ -60,6 +60,20 @@ namespace MasterProject.DAL
             select.TableName = "EventIDs";
             return this.Select(select);
         }
+        public DataTable helper2()
+        {
+            SelectSQL select = new SelectSQL();
+            select.Sql = "select EmployeeEvent.EventID from EmployeeEvent";
+            select.TableName = "EventIDs";
+            return this.Select(select);
+        }
+        public DataTable helper3(int orderID)
+        {
+            SelectSQL select = new SelectSQL();
+            select.Sql = "select EmployeeEvent.EmployeeID from EmployeeEvent where EventID in (select [Event].EventID from [Event] where OrderID = " + orderID + ")";
+            select.TableName = "EmployeeIDs";
+            return this.Select(select);
+        }
         public DataSet GetAllEventByType(int typeID)
         {
             List<SelectSQL> selectSQLs = new List<SelectSQL>();
@@ -89,7 +103,6 @@ namespace MasterProject.DAL
             return this.Select(selectSQLs);
 
         }
-        
 
 
         public int AssignWork(int[] EventID, LoginUser user)
@@ -98,7 +111,7 @@ namespace MasterProject.DAL
             foreach (int eventsID in EventID)
             {
                 string sql = string.Format(@"insert into EmployeeEvent(EmployeeID, EventID)
-                                           values({0} , {1})",  
+                                           values({0} , {1})",
                                            user.id, eventsID);
                 sqls.Add(sql);
             }

@@ -215,6 +215,7 @@
     <Content Include="Views\Employee\MyEventOrders.cshtml" />
     <Content Include="Views\FoodByFoodType\GetFoodByType.cshtml" />
     <Content Include="Views\FoodSupply\FoodSupplyForm.cshtml" />
+    <Content Include="Views\Employee\ManagerEventOrders.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
