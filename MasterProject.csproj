@@ -200,6 +200,9 @@
     <None Include="Connected Services\FoodSupplier\Service1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\FoodSupplier\Service2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <Content Include="Views\Share\View.cshtml" />
     <Content Include="Views\Home\HomePage.cshtml" />
@@ -229,7 +232,9 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\FoodSupplier\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\OrderFoodSupply\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

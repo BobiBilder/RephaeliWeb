@@ -9,17 +9,176 @@
 //------------------------------------------------------------------------------
 
 namespace MasterProject.FoodSupplier {
+    using System.Runtime.Serialization;
+    using System;
     
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="BaseModel", Namespace="http://schemas.datacontract.org/2004/07/")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(MasterProject.FoodSupplier.FoodType))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(MasterProject.FoodSupplier.Food))]
+    public partial class BaseModel : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="FoodType", Namespace="http://schemas.datacontract.org/2004/07/")]
+    [System.SerializableAttribute()]
+    public partial class FoodType : MasterProject.FoodSupplier.BaseModel {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FoodTypeNameField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FoodTypeName {
+            get {
+                return this.FoodTypeNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FoodTypeNameField, value) != true)) {
+                    this.FoodTypeNameField = value;
+                    this.RaisePropertyChanged("FoodTypeName");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Food", Namespace="http://schemas.datacontract.org/2004/07/")]
+    [System.SerializableAttribute()]
+    public partial class Food : MasterProject.FoodSupplier.BaseModel {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FoodDescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FoodNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FoodPictureField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double FoodPriceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private MasterProject.FoodSupplier.FoodType FoodTypeField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FoodDescription {
+            get {
+                return this.FoodDescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FoodDescriptionField, value) != true)) {
+                    this.FoodDescriptionField = value;
+                    this.RaisePropertyChanged("FoodDescription");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FoodName {
+            get {
+                return this.FoodNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FoodNameField, value) != true)) {
+                    this.FoodNameField = value;
+                    this.RaisePropertyChanged("FoodName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FoodPicture {
+            get {
+                return this.FoodPictureField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FoodPictureField, value) != true)) {
+                    this.FoodPictureField = value;
+                    this.RaisePropertyChanged("FoodPicture");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double FoodPrice {
+            get {
+                return this.FoodPriceField;
+            }
+            set {
+                if ((this.FoodPriceField.Equals(value) != true)) {
+                    this.FoodPriceField = value;
+                    this.RaisePropertyChanged("FoodPrice");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public MasterProject.FoodSupplier.FoodType FoodType {
+            get {
+                return this.FoodTypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FoodTypeField, value) != true)) {
+                    this.FoodTypeField = value;
+                    this.RaisePropertyChanged("FoodType");
+                }
+            }
+        }
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="FoodSupplier.IService")]
     public interface IService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Plus", ReplyAction="http://tempuri.org/IService/PlusResponse")]
-        int Plus(int num1, int num2);
+        Food GetAllFood(MasterProject.FoodSupplier.Food food);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Plus", ReplyAction="http://tempuri.org/IService/PlusResponse")]
-        System.Threading.Tasks.Task<int> PlusAsync(int num1, int num2);
+        System.Threading.Tasks.Task<Food> GetAllFoodAsync(MasterProject.FoodSupplier.Food food);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Minus", ReplyAction="http://tempuri.org/IService/MinusResponse")]
         int Minus(int num1, int num2);
@@ -67,12 +226,12 @@ namespace MasterProject.FoodSupplier {
                 base(binding, remoteAddress) {
         }
         
-        public int Plus(int num1, int num2) {
-            return base.Channel.Plus(num1, num2);
+        public Food GetAllFood(MasterProject.FoodSupplier.Food food) {
+            return base.Channel.GetAllFood(food);
         }
         
-        public System.Threading.Tasks.Task<int> PlusAsync(int num1, int num2) {
-            return base.Channel.PlusAsync(num1, num2);
+        public System.Threading.Tasks.Task<Food> GetAllFoodAsync(MasterProject.FoodSupplier.Food food) {
+            return base.Channel.GetAllFoodAsync(food);
         }
         
         public int Minus(int num1, int num2) {
