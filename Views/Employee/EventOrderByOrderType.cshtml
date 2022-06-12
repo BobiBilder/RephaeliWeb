@@ -6,6 +6,7 @@
 @{
     ViewBag.Title = "EventOrders";
     Layout = "~/Views/Share/ViewWorker.cshtml";
+    LoginUser user = Session["User"] as LoginUser;
 }
 <link href="~/Content/Styles/Style-Food.css" rel="stylesheet" />
 <div class="wrapper">
@@ -21,13 +22,22 @@
             }
             else
             {
-                client = Model.Clients[(order.ClientID - 1)];
+                if (order.ClientID < 17)
+                {
+                    client = Model.Clients[(order.ClientID - 1)];
+                }
+                else
+                {
+                    client = Model.Clients[(order.ClientID - 5)];
+                }
             }
             events.EventType.EventTypeName = Model.EventTypes[events.EventType.id - 1].EventTypeName;
             <div class="eventBlock">
                 <label class="container">
-                    <input type="checkbox" id="orderID" name="EventID" value="@events.id">
-                    <span class="checkmark"></span>
+                    @if (!user.IsManager) {
+                        <input type="checkbox" id="orderID" name="EventID" value="@events.id">
+                        <span class="checkmark"></span>
+                    }
                     <h1 class="eventInfo">@events.EventType.EventTypeName</h1>
                     <h2 class="eventInfo">מוזמנים:@events.Invitations</h2>
                     <h2 class="eventInfo">האירוע של:@client.FirstName @client.LastName</h2>
@@ -48,11 +58,20 @@
                     </a>
                 </div>
             }
-            <div class="eventTypes">
+        <div class="eventTypes">
+            @if (!user.IsManager)
+            {
                 <a href="~/Employee/MyEventOrders">
                     <p class="types">להם נרשמתי:</p>
                 </a>
-            </div>
+            }
+            else
+            {
+                <a href="~/Employee/ManagerEventOrders">
+                    <p class="types">להם נרשמו:</p>
+                </a>
+            }
+        </div>
         </div>
     </div>
 </div>

@@ -8,7 +8,7 @@
                     method: "GET",
                     dataType: "html",
                     beforeSend: function () {
-                        $(".loader").removeClass("hidden");
+                        $(".loader1").removeClass("hidden");
                         $(".foodWrapper").addClass("hidden");
                     },
                     error: function () {
@@ -21,7 +21,39 @@
                         setTimeout(
                             function () {
                                 $(".foodWrapper").removeClass("hidden");
-                                $(".loader").addClass("hidden");
+                                $(".loader1").addClass("hidden");
+                            }, 4000);
+                    }
+                });
+            }
+        );
+    }
+);
+
+$("document").ready(
+    function () {
+        $(".specificFood").click(
+            function () {
+                var foodID = $(this).attr("data-specificFoodID");
+                $.ajax({
+                    url: "/SpecificFood/GetSpecificFood/?foodID=" + foodID,
+                    method: "GET",
+                    dataType: "html",
+                    beforeSend: function () {
+                        $(".loader2").removeClass("hidden");
+                        $(".foodWrapper").addClass("hidden");
+                    },
+                    error: function () {
+                        // your code here;
+                    },
+                    success: function (data) {
+                        $(".foodWrapper").html(data);
+                    },
+                    complete: function () {
+                        setTimeout(
+                            function () {
+                                $(".foodWrapper").removeClass("hidden");
+                                $(".loader2").addClass("hidden");
                             }, 4000);
                     }
                 });

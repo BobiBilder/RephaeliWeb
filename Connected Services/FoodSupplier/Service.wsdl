@@ -7,23 +7,23 @@
       <xsd:import schemaLocation="http://localhost:49762/Service.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IService_Plus_InputMessage">
-    <wsdl:part name="parameters" element="tns:Plus" />
+  <wsdl:message name="IService_GetAllFood_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllFood" />
   </wsdl:message>
-  <wsdl:message name="IService_Plus_OutputMessage">
-    <wsdl:part name="parameters" element="tns:PlusResponse" />
+  <wsdl:message name="IService_GetAllFood_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllFoodResponse" />
   </wsdl:message>
-  <wsdl:message name="IService_Minus_InputMessage">
-    <wsdl:part name="parameters" element="tns:Minus" />
+  <wsdl:message name="IService_Supply_InputMessage">
+    <wsdl:part name="parameters" element="tns:Supply" />
   </wsdl:message>
-  <wsdl:message name="IService_Minus_OutputMessage">
-    <wsdl:part name="parameters" element="tns:MinusResponse" />
+  <wsdl:message name="IService_Supply_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SupplyResponse" />
   </wsdl:message>
-  <wsdl:message name="IService_Multi_InputMessage">
-    <wsdl:part name="parameters" element="tns:Multi" />
+  <wsdl:message name="IService_IsPaid_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsPaid" />
   </wsdl:message>
-  <wsdl:message name="IService_Multi_OutputMessage">
-    <wsdl:part name="parameters" element="tns:MultiResponse" />
+  <wsdl:message name="IService_IsPaid_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsPaidResponse" />
   </wsdl:message>
   <wsdl:message name="IService_Divide_InputMessage">
     <wsdl:part name="parameters" element="tns:Divide" />
@@ -32,17 +32,17 @@
     <wsdl:part name="parameters" element="tns:DivideResponse" />
   </wsdl:message>
   <wsdl:portType name="IService">
-    <wsdl:operation name="Plus">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService/Plus" message="tns:IService_Plus_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService/PlusResponse" message="tns:IService_Plus_OutputMessage" />
+    <wsdl:operation name="GetAllFood">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetAllFood" message="tns:IService_GetAllFood_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetAllFoodResponse" message="tns:IService_GetAllFood_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="Minus">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService/Minus" message="tns:IService_Minus_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService/MinusResponse" message="tns:IService_Minus_OutputMessage" />
+    <wsdl:operation name="Supply">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/Supply" message="tns:IService_Supply_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/SupplyResponse" message="tns:IService_Supply_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="Multi">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService/Multi" message="tns:IService_Multi_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService/MultiResponse" message="tns:IService_Multi_OutputMessage" />
+    <wsdl:operation name="IsPaid">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/IsPaid" message="tns:IService_IsPaid_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/IsPaidResponse" message="tns:IService_IsPaid_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="Divide">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/Divide" message="tns:IService_Divide_InputMessage" />
@@ -51,8 +51,8 @@
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService" type="tns:IService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="Plus">
-      <soap:operation soapAction="http://tempuri.org/IService/Plus" style="document" />
+    <wsdl:operation name="GetAllFood">
+      <soap:operation soapAction="http://tempuri.org/IService/GetAllFood" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -60,8 +60,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="Minus">
-      <soap:operation soapAction="http://tempuri.org/IService/Minus" style="document" />
+    <wsdl:operation name="Supply">
+      <soap:operation soapAction="http://tempuri.org/IService/Supply" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -69,8 +69,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="Multi">
-      <soap:operation soapAction="http://tempuri.org/IService/Multi" style="document" />
+    <wsdl:operation name="IsPaid">
+      <soap:operation soapAction="http://tempuri.org/IService/IsPaid" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

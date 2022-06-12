@@ -91,6 +91,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Rephaeli.accdb" />
+    <Content Include="Connected Services\FoodSupplier\MasterProject.FoodSupplier.Food.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Connected Services\FoodSupplier\Service.disco" />
     <None Include="Connected Services\FoodSupplier\configuration91.svcinfo" />
     <None Include="Connected Services\FoodSupplier\configuration.svcinfo" />
@@ -219,6 +223,7 @@
     <Content Include="Views\FoodByFoodType\GetFoodByType.cshtml" />
     <Content Include="Views\FoodSupply\FoodSupplyForm.cshtml" />
     <Content Include="Views\Employee\ManagerEventOrders.cshtml" />
+    <Content Include="Views\SpecificFood\GetSpecificFood.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

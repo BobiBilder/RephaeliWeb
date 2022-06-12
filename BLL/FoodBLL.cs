@@ -69,32 +69,32 @@ namespace MasterProject.BLL
             }
             return foodViewModel;
         }//not so needed??
-        public SpecificFoodViewModel GetSpecificFood(int foodID)
-        {
-            FoodDB foodDB = new FoodDB();
-            DataSet dsFood = foodDB.GetFood(foodID);
-            SpecificFoodViewModel foodViewModel = new SpecificFoodViewModel();
-            foodViewModel.food = new Food();
-            foreach (DataRow dr in dsFood.Tables["Food"].Rows)
-            {
-                foodViewModel.food.FoodName = dr["FoodName"].ToString();
-                foodViewModel.food.FoodPrice = double.Parse(dr["FoodPrice"].ToString());
-                foodViewModel.food.FoodPicture = dr["FoodPicture"].ToString();
-                foodViewModel.food.FoodDescription = dr["FoodDescription"].ToString();
-                foodViewModel.food.id = int.Parse(dr["FoodID"].ToString());
-                foodViewModel.food.FoodType = new FoodType();
-                foodViewModel.food.FoodType.id = int.Parse(dr["FoodTypeID"].ToString());
-            }
-            foodViewModel.FoodTypes = new List<FoodType>();
-            foreach (DataRow dr in dsFood.Tables["FoodType"].Rows)
-            {
-                FoodType foodType = new FoodType();
-                foodType.FoodTypeName = dr["FoodTypeName"].ToString();
-                foodType.id = int.Parse(dr["FoodTypeID"].ToString());
-                foodViewModel.FoodTypes.Add(foodType);
-            }
-            return foodViewModel;
-        }
+        //public SpecificFoodViewModel GetSpecificFood(int foodID)
+        //{
+        //    FoodDB foodDB = new FoodDB();
+        //    DataSet dsFood = foodDB.GetFood(foodID);
+        //    SpecificFoodViewModel foodViewModel = new SpecificFoodViewModel();
+        //    foodViewModel.food = new Food();
+        //    foreach (DataRow dr in dsFood.Tables["Food"].Rows)
+        //    {
+        //        foodViewModel.food.FoodName = dr["FoodName"].ToString();
+        //        foodViewModel.food.FoodPrice = double.Parse(dr["FoodPrice"].ToString());
+        //        foodViewModel.food.FoodPicture = dr["FoodPicture"].ToString();
+        //        foodViewModel.food.FoodDescription = dr["FoodDescription"].ToString();
+        //        foodViewModel.food.id = int.Parse(dr["FoodID"].ToString());
+        //        foodViewModel.food.FoodType = new FoodType();
+        //        foodViewModel.food.FoodType.id = int.Parse(dr["FoodTypeID"].ToString());
+        //    }
+        //    foodViewModel.FoodTypes = new List<FoodType>();
+        //    foreach (DataRow dr in dsFood.Tables["FoodType"].Rows)
+        //    {
+        //        FoodType foodType = new FoodType();
+        //        foodType.FoodTypeName = dr["FoodTypeName"].ToString();
+        //        foodType.id = int.Parse(dr["FoodTypeID"].ToString());
+        //        foodViewModel.FoodTypes.Add(foodType);
+        //    }
+        //    return foodViewModel;
+        //}
 
         public bool AddFood(Food food)
         {
@@ -121,6 +121,21 @@ namespace MasterProject.BLL
                 lFood.Add(food);
             }
             return lFood;
+        }
+        public Food GetSpecificFood(int foodID)
+        {
+            FoodDB foodDB = new FoodDB();
+            DataTable dt = foodDB.GetSpecificFood(foodID);
+            Food food = new Food();
+            foreach (DataRow dr in dt.Rows)
+            {
+                food.FoodName = dr["FoodName"].ToString();
+                food.FoodPrice = double.Parse(dr["FoodPrice"].ToString());
+                food.FoodPicture = dr["FoodPicture"].ToString();
+                food.FoodDescription = dr["FoodDescription"].ToString();
+                food.id = int.Parse(dr["FoodID"].ToString());
+            }
+            return food;
         }
     }
 }

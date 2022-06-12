@@ -89,5 +89,10 @@ namespace MasterProject.DAL
                 return this.Select(this.selectsql);
             }
         }
+        public DataTable GetSpecificFood(int foodID)
+        {
+            selectsql.Sql = "select * from Food where FoodID =" + foodID;
+            return this.Select(this.selectsql);
+        }
     }
 }

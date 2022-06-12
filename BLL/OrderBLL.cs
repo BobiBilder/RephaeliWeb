@@ -294,7 +294,9 @@ namespace MasterProject.BLL
                 order.OrderDate = dr["OrderDate"].ToString();
                 order.ClientID = int.Parse(dr["ClientID"].ToString());
                 order.id = int.Parse(dr["OrderID"].ToString());
+                order.OrderTime = dr["OrderTime"].ToString();
                 order.IsWorker = bool.Parse(dr["IsWorker"].ToString());
+
                 eventOrderViewModel.Orders.Add(order);
             }
 

@@ -125,7 +125,7 @@ body::-webkit-scrollbar {
     color: white;
     font-size: 1.2em;
 }
-.link {
+.specificFood {
     text-decoration: none;
     font-size: 1.2em;
     font-family: 'Suez One', serif;
@@ -151,16 +151,15 @@ body::-webkit-scrollbar {
     background: rgba(80, 80, 80,0.6);
     border: solid 1px white;
 }
-.hidden {
-    visibility:hidden;
-}
-.loader {
+.loader1, .loader2 {
     position: absolute;
     left: 30%;
     top: 10%;
     background: rgba(80, 80, 80, 0.4);
 }
-
+.dancing{
+    height:450px;
+}
 
 .span {
     color: white;

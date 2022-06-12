@@ -35,11 +35,16 @@ namespace MasterProject.Controllers
     }
     public class SpecificFoodController : Controller
     {
-        public ActionResult SpecificFood(int foodID)
+        //public ActionResult SpecificFood(int foodID)
+        //{
+        //    FoodBLL foodBll = new FoodBLL();
+        //    SpecificFoodViewModel foodViewModel = foodBll.GetSpecificFood(foodID);
+        //    return View(foodViewModel);
+        //}
+        public ActionResult GetSpecificFood(int foodID)
         {
-            FoodBLL foodBll = new FoodBLL();
-            SpecificFoodViewModel foodViewModel = foodBll.GetSpecificFood(foodID);
-            return View(foodViewModel);
+            FoodBLL foodBLL = new FoodBLL();
+            return PartialView(foodBLL.GetSpecificFood(foodID));
         }
     }
 }

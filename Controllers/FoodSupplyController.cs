@@ -17,9 +17,10 @@ namespace MasterProject.Controllers
 
         public ActionResult GetFood()
         {
-            ServiceClient service = new ServiceClient();
-            FoodSupplier.Food[] list = ServiceClient.GetAllFood();
-            return View(list);
+            //ServiceClient service = new ServiceClient();
+            //FoodSupplier.Food[] list = ServiceClient.GetAllFood();
+            //return View(list);
+            return View();
         }
 
         public ActionResult PutSupply(int num1, int num2, int action)

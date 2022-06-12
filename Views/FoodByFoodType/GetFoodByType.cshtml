@@ -2,42 +2,14 @@
 @model List<Food>
 
 
-@if (Session["User"] == null)
+
+@foreach (Food food in Model)
 {
-    <div class="foodWrapper">
-        @foreach (Food food in Model)
-        {
-            <a class="link" href="~/SpecificFood/SpecificFood?foodID=@food.id">
-                <div class="foodBlock">
-                    <div>
-                        <h1 class="foodName">@food.FoodName</h1>
-                        <img class="foodPicture" src="~/Content/Images/Food/@food.FoodPicture" />
-                        <h3 class="foodPrice">@food.FoodPrice ₪ לקילו </h3>
-                    </div>
-                </div>
-            </a>
-        }
-    </div>
-}
-else
-{
-    <form class="foodWrapper" method="post" action="~/Order/OrderedFood">
-        @foreach (Food food in Model)
-        {
-            <div class="foodBlock">
-                <a class="link" href="~/SpecificFood/SpecificFood?foodID=@food.id">
-                    <div>
-                        <h1 class="foodName">@food.FoodName</h1>
-                        <img class="foodPicture" src="~/Content/Images/Food/@food.FoodPicture" />
-                        <h3 class="foodPrice">@food.FoodPrice ₪ לקילו </h3>
-                    </div>
-                </a>
-                <label class="quantity" for="quantity">משקל בין 1 ל-20 קילו:</label>
-                <input class="range" type="number" id="quantity" name="quantity" min="0" max="20">
-                <input class="hidden" type="text" value="@food.id" name="foodID" />
-            </div>
-        }
-        <br>
-        <input type="button" onclick="checkOrder()" class="button-order" value="הזמנה">
-    </form>
+    <span class="specificFood" data-specificFoodID="@food.id" id="specificFood">
+        <div class="foodBlock">
+            <h1 class="foodName">@food.FoodName</h1>
+            <img class="foodPicture" src="~/Content/Images/Food/@food.FoodPicture" />
+            <h3 class="foodPrice">@food.FoodPrice ₪ לקילו </h3>
+        </div>
+    </span>
 }

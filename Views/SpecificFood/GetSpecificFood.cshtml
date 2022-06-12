@@ -1,0 +1,14 @@
+﻿@using MasterProject.Models;
+@model Food
+
+
+<div class="foodWrapper">
+    <span class="specificFood">
+        <div class="foodBlock">
+            <h1 class="foodName">@Model.FoodName</h1>
+            <img class="foodPicture" src="~/Content/Images/Food/@Model.FoodPicture" />
+            <h3 class="foodPrice">@Model.FoodPrice ₪ לקילו </h3>
+        </div>
+    </span>
+</div>
+

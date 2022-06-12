@@ -10,7 +10,6 @@
 }
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <link href="~/Content/Styles/Style-Food.css" rel="stylesheet" />
-<script src="~/Content/Scripts/SortEventType-Script.js"></script>
 <script src="~/Content/Scripts/Events-Script.js"></script>
 <div class="wrapper">
     @if (!user.IsManager)
@@ -27,7 +26,14 @@
                 }
                 else
                 {
-                    client = Model.Clients[(order.ClientID - 1)];
+                    if(order.ClientID < 17)
+                    {
+                        client = Model.Clients[(order.ClientID - 1)];
+                    }
+                    else
+                    {
+                        client = Model.Clients[(order.ClientID - 5)];
+                    }
                 }
                 events.EventType.EventTypeName = Model.EventTypes[events.EventType.id - 1].EventTypeName;
                 <div class="eventBlock">
@@ -63,7 +69,14 @@
                 }
                 else
                 {
-                    client = Model.Clients[(order.ClientID - 1)];
+                    if (order.ClientID < 17)
+                    {
+                        client = Model.Clients[(order.ClientID - 1)];
+                    }
+                    else
+                    {
+                        client = Model.Clients[(order.ClientID - 5)];
+                    }
                 }
                 events.EventType.EventTypeName = Model.EventTypes[events.EventType.id - 1].EventTypeName;
                 <div class="eventBlock">

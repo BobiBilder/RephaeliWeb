@@ -174,23 +174,23 @@ namespace MasterProject.FoodSupplier {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="FoodSupplier.IService")]
     public interface IService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Plus", ReplyAction="http://tempuri.org/IService/PlusResponse")]
-        Food GetAllFood(MasterProject.FoodSupplier.Food food);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAllFood", ReplyAction="http://tempuri.org/IService/GetAllFoodResponse")]
+        MasterProject.FoodSupplier.Food GetAllFood(MasterProject.FoodSupplier.Food food);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Plus", ReplyAction="http://tempuri.org/IService/PlusResponse")]
-        System.Threading.Tasks.Task<Food> GetAllFoodAsync(MasterProject.FoodSupplier.Food food);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAllFood", ReplyAction="http://tempuri.org/IService/GetAllFoodResponse")]
+        System.Threading.Tasks.Task<MasterProject.FoodSupplier.Food> GetAllFoodAsync(MasterProject.FoodSupplier.Food food);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Minus", ReplyAction="http://tempuri.org/IService/MinusResponse")]
-        int Minus(int num1, int num2);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Supply", ReplyAction="http://tempuri.org/IService/SupplyResponse")]
+        int Supply(int num1, int num2);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Minus", ReplyAction="http://tempuri.org/IService/MinusResponse")]
-        System.Threading.Tasks.Task<int> MinusAsync(int num1, int num2);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Supply", ReplyAction="http://tempuri.org/IService/SupplyResponse")]
+        System.Threading.Tasks.Task<int> SupplyAsync(int num1, int num2);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Multi", ReplyAction="http://tempuri.org/IService/MultiResponse")]
-        int Multi(int num1, int num2);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/IsPaid", ReplyAction="http://tempuri.org/IService/IsPaidResponse")]
+        int IsPaid(int num1, int num2);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Multi", ReplyAction="http://tempuri.org/IService/MultiResponse")]
-        System.Threading.Tasks.Task<int> MultiAsync(int num1, int num2);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/IsPaid", ReplyAction="http://tempuri.org/IService/IsPaidResponse")]
+        System.Threading.Tasks.Task<int> IsPaidAsync(int num1, int num2);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Divide", ReplyAction="http://tempuri.org/IService/DivideResponse")]
         double Divide(int num1, int num2);
@@ -226,28 +226,28 @@ namespace MasterProject.FoodSupplier {
                 base(binding, remoteAddress) {
         }
         
-        public Food GetAllFood(MasterProject.FoodSupplier.Food food) {
+        public MasterProject.FoodSupplier.Food GetAllFood(MasterProject.FoodSupplier.Food food) {
             return base.Channel.GetAllFood(food);
         }
         
-        public System.Threading.Tasks.Task<Food> GetAllFoodAsync(MasterProject.FoodSupplier.Food food) {
+        public System.Threading.Tasks.Task<MasterProject.FoodSupplier.Food> GetAllFoodAsync(MasterProject.FoodSupplier.Food food) {
             return base.Channel.GetAllFoodAsync(food);
         }
         
-        public int Minus(int num1, int num2) {
-            return base.Channel.Minus(num1, num2);
+        public int Supply(int num1, int num2) {
+            return base.Channel.Supply(num1, num2);
         }
         
-        public System.Threading.Tasks.Task<int> MinusAsync(int num1, int num2) {
-            return base.Channel.MinusAsync(num1, num2);
+        public System.Threading.Tasks.Task<int> SupplyAsync(int num1, int num2) {
+            return base.Channel.SupplyAsync(num1, num2);
         }
         
-        public int Multi(int num1, int num2) {
-            return base.Channel.Multi(num1, num2);
+        public int IsPaid(int num1, int num2) {
+            return base.Channel.IsPaid(num1, num2);
         }
         
-        public System.Threading.Tasks.Task<int> MultiAsync(int num1, int num2) {
-            return base.Channel.MultiAsync(num1, num2);
+        public System.Threading.Tasks.Task<int> IsPaidAsync(int num1, int num2) {
+            return base.Channel.IsPaidAsync(num1, num2);
         }
         
         public double Divide(int num1, int num2) {

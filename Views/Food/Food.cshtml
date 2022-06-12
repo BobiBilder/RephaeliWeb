@@ -28,49 +28,27 @@
 <script src="~/Content/Scripts/SortFoodType-Script.js"></script>
 <link href="~/Content/Styles/Style-Food.css" rel="stylesheet" />
 <div class="wrapper">
-    <div class="loader hidden">
+
+    <div class="loader1 hidden">
         <img src="~/Content/Images/GIFs/FoodLoading.gif" />
     </div>
-    @if (Session["User"] == null)
-    {
-        <div class="foodWrapper">
-            @foreach (Food food in Model.Food)
-            {
-                <a class="link" href="~/SpecificFood/SpecificFood?foodID=@food.id">
-                    <div class="foodBlock">
-                        <div>
-                            <h1 class="foodName">@food.FoodName</h1>
-                            <img class="foodPicture" src="~/Content/Images/Food/@food.FoodPicture" />
-                            <h3 class="foodPrice">@food.FoodPrice ₪ לקילו </h3>
-                        </div>
-                    </div>
-                </a>
-            }
-        </div>
-    }
-    else
-    {
-        <form class="foodWrapper" method="post" action="~/Order/OrderedFood">
-            @foreach (Food food in Model.Food)
-            {
+    <div class="loader2 hidden">
+        <img class="dancing" src="~/Content/Images/GIFs/DancingPotato.png" />
+    </div>
+    
+    <div class="foodWrapper">
+        @foreach (Food food in Model.Food)
+        {
+            <span class="specificFood" data-specificFoodID="@food.id" id="specificFood">
                 <div class="foodBlock">
-                    <a class="link" href="~/SpecificFood/SpecificFood?foodID=@food.id">
-                        <div>
-                            <h1 class="foodName">@food.FoodName</h1>
-                            <img class="foodPicture" src="~/Content/Images/Food/@food.FoodPicture" />
-                            <h3 class="foodPrice">@food.FoodPrice ₪ לקילו </h3>
-                        </div>
-                    </a>
-                    <label class="quantity" for="quantity">משקל בין 1 ל-20 קילו:</label>
-                    <input class="range" type="number" id="quantity" name="quantity" min="0" max="20">
-                    <input class="hidden" type="text" value="@food.id" name="foodID" />
+                        <h1 class="foodName">@food.FoodName</h1>
+                        <img class="foodPicture" src="~/Content/Images/Food/@food.FoodPicture" />
+                        <h3 class="foodPrice">@food.FoodPrice ₪ לקילו </h3>
                 </div>
-            }
-            <br>
-            <input type="button" onclick="checkOrder()" class="button-order" value="הזמנה">
-        </form>
-    }
-
+            </span>
+        }
+    </div>
+    
     <div class="typesBlock">
         <a data-foodTypeID="0" class="SortFoodType">
             <h1 class="typesTitle">כל הסוגים:</h1>
