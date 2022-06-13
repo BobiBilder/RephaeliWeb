@@ -1,4 +1,4 @@
-﻿function checkSignIn() {
+﻿    function checkSignIn() {
     var noError = checkFName() && checkLName() && checkID() && checkPass1() && checkEmail() && checkPhone();
     if (noError) {
         document.forms[1].submit();
