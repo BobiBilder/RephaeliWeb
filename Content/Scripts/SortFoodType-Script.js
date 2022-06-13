@@ -27,11 +27,6 @@
                 });
             }
         );
-    }
-);
-
-$("document").ready(
-    function () {
         $(".specificFood").click(
             function () {
                 var foodID = $(this).attr("data-specificFoodID");
