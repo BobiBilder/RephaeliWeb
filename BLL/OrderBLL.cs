@@ -127,6 +127,15 @@ namespace MasterProject.BLL
             }
             return employeesIDs;
         }
+        private bool helper4(int orderID, List<Order> orders)
+        {
+            bool isOK = true;
+            foreach(Order order in orders)
+            {
+                isOK = isOK && orderID != order.id;
+            }
+            return isOK
+        }
         public EventOrderViewModel GetNotMyEventsViewModel(LoginUser user)
         {
             EventDB eventDB = new EventDB();
@@ -407,6 +416,77 @@ namespace MasterProject.BLL
             return eventOrderViewModel;
         }
         
+        public EventOrderViewModel GetMyEvents(LoginUser user)
+        {
+            EventDB eventDB = new EventDB();
+            DataSet dsEvent = eventDB.GetMyEvents(user);
+            EventOrderViewModel eventOrderViewModel = new EventOrderViewModel();
+
+            eventOrderViewModel.Orders = new List<Order>();
+            foreach (DataRow dr in dsEvent.Tables["Orders"].Rows)
+            {
+                Order order = new Order();
+                order.IsPayed = bool.Parse(dr["IsPayed"].ToString());
+                order.OrderDate = dr["OrderDate"].ToString();
+                order.ClientID = int.Parse(dr["ClientID"].ToString());
+                order.id = int.Parse(dr["OrderID"].ToString());
+                order.OrderTime = dr["OrderTime"].ToString();
+                order.IsWorker = bool.Parse(dr["IsWorker"].ToString());
+                eventOrderViewModel.Orders.Add(order);
+            }
+
+            eventOrderViewModel.Events = new List<Event>();
+            foreach (DataRow dr in dsEvent.Tables["Events"].Rows)
+            {
+                if (helper4(int.Parse(dr["OrderID"].ToString()), eventOrderViewModel.Orders))
+                {
+                    Event events = new Event();
+                    events.OrderID = int.Parse(dr["OrderID"].ToString());
+                    events.id = int.Parse(dr["EventID"].ToString());
+                    events.Invitations = int.Parse(dr["Invitations"].ToString());
+                    events.Notes = dr["Notes"].ToString();
+                    events.EventType = new EventType();
+                    events.EventType.id = int.Parse(dr["EventTypeID"].ToString());
+                    eventOrderViewModel.Events.Add(events);
+                }
+            }
+
+            eventOrderViewModel.Clients = new List<Clients>();
+            foreach (DataRow dr in dsEvent.Tables["Clients"].Rows)
+            {
+                Clients client = new Clients();
+                client.FirstName = dr["FirstName"].ToString();
+                client.LastName = dr["LastName"].ToString();
+                client.Email = dr["Email"].ToString();
+                client.id = int.Parse(dr["ClientID"].ToString());
+                client.Password = dr["Password"].ToString();
+                eventOrderViewModel.Clients.Add(client);
+            }
+
+            eventOrderViewModel.employees = new List<Employee>();
+            foreach (DataRow dr in dsEvent.Tables["Employees"].Rows)
+            {
+                Employee employee = new Employee();
+                employee.FirstName = dr["FirstName"].ToString();
+                employee.LastName = dr["LastName"].ToString();
+                employee.Email = dr["Email"].ToString();
+                employee.id = int.Parse(dr["EmployeeID"].ToString());
+                employee.Password = dr["Password"].ToString();
+                eventOrderViewModel.employees.Add(employee);
+            }
+
+            eventOrderViewModel.EventTypes = new List<EventType>();
+            foreach (DataRow dr in dsEvent.Tables["EventTypes"].Rows)
+            {
+                EventType eventType = new EventType();
+                eventType.EventTypeName = dr["EventTypeName"].ToString();
+                eventType.id = int.Parse(dr["EventTypeID"].ToString());
+                eventOrderViewModel.EventTypes.Add(eventType);
+            }
+
+            return eventOrderViewModel;
+        }
+
         public EventRequestViewModel GetEventTypes()
         {
             EventDB eventDB = new EventDB();

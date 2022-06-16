@@ -103,7 +103,41 @@ namespace MasterProject.DAL
             return this.Select(selectSQLs);
 
         }
+        public DataSet GetMyEvents(LoginUser user)
+        {
+            List<SelectSQL> selectSQLs = new List<SelectSQL>();
+            selectsql.Sql = "select * from [Event]";
+            selectSQLs.Add(selectsql);
 
+            SelectSQL select1 = new SelectSQL();
+            if (user.IsWorker)
+            {
+                select1.Sql = "select * from [Order] where ClientID = " + user.id + " and IsWorker = -1";
+            }
+            else
+            {
+                select1.Sql = "select * from [Order] where ClientID = " + user.id + " and IsWorker = 0";
+            }
+            select1.TableName = "Orders";
+            selectSQLs.Add(select1);
+
+            SelectSQL select2 = new SelectSQL();
+            select2.Sql = "select * from Clients";
+            select2.TableName = "Clients";
+            selectSQLs.Add(select2);
+
+            SelectSQL select3 = new SelectSQL();
+            select3.Sql = "select * from [EventType]";
+            select3.TableName = "EventTypes";
+            selectSQLs.Add(select3);
+
+            SelectSQL select4 = new SelectSQL();
+            select4.Sql = "select * from Employee";
+            select4.TableName = "Employees";
+            selectSQLs.Add(select4);
+
+            return this.Select(selectSQLs);
+        }
 
         public int AssignWork(int[] EventID, LoginUser user)
         {

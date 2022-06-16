@@ -45,12 +45,14 @@
                     <h2 class="eventInfo">בשעה-@order.OrderTime</h2>
                     @if (order.EmployeeIDs.Count != 0)
                     {
-                        <h2>עובדים:</h2>
+                        <h2 class="eventInfo" style="text-decoration:underline">עובדים:</h2>
+                        int count = 1;
                         foreach (Employee employee in Model.employees)
                         {
                             if (order.EmployeeIDs.Contains(employee.id))
-                                {
-                                <h2 class="eventInfo">@employee.FirstName @employee.LastName</h2>
+                            {
+                                <h2 class="eventInfo">@count ) @employee.FirstName @employee.LastName</h2>
+                                count++;
                             }
                         }
                     }

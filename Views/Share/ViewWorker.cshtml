@@ -31,21 +31,25 @@
                         <ul class="drop-list">
                             <li class="drop-option"><a href="~/Food/Food">תפריט/הזמנה</a></li>
                             <li class="drop-option"><a href="~/EventRequests/EventRequests">קביעת אירוע</a></li>
+                            <li class="drop-option"><a href="~/EventRequests/MyEventRequests">האירועים שלי</a></li>
                         </ul>
                     </div>
                 </li>
                 <li class="dropdown">
-                    <div class="dropbtn">עבודה</div>
-                    <div class="dropdown-list">
-                        <ul class="drop-list">
-                            <li class="drop-option"><a href="#">הזמנות</a></li>
-                            <li class="drop-option"><a href="~/Employee/EventOrders">אירועים</a></li>
-                            @if (user.IsManager)
-                            {
+                    @if (user.IsManager)
+                    {
+                        <div class="dropbtn">עבודה</div>
+                        <div class="dropdown-list">
+                            <ul class="drop-list">
+                                <li class="drop-option"><a href="~/Employee/EventOrders">אירועים</a></li>
                                 <li class="drop-option"><a href="~/Employee/AddFoodForm">הוסף אוכל</a></li>
-                            }
-                        </ul>
-                    </div>
+                            </ul>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="dropbtn"><a href="~/Employee/EventOrders">עבודה</a></div>
+                    }
                 </li>
                 <li class="option"><form action="~/User/Logout"><input class="logout" type="submit" value="התנתק"></form></li>
                 <li class="option">שלום @user.FirstName @user.LastName</li>

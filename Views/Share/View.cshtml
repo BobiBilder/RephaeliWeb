@@ -31,13 +31,22 @@
             </a>
             <ul class="list">
                 <li class="option"><a href="~/Food/Food">תפריט/הזמנה</a></li>
-                <li class="option"><a href="~/EventRequests/EventRequests">קביעת אירוע</a></li>
                 @if (Session["User"] != null)
                 {
+                    <li class="dropdown">
+                        <div class="dropbtn">אירועים</div>
+                        <div class="dropdown-list">
+                            <ul class="drop-list">
+                                <li class="drop-option"><a href="~/EventRequests/EventRequests">קביעת אירוע</a></li>
+                                <li class="drop-option"><a href="~/EventRequests/MyEventRequests">האירועים שלי</a></li>
+                            </ul>
+                        </div>
+                    </li>
                     <li class="option"><form action="~/User/Logout"><input class="logout" type="submit" value="התנתק"></form></li>
                 }
                 else
                 {
+                    <li class="option"><a href="~/EventRequests/EventRequests">קביעת אירוע</a></li>
                     <li class="option"><a href="~/Wanted/Wanted">הרשמה</a></li>
                 }
                 @if (Session["User"] == null)
