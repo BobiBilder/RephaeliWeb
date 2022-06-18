@@ -34,10 +34,6 @@
             events.EventType.EventTypeName = Model.EventTypes[events.EventType.id - 1].EventTypeName;
             <div class="eventBlock">
                 <label class="container">
-                    @if (!user.IsManager) {
-                        <input type="checkbox" id="orderID" name="EventID" value="@events.id">
-                        <span class="checkmark"></span>
-                    }
                     <h1 class="eventInfo">@events.EventType.EventTypeName</h1>
                     <h2 class="eventInfo">מוזמנים:@events.Invitations</h2>
                     <h2 class="eventInfo">האירוע של:@client.FirstName @client.LastName</h2>

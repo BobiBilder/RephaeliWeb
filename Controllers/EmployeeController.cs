@@ -35,7 +35,7 @@ namespace MasterProject.Controllers
             eventOrderViewModel = orderBLL.GetMyEventsViewModel(user);
             return View(eventOrderViewModel);
         }
-        public ActionResult ManagerEventOrders()
+        public ActionResult ManagerEventOrder()
         {
             OrderBLL orderBLL = new OrderBLL();
             EventOrderViewModel eventOrderViewModel = orderBLL.GetAllAssignedEventsViewModel();

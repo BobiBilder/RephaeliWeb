@@ -271,7 +271,7 @@
     <Content Include="Views\Employee\MyEventOrders.cshtml" />
     <Content Include="Views\FoodByFoodType\GetFoodByType.cshtml" />
     <Content Include="Views\FoodSupply\FoodSupplyForm.cshtml" />
-    <Content Include="Views\Employee\ManagerEventOrders.cshtml" />
+    <Content Include="Views\Employee\ManagerEventOrder.cshtml" />
     <Content Include="Views\SpecificFood\GetSpecificFood.cshtml" />
     <Content Include="Views\EventRequests\MyEventRequests.cshtml" />
     <None Include="Web.Debug.config">

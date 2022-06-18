@@ -134,7 +134,7 @@ namespace MasterProject.BLL
             {
                 isOK = isOK && orderID != order.id;
             }
-            return isOK
+            return isOK;
         }
         public EventOrderViewModel GetNotMyEventsViewModel(LoginUser user)
         {
@@ -438,7 +438,7 @@ namespace MasterProject.BLL
             eventOrderViewModel.Events = new List<Event>();
             foreach (DataRow dr in dsEvent.Tables["Events"].Rows)
             {
-                if (helper4(int.Parse(dr["OrderID"].ToString()), eventOrderViewModel.Orders))
+                if (!helper4(int.Parse(dr["OrderID"].ToString()), eventOrderViewModel.Orders))
                 {
                     Event events = new Event();
                     events.OrderID = int.Parse(dr["OrderID"].ToString());
