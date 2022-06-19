@@ -150,7 +150,7 @@ namespace MasterProject.DAL
                 this.connection.Open();
                 transaction = this.connection.BeginTransaction();
                 this.command.Transaction = transaction;
-                AddBaseModel(baseModel);
+                ChangeBaseModel(baseModel, 1);
                 transaction.Commit();
             }
             catch (Exception ex)
@@ -167,7 +167,7 @@ namespace MasterProject.DAL
             return rows;
         }
 
-        public int AddBaseModel(BaseModel baseModel)
+        public int ChangeBaseModel(BaseModel baseModel, int action)
         {
             OleDbTransaction transaction = null;
             try
@@ -176,9 +176,23 @@ namespace MasterProject.DAL
                 this.connection.Open();
                 transaction = this.connection.BeginTransaction();
                 this.command.Transaction = transaction;
-                
-                int x = AddModel(baseModel);
-                transaction.Commit();
+
+                int x = 0;
+                switch (action)
+                {
+                    case 1:
+                        x = AddModel(baseModel);
+                        transaction.Commit();
+                        break;
+                    case 2:
+                        x = DeleteModel(baseModel);
+                        transaction.Commit();
+                        break;
+                    case 3:
+                        x = UpdateModel(baseModel);
+                        transaction.Commit();
+                        break;
+                }
                 return x;
             }
             catch(Exception ex)
@@ -193,6 +207,14 @@ namespace MasterProject.DAL
         }
 
         public virtual int AddModel(BaseModel baseModel)
+        {
+            return 0;
+        }
+        public virtual int DeleteModel(BaseModel baseModel)
+        {
+            return 0;
+        }
+        public virtual int UpdateModel(BaseModel baseModel)
         {
             return 0;
         }

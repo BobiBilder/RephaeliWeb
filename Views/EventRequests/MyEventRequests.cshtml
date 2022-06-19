@@ -55,22 +55,22 @@
         @foreach (Order order in Model.Orders)
         {
             <div class="personal-input">
-                <form method="post" action="~/EventRequests/EventForm">
+                <form method="post" id="EventForm_@orderCounter">
 
                     <label for="name">שם</label>
-                    <span class="span" id="errorName">צריך לכתוב רק אותיות</span>
-                    <span class="span" id="emptyName">צריך למלא</span>
-                    <input type="text" id="name" placeholder="השם שלך..." value="@user.FirstName @user.LastName">
+                    <span class="span" id="errorName_@orderCounter">צריך לכתוב רק אותיות</span>
+                    <span class="span" id="emptyName_@orderCounter">צריך למלא</span>
+                    <input type="text" id="name_@orderCounter" placeholder="השם שלך..." value="@user.FirstName @user.LastName">
 
                     <label for="phone">טלפון</label>
-                    <span class="span" id="errorTel">צריך לכתוב לפי התבנית</span>
-                    <span class="span" id="emptyTel">צריך למלא</span>
-                    <input type="text" id="phone" placeholder="הטלפון שלך..." value="@user.PhoneNumber">
+                    <span class="span" id="errorTel_@orderCounter">צריך לכתוב לפי התבנית</span>
+                    <span class="span" id="emptyTel_@orderCounter">צריך למלא</span>
+                    <input type="text" id="phone_@orderCounter" placeholder="הטלפון שלך..." value="@user.PhoneNumber">
                     <small>תבנית: 05X-XXX-XXXX, לא צריך את ה"-"</small><br><br>
 
                     <label for="event">סוג האירוע</label>
-                    <span class="span" id="emptyEvent">צריך לבחור</span>
-                    <select id="event" name="EventTypeID">
+                    <span class="span" id="emptyEvent_@orderCounter">צריך לבחור</span>
+                    <select id="event_@orderCounter" name="EventTypeID">
                         @foreach (EventType eventType in Model.EventTypes)
                         {
                             if (Model.Events[orderCounter].EventType.id == eventType.id)
@@ -85,35 +85,35 @@
                     </select><br><br>
 
                     <label for="guests">מוזמנים</label>
-                    <span class="span" id="errorGuests">צריך לכתוב רק ספרות</span>
-                    <span class="span" id="emptyGuests">צריך למלא</span>
-                    <input type="text" id="Guests" placeholder="מספר המוזמנים..." value="@Model.Events[orderCounter].Invitations" name="Invitations"><br><br>
+                    <span class="span" id="errorGuests_@orderCounter">צריך לכתוב רק ספרות</span>
+                    <span class="span" id="emptyGuests_@orderCounter">צריך למלא</span>
+                    <input type="text" id="Guests_@orderCounter" placeholder="מספר המוזמנים..." value="@Model.Events[orderCounter].Invitations" name="Invitations"><br><br>
 
                     <label for="calendar">התאריך שנבחר:@order.OrderDate</label>
-                    <span class="span" id="emptyDate">צריך לבחור תאריך מלא</span>
+                    <span class="span" id="emptyDate_@orderCounter">צריך לבחור תאריך מלא</span>
                     <div class="calendar">
 
                         <div class="year">
                             <label for="year">שנה:</label>
-                            <select class="date-year" id="year" onchange="SelectYear()" name="year">
-                                <option selected>שנה</option>
-                                <option id="year1"></option>
-                                <option id="year2"></option>
-                                <option id="year3"></option>
+                            <select class="date-year" id="year_@orderCounter" onchange="SelectYear(@orderCounter)" name="year">
+                                <option selected disabled hidden>שנה</option>
+                                <option id="year1_@orderCounter"></option>
+                                <option id="year2_@orderCounter"></option>
+                                <option id="year3_@orderCounter"></option>
                             </select>
                             <script>
                                 date = new Date();
                                 year = date.getFullYear();
-                                document.getElementById("year1").innerHTML = year;
-                                document.getElementById("year2").innerHTML = year + 1;
-                                document.getElementById("year3").innerHTML = year + 2;
+                                document.getElementById("year1_" + @orderCounter).innerHTML = year;
+                                document.getElementById("year2_" + @orderCounter).innerHTML = year + 1;
+                                document.getElementById("year3_" + @orderCounter ).innerHTML = year + 2;
                             </script>
                         </div>
 
 
-                        <div class="hidden" id="current-month-date">
+                        <div class="hidden" id="current-month-date_@orderCounter">
                             <label for="month">חודש:</label>
-                            <select class="date-month" id="current-month" onchange="SelectMonth()" name="month">
+                            <select class="date-month" id="current-month_@orderCounter" onchange="SelectMonth(@orderCounter)" name="month">
                                 <option selected disabled hidden>חודש</option>
                                 @for (int i = month; i < 13; i++)
                                 {
@@ -122,9 +122,9 @@
                             </select>
                         </div>
 
-                        <div class="hidden" id="other-month-date">
+                        <div class="hidden" id="other-month-date_@orderCounter">
                             <label for="month">חודש:</label>
-                            <select class="date-month" id="other-month" onchange="SelectMonth()" name="month">
+                            <select class="date-month" id="other-month_@orderCounter" onchange="SelectMonth(@orderCounter)" name="month">
                                 <option selected disabled hidden>חודש</option>
                                 @for (int i = 1; i < 13; i++)
                                 {
@@ -134,9 +134,9 @@
                         </div>
 
 
-                        <div class="hidden" id="current-day-date">
+                        <div class="hidden" id="current-day-date_@orderCounter">
                             <label for="day">יום:</label>
-                            <select class="date-day" id="current-day" name="day">
+                            <select class="date-day" id="current-day_@orderCounter" name="day">
                                 <option selected disabled hidden value="0">יום</option>
                                 @for (int i = day; i < currentLastDay + 1; i++)
                                 {
@@ -145,9 +145,9 @@
                             </select>
                         </div>
 
-                        <div class="hidden" id="short-day-date">
+                        <div class="hidden" id="short-day-date_@orderCounter">
                             <label for="day">יום:</label>
-                            <select class="date-day" id="short-day" name="day">
+                            <select class="date-day" id="short-day_@orderCounter" name="day">
                                 <option selected disabled hidden value="0">יום</option>
                                 @for (int i = 1; i < 31; i++)
                                 {
@@ -156,9 +156,9 @@
                             </select>
                         </div>
 
-                        <div class="hidden" id="long-day-date">
+                        <div class="hidden" id="long-day-date_@orderCounter">
                             <label for="day">יום:</label>
-                            <select class="date-day" id="long-day" name="day">
+                            <select class="date-day" id="long-day_@orderCounter" name="day">
                                 <option selected disabled hidden value="0">יום</option>
                                 @for (int i = 1; i < 32; i++)
                                 {
@@ -167,9 +167,9 @@
                             </select>
                         </div>
 
-                        <div class="hidden" id="feb-day-date">
+                        <div class="hidden" id="feb-day-date_@orderCounter">
                             <label for="day">יום:</label>
-                            <select class="date-day" id="feb-day" name="day">
+                            <select class="date-day" id="feb-day_@orderCounter" name="day">
                                 <option selected disabled hidden value="0">יום</option>
                                 @for (int i = 1; i < 29; i++)
                                 {
@@ -184,16 +184,15 @@
                     <label for="order">הערות</label>
                     @if (Model.Events[orderCounter].Notes != "")
                     {
-                        <textarea class="notes  " id="order" placeholder="אם יש משהו שאנחנו צריכים לדעת..." name="notes">@Model.Events[orderCounter].Notes</textarea>
+                        <textarea class="notes  " id="order_@orderCounter" placeholder="אם יש משהו שאנחנו צריכים לדעת..." name="notes">@Model.Events[orderCounter].Notes</textarea>
                     }
                     else
                     {
-                        <textarea id="order" placeholder="אם יש משהו שאנחנו צריכים לדעת..." name="notes"></textarea>
+                        <textarea id="order_@orderCounter" placeholder="אם יש משהו שאנחנו צריכים לדעת..." name="notes"></textarea>
                     }
                     
-
-                    <input type="button" class="eventBtn" onclick="checkRequest()" value="עידכון">
-                    <input type="button" class="eventBtn" onclick="checkRequest()" value="מחיקה">
+                    <button type="submit" class="eventBtn" formaction="/EventRequests/UpdateMyEvent" onclick="checkRequest(@orderCounter)">עידכון</button>
+                    <button type="submit" class="eventBtn" formaction="/EventRequests/DeleteMyEvent" onclick="checkRequest(@orderCounter)">מחיקה</button>
                 </form>
             </div>
             orderCounter++;

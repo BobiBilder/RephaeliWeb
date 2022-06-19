@@ -1,7 +1,7 @@
 ﻿function checkRequest() {
     var noError = checkName() && checkPhone() && checkEtype() && checkGuests() && checkDate();
     if (noError) {
-        document.forms[1].submit();
+        document.forms[].submit();
     }
 }
 function checkName() {
@@ -83,23 +83,7 @@ function checkDate() {
     }
 }
 
-function Focus() {
-    document.getElementById('dropdown-form').style.display= "block";
-    document.getElementById('user').focus();
-}
 
-$("document").ready(
-    function () {
-        $(".date-month").click(function () {
-            $('.date-day').prop('selectedIndex', 0);
-        });
-
-        $(".date-year").click(function () {
-            $('.date-month').prop('selectedIndex', 0);
-            $('.date-day').prop('selectedIndex', 0);
-        });
-    }
-);
 function SelectYear() {
     document.getElementById('short-day-date').style.display = "none";
     document.getElementById('feb-day-date').style.display = "none";
@@ -156,7 +140,166 @@ function SelectMonth() {
         document.getElementById('feb-day-date').style.display = "block";
     }
 }
+function Focus() {
+    document.getElementById('dropdown-form').style.display= "block";
+    document.getElementById('user').focus();
+}
 
+$("document").ready(
+    function () {
+        $(".date-month").click(function () {
+            $('.date-day').prop('selectedIndex', 0);
+        });
+
+        $(".date-year").click(function () {
+            $('.date-month').prop('selectedIndex', 0);
+            $('.date-day').prop('selectedIndex', 0);
+        });
+    }
+);
+
+function checkRequest(orderCounter) {
+    var noError = checkName(orderCounter) && checkPhone(orderCounter) && checkEtype(orderCounter) && checkGuests(orderCounter) && checkDate(orderCounter);
+    if (noError) {
+        document.forms["EventForm_" + orderCounter].submit();
+    }
+}
+function checkName(orderCounter) {
+    var name = document.getElementById("name_" + orderCounter).value;
+    if (name == "") {
+        document.getElementById("errorName_" + orderCounter).style.visibility = "hidden";
+        document.getElementById("emptyName_" + orderCounter).style.visibility = "visible";
+        return false;
+    } else if (name != "") {
+        document.getElementById("emptyName_" + orderCounter).style.visibility = "hidden";
+    }
+    if (/\d/.test(name)) {
+        document.getElementById("errorName_" + orderCounter).style.visibility = "visible";
+        return false;
+    } else {
+        document.getElementById("errorName_" + orderCounter).style.visibility = "hidden";
+    }
+    return true;
+}
+function checkPhone(orderCounter) {
+    var phone = document.getElementById("phone_" + orderCounter).value;
+    if (phone == "") {
+        document.getElementById("errorTel_" + orderCounter).style.visibility = "hidden";
+        document.getElementById("emptyTel_" + orderCounter).style.visibility = "visible";
+        return false;
+    } else if (phone != "") {
+        document.getElementById("emptyTel_" + orderCounter).style.visibility = "hidden";
+        document.getElementById("errorTel_" + orderCounter).style.visibility = "hidden";
+    }
+    if ((/[a-z א-ת]/g.test(phone) || phone.length != 10 || phone.charAt(0) != "0" || phone.charAt(1) != "5") && phone != "") {
+        document.getElementById("errorTel_" + orderCounter).style.visibility = "visible";
+        return false;
+    } else {
+        document.getElementById("errorTel_" + orderCounter).style.visibility = "hidden";
+    }
+    return true;
+}
+function checkEtype(orderCounter) {
+    var events = document.getElementById("event_" + orderCounter);
+    var event = events.options[events.selectedIndex].value;
+    if (event == "0") {
+        document.getElementById("emptyEvent_" + orderCounter).style.visibility = "visible";
+        return false;
+    } else {
+        document.getElementById("emptyEvent_" + orderCounter).style.visibility = "hidden";
+        return true;
+    }
+}
+function checkGuests(orderCounter) {
+    var guests = document.getElementById("Guests_" + orderCounter).value;
+    if (guests == "") {
+        document.getElementById("errorGuests_" + orderCounter).style.visibility = "hidden";
+        document.getElementById("emptyGuests_" + orderCounter).style.visibility = "visible";
+        return false;
+    } else if (guests != "") {
+        document.getElementById("emptyGuests_" + orderCounter).style.visibility = "hidden";
+    }
+    if (/[a-z א-ת]/g.test(guests)) {
+        document.getElementById("errorGuests_" + orderCounter).style.visibility = "visible";
+        return false;
+    } else {
+        document.getElementById("errorGuests_" + orderCounter).style.visibility = "hidden";
+    }
+    return true;
+}
+function checkDate(orderCounter) {
+    var sum = 0;
+    var selected = document.getElementsByClassName("date-day_" + orderCounter);
+    for (var i = 0; i < 4; i++) {
+        sum += parseInt(selected[i].options[selected[i].selectedIndex].value);
+    }
+    if (sum == 0) {
+        document.getElementById("emptyDate_" + orderCounter).style.visibility = "visible";
+        return false;
+    }
+    else {
+        document.getElementById("emptyDate_" + orderCounter).style.visibility = "hidden";
+        return true;
+    }
+}
+
+
+function SelectYear(orderCounter) {
+    document.getElementById("short-day-date_" + orderCounter).style.display = "none";
+    document.getElementById("feb-day-date_" + orderCounter).style.display = "none";
+    document.getElementById("long-day-date_" + orderCounter).style.display = "none";
+    document.getElementById("current-day-date_" + orderCounter).style.display = "none";
+    var years = document.getElementById("year_" + orderCounter);
+    var selectedYear = years.options[years.selectedIndex].value;
+    var date = new Date();
+    var currentYear = date.getFullYear();
+    if (selectedYear == currentYear) {
+        document.getElementById("other-month-date_" + orderCounter).style.display = "none";
+        document.getElementById("current-month-date_" + orderCounter).style.display = "block";
+    }
+    else {
+        document.getElementById("current-month-date_" + orderCounter).style.display = "none";
+        document.getElementById("other-month-date_" + orderCounter).style.display = "block";
+    }
+}
+function SelectMonth(orderCounter) {
+    var years = document.getElementById("year_" + orderCounter);
+    var selectedYear = years.options[years.selectedIndex].value;
+    var date = new Date();
+    var currentYear = date.getFullYear();
+    if (selectedYear == currentYear) {
+        var months = document.getElementById("current-month_" + orderCounter);
+    }
+    else {
+        var months = document.getElementById("other-month_" + orderCounter);
+    }
+    var selectedMonth = months.options[months.selectedIndex].value;
+    var currentMonth = date.getMonth() + 1;
+    if (selectedMonth == currentMonth && selectedYear == currentYear) {
+        document.getElementById("short-day-date_" + orderCounter).style.display = "none";
+        document.getElementById("feb-day-date_" + orderCounter).style.display = "none";
+        document.getElementById("long-day-date_" + orderCounter).style.display = "none";
+        document.getElementById("current-day-date_" + orderCounter).style.display = "block";
+    }
+    else if (selectedMonth == 1 || selectedMonth == 3 || selectedMonth == 5 || selectedMonth == 7 || selectedMonth == 8 || selectedMonth == 10 || selectedMonth == 12) {
+        document.getElementById("short-day-date_" + orderCounter).style.display = "none";
+        document.getElementById("feb-day-date_" + orderCounter).style.display = "none";
+        document.getElementById("current-day-date_" + orderCounter).style.display = "none";
+        document.getElementById("long-day-date_" + orderCounter).style.display = "block";
+    }
+    else if (selectedMonth == 4 || selectedMonth == 6 || selectedMonth == 9 || selectedMonth == 11) {
+        document.getElementById("feb-day-date_" + orderCounter).style.display = "none";
+        document.getElementById("long-day-date_" + orderCounter).style.display = "none";
+        document.getElementById("current-day-date_" + orderCounter).style.display = "none";
+        document.getElementById("short-day-date_" + orderCounter).style.display = "block";
+    }
+    else {
+        document.getElementById("short-day-date_" + orderCounter).style.display = "none";
+        document.getElementById("long-day-date_" + orderCounter).style.display = "none";
+        document.getElementById("current-day-date_" + orderCounter).style.display = "none";
+        document.getElementById("feb-day-date_" + orderCounter).style.display = "block";
+    }
+}
 
 
 

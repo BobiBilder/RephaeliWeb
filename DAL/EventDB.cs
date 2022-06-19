@@ -166,9 +166,6 @@ namespace MasterProject.DAL
 
         public override int AddModel(BaseModel baseModels)
         {
-            //Insert to Food
-            //get foodID
-            //Insert FoodType
             OrderEvent order = baseModels as OrderEvent;
             int rows = 0;
             string orderSQL = string.Format(@"Insert into [Order](
@@ -184,6 +181,37 @@ namespace MasterProject.DAL
                                              OrderID, Invitations, EventTypeID, Notes)
                                              values('{0}', {1}, {2}, '{3}')",
                                              orderID, order.Event.Invitations, order.Event.EventType.id, order.Event.Notes);
+            command.CommandText = eventSQL;
+            rows = rows + command.ExecuteNonQuery();
+            return rows;
+        }
+        public override int DeleteModel(BaseModel baseModels)
+        {
+            OrderEvent order = baseModels as OrderEvent;
+            int rows = 0;
+            string employeeSQL = string.Format(@"Delete from EmployeeEvent where EventID = ", order.Event.id);
+            command.CommandText = employeeSQL;
+            rows = rows + command.ExecuteNonQuery();
+            string eventSQL = string.Format(@"Delete from [Event] where OrderID = ", order.id);
+            command.CommandText = eventSQL;
+            rows = rows + command.ExecuteNonQuery();
+            string orderSQL = string.Format(@"Delete from [Order] where OrderID = ", order.id);
+            command.CommandText = orderSQL;
+            rows = rows + command.ExecuteNonQuery();
+            return rows;
+        }
+        public override int UpdateModel(BaseModel baseModels)
+        {
+            OrderEvent order = baseModels as OrderEvent;
+            int rows = 0;
+            string orderSQL = string.Format(@"update [Order]
+                                             set OrderDate = '"+ order.OrderDate + "'" +
+                                             "where OrderID = " + order.id);
+            command.CommandText = orderSQL;
+            rows = rows + command.ExecuteNonQuery();
+            string eventSQL = string.Format(@"update [Event]
+                                             set Invitations = " + order.Event.Invitations + " , EventTypeID = " + order.Event.EventType.id + " , Notes = '" + order.Event.Notes + "'" +
+                                             "where OrderID = " + order.id);
             command.CommandText = eventSQL;
             rows = rows + command.ExecuteNonQuery();
             return rows;
