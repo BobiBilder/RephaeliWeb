@@ -1,10 +1,10 @@
-﻿function checkRequest() {
-    var noError = checkName() && checkPhone() && checkEtype() && checkGuests() && checkDate();
+﻿function checkRequest1() {
+    var noError = checkName1() && checkPhone1() && checkEtype1() && checkGuests1() && checkDate1();
     if (noError) {
-        document.forms[].submit();
+        document.forms[1].submit();
     }
 }
-function checkName() {
+function checkName1() {
     var name = document.getElementById('name').value;
     if (name == "") {
         document.getElementById("errorName").style.visibility = "hidden";
@@ -21,7 +21,7 @@ function checkName() {
     }
     return true;
 }
-function checkPhone() {
+function checkPhone1() {
     var phone = document.getElementById('phone').value;
     if (phone == "") {
         document.getElementById("errorTel").style.visibility = "hidden";
@@ -39,7 +39,7 @@ function checkPhone() {
     }
     return true;
 }
-function checkEtype() {
+function checkEtype1() {
     var events = document.getElementById("event");
     var event = events.options[events.selectedIndex].value;
     if (event == "0") {
@@ -50,7 +50,7 @@ function checkEtype() {
         return true;
     }
 }
-function checkGuests() {
+function checkGuests1() {
     var guests = document.getElementById('Guests').value;
     if (guests == "") {
         document.getElementById("errorGuests").style.visibility = "hidden";
@@ -67,7 +67,7 @@ function checkGuests() {
     }
     return true;
 }
-function checkDate() {
+function checkDate1() {
     var sum = 0;
     var selected = document.getElementsByClassName('date-day');
     for (var i = 0; i < 4; i++) {
@@ -84,7 +84,7 @@ function checkDate() {
 }
 
 
-function SelectYear() {
+function SelectYear1() {
     document.getElementById('short-day-date').style.display = "none";
     document.getElementById('feb-day-date').style.display = "none";
     document.getElementById('long-day-date').style.display = "none";
@@ -102,7 +102,7 @@ function SelectYear() {
         document.getElementById('other-month-date').style.display = "block";
     }
 }
-function SelectMonth() {
+function SelectMonth1() {
     var years = document.getElementById('year');
     var selectedYear = years.options[years.selectedIndex].value;
     var date = new Date();
@@ -158,13 +158,16 @@ $("document").ready(
     }
 );
 
-function checkRequest(orderCounter) {
-    var noError = checkName(orderCounter) && checkPhone(orderCounter) && checkEtype(orderCounter) && checkGuests(orderCounter) && checkDate(orderCounter);
+function checkRequest2(orderCounter) {
+    var noError = checkName2(orderCounter) && checkPhone2(orderCounter) && checkEtype2(orderCounter) && checkGuests2(orderCounter) && checkDate2(orderCounter);
     if (noError) {
         document.forms["EventForm_" + orderCounter].submit();
     }
 }
-function checkName(orderCounter) {
+function deleteRequest(orderCounter) {
+    document.forms["EventForm_" + orderCounter].submit();
+}
+function checkName2(orderCounter) {
     var name = document.getElementById("name_" + orderCounter).value;
     if (name == "") {
         document.getElementById("errorName_" + orderCounter).style.visibility = "hidden";
@@ -181,7 +184,7 @@ function checkName(orderCounter) {
     }
     return true;
 }
-function checkPhone(orderCounter) {
+function checkPhone2(orderCounter) {
     var phone = document.getElementById("phone_" + orderCounter).value;
     if (phone == "") {
         document.getElementById("errorTel_" + orderCounter).style.visibility = "hidden";
@@ -199,7 +202,7 @@ function checkPhone(orderCounter) {
     }
     return true;
 }
-function checkEtype(orderCounter) {
+function checkEtype2(orderCounter) {
     var events = document.getElementById("event_" + orderCounter);
     var event = events.options[events.selectedIndex].value;
     if (event == "0") {
@@ -210,7 +213,7 @@ function checkEtype(orderCounter) {
         return true;
     }
 }
-function checkGuests(orderCounter) {
+function checkGuests2(orderCounter) {
     var guests = document.getElementById("Guests_" + orderCounter).value;
     if (guests == "") {
         document.getElementById("errorGuests_" + orderCounter).style.visibility = "hidden";
@@ -227,7 +230,7 @@ function checkGuests(orderCounter) {
     }
     return true;
 }
-function checkDate(orderCounter) {
+function checkDate2(orderCounter) {
     var sum = 0;
     var selected = document.getElementsByClassName("date-day_" + orderCounter);
     for (var i = 0; i < 4; i++) {
@@ -244,7 +247,7 @@ function checkDate(orderCounter) {
 }
 
 
-function SelectYear(orderCounter) {
+function SelectYear2(orderCounter) {
     document.getElementById("short-day-date_" + orderCounter).style.display = "none";
     document.getElementById("feb-day-date_" + orderCounter).style.display = "none";
     document.getElementById("long-day-date_" + orderCounter).style.display = "none";
@@ -262,7 +265,7 @@ function SelectYear(orderCounter) {
         document.getElementById("other-month-date_" + orderCounter).style.display = "block";
     }
 }
-function SelectMonth(orderCounter) {
+function SelectMonth2(orderCounter) {
     var years = document.getElementById("year_" + orderCounter);
     var selectedYear = years.options[years.selectedIndex].value;
     var date = new Date();

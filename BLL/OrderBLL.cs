@@ -518,12 +518,12 @@ namespace MasterProject.BLL
             EventDB eventDB = new EventDB();
             return eventDB.ChangeBaseModel(order, 1) > 0;
         }
-        public bool DeleteMyEvent(Order order)
+        public bool DeleteMyEvent(OrderEvent order)
         {
             EventDB eventDB = new EventDB();
             return eventDB.ChangeBaseModel(order, 2) > 0;
         }
-        public bool UpdateMyEvent(Order order)
+        public bool UpdateMyEvent(OrderEvent order)
         {
             EventDB eventDB = new EventDB();
             return eventDB.ChangeBaseModel(order, 3) > 0;

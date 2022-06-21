@@ -70,21 +70,12 @@ namespace MasterProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteMyEvent(string EventTypeID, string Invitations, string year, string month, string day, string notes)
+        public ActionResult DeleteMyEvent(string orderID, string eventID)
         {
-            string date = day + "/" + month + "/" + year;
             OrderEvent order = new OrderEvent();
-            LoginUser user = Session["User"] as LoginUser;
-            order.ClientID = user.id;
-            order.IsWorker = user.IsWorker;
-            order.IsPayed = false;
-            order.OrderDate = date;
-            order.OrderTime = DateTime.Now.ToString("HH:mm");
+            order.id = int.Parse(orderID);
             order.Event = new NewEvent();
-            order.Event.EventType = new EventType();
-            order.Event.EventType.id = int.Parse(EventTypeID);
-            order.Event.Invitations = int.Parse(Invitations);
-            order.Event.Notes = notes;
+            order.Event.id = int.Parse(eventID);
             OrderBLL eventBLL = new OrderBLL();
             if (eventBLL.DeleteMyEvent(order))
             {
@@ -96,17 +87,19 @@ namespace MasterProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdateMyEvent(string EventTypeID, string Invitations, string year, string month, string day, string notes)
+        public ActionResult UpdateMyEvent(string EventTypeID, string Invitations, string year, string month, string day, string notes, string orderID, string eventID)
         {
             string date = day + "/" + month + "/" + year;
             OrderEvent order = new OrderEvent();
             LoginUser user = Session["User"] as LoginUser;
+            order.id = int.Parse(orderID);
             order.ClientID = user.id;
             order.IsWorker = user.IsWorker;
             order.IsPayed = false;
             order.OrderDate = date;
             order.OrderTime = DateTime.Now.ToString("HH:mm");
             order.Event = new NewEvent();
+            order.Event.id = int.Parse(eventID);
             order.Event.EventType = new EventType();
             order.Event.EventType.id = int.Parse(EventTypeID);
             order.Event.Invitations = int.Parse(Invitations);

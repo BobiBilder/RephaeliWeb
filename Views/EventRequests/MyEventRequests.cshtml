@@ -95,7 +95,7 @@
 
                         <div class="year">
                             <label for="year">שנה:</label>
-                            <select class="date-year" id="year_@orderCounter" onchange="SelectYear(@orderCounter)" name="year">
+                            <select class="date-year" id="year_@orderCounter" onchange="SelectYear2(@orderCounter)" name="year">
                                 <option selected disabled hidden>שנה</option>
                                 <option id="year1_@orderCounter"></option>
                                 <option id="year2_@orderCounter"></option>
@@ -113,7 +113,7 @@
 
                         <div class="hidden" id="current-month-date_@orderCounter">
                             <label for="month">חודש:</label>
-                            <select class="date-month" id="current-month_@orderCounter" onchange="SelectMonth(@orderCounter)" name="month">
+                            <select class="date-month" id="current-month_@orderCounter" onchange="SelectMonth2(@orderCounter)" name="month">
                                 <option selected disabled hidden>חודש</option>
                                 @for (int i = month; i < 13; i++)
                                 {
@@ -124,7 +124,7 @@
 
                         <div class="hidden" id="other-month-date_@orderCounter">
                             <label for="month">חודש:</label>
-                            <select class="date-month" id="other-month_@orderCounter" onchange="SelectMonth(@orderCounter)" name="month">
+                            <select class="date-month" id="other-month_@orderCounter" onchange="SelectMonth2(@orderCounter)" name="month">
                                 <option selected disabled hidden>חודש</option>
                                 @for (int i = 1; i < 13; i++)
                                 {
@@ -190,9 +190,12 @@
                     {
                         <textarea id="order_@orderCounter" placeholder="אם יש משהו שאנחנו צריכים לדעת..." name="notes"></textarea>
                     }
-                    
-                    <button type="submit" class="eventBtn" formaction="/EventRequests/UpdateMyEvent" onclick="checkRequest(@orderCounter)">עידכון</button>
-                    <button type="submit" class="eventBtn" formaction="/EventRequests/DeleteMyEvent" onclick="checkRequest(@orderCounter)">מחיקה</button>
+
+                    <input type="text" style="display:none" value="@order.id" name="orderID">
+                    <input type="text" style="display:none" value="@Model.Events[orderCounter].id" name="eventID">
+
+                    <button type="submit" class="eventBtn" formaction="/EventRequests/UpdateMyEvent" onclick="checkRequest2(@orderCounter)">עידכון</button>
+                    <button type="submit" class="eventBtn" formaction="/EventRequests/DeleteMyEvent" onclick="deleteRequest(@orderCounter)">מחיקה</button>
                 </form>
             </div>
             orderCounter++;

@@ -107,7 +107,7 @@
 
                 <div class="year">
                     <label for="year">שנה:</label>
-                    <select class="date-year" id="year" onchange="SelectYear()" name="year">
+                    <select class="date-year" id="year" onchange="SelectYear1()" name="year">
                         <option selected disabled hidden>שנה</option>
                         <option id="year1"></option>
                         <option id="year2"></option>
@@ -125,7 +125,7 @@
 
                 <div class="hidden" id="current-month-date">
                     <label for="month">חודש:</label>
-                    <select class="date-month" id="current-month" onchange="SelectMonth()" name="month">
+                    <select class="date-month" id="current-month" onchange="SelectMonth1()" name="month">
                         <option selected disabled hidden>חודש</option>
                         @for (int i = month; i < 13; i++)
                         {
@@ -136,7 +136,7 @@
 
                 <div class="hidden" id="other-month-date">
                     <label for="month">חודש:</label>
-                    <select class="date-month" id="other-month" onchange="SelectMonth()" name="month">
+                    <select class="date-month" id="other-month" onchange="SelectMonth1()" name="month">
                         <option selected disabled hidden>חודש</option>
                         @for (int i = 1; i < 13; i++)
                         {
@@ -196,7 +196,7 @@
             <textarea id="order" placeholder="אם יש משהו שאנחנו צריכים לדעת..." name="notes"></textarea>
             @if (Session["User"] != null)
             {
-                <input type="button" class="eventBtn" onclick="checkRequest()" value="שליחה">
+                <input type="button" class="eventBtn" onclick="checkRequest1()" value="שליחה">
             }
         </form>
     </div>
