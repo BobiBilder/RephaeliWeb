@@ -19,13 +19,5 @@ namespace MasterProject.DAL
             selectsql.Sql = "select * from Order";
             return this.Select(this.selectsql);
         }
-
-        public bool InsertNewFoodOrder(string[] quantity, string[] foodID, string userID)
-        {
-            for (int i = 0; i < foodID.Length; i++)
-            {
-            }
-            return true;
-        }
     }
 }

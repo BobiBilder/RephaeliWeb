@@ -1,0 +1,52 @@
+﻿@using MasterProject.FoodSupplier;
+@using MasterProject.ViewModels;
+@model SupplierOrderViewModel
+@{
+    ViewBag.Title = "MySupplyOrders";
+    Layout = "~/Views/Share/ViewWorker.cshtml";
+}
+<link href="~/Content/Styles/Style-Food.css" rel="stylesheet" />
+<div class="wrapper">
+    <div class="EventWrapper">
+        @foreach (Order order in Model.orders)
+        {
+            <div class="eventBlock">
+                <label class="container">
+                    <h1 class="eventInfo">@order.Date</h1>
+                    @if (order.IsPaid)
+                    {
+                        <h1 class="eventInfo">שולם</h1>
+                    }
+                    else
+                    {
+                        <h1 class="eventInfo">לא שולם</h1>
+                    }
+                    <h2 class="eventInfo">אוכל:</h2>
+
+                    @foreach (int foodID in order.FoodIDs)
+                    {
+                        foreach (Food food in Model.food)
+                        {
+                            if (food.id == foodID)
+                            {
+                                <h2 class="eventInfo">@food.FoodName</h2>
+                            }
+                        }
+                    }
+                </label>
+            </div>
+        }
+    </div>
+
+
+
+    <div class="typesBlock-supplier">
+        <a href="~/FoodSupply/FoodSupplyForm">
+            <h1 class="types">הזמנה מהספק</h1>
+        </a>
+        <a href="~/FoodSupply/MySupplyOrders">
+            <h1 class="types">ההזמנות שלי</h1>
+        </a>
+    </div>
+</div>
+

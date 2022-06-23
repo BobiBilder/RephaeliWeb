@@ -151,7 +151,7 @@ namespace MasterProject.DAL
             }
             return this.ChangeData(sqls);
         }
-        public int RemoveWork(int[] EventID, LoginUser user)
+        public int RemoveWork(int[] EventID, LoginUser user)//deleting one Table in the DataBase
         {
             List<string> sqls = new List<string>();
             foreach (int eventsID in EventID)
@@ -164,7 +164,7 @@ namespace MasterProject.DAL
         }
 
 
-        public override int AddModel(BaseModel baseModels)
+        public override int AddModel(BaseModel baseModels)//adding more than one Table in the DataBase
         {
             OrderEvent order = baseModels as OrderEvent;
             int rows = 0;
@@ -174,7 +174,7 @@ namespace MasterProject.DAL
                                          order.ClientID, order.OrderDate, order.IsPayed, order.OrderTime, order.IsWorker);
             command.CommandText = orderSQL;
             rows = rows + command.ExecuteNonQuery();
-            orderSQL = "select @@Identity";
+            orderSQL = "select @@Identity";//gets the new row ID from the DataBase
             command.CommandText = orderSQL;
             string orderID = command.ExecuteScalar().ToString();
             string eventSQL = string.Format(@"Insert into [Event](
@@ -185,7 +185,7 @@ namespace MasterProject.DAL
             rows = rows + command.ExecuteNonQuery();
             return rows;
         }
-        public override int DeleteModel(BaseModel baseModels)
+        public override int DeleteModel(BaseModel baseModels)//deleting more than one Table in the DataBase
         {
             OrderEvent order = baseModels as OrderEvent;
             int rows = 0;
@@ -200,7 +200,7 @@ namespace MasterProject.DAL
             rows = rows + command.ExecuteNonQuery();
             return rows;
         }
-        public override int UpdateModel(BaseModel baseModels)
+        public override int UpdateModel(BaseModel baseModels)//updating more than one Table in the DataBase
         {
             OrderEvent order = baseModels as OrderEvent;
             int rows = 0;

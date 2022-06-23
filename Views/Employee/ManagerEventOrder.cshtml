@@ -18,7 +18,15 @@
         @for (int i = 0; i < Model.Events.Count(); i++)
         {
             Event events = Model.Events[i];
-            Order order = Model.Orders[events.id - 8];
+            Order order = new Order();
+            if (events.id == 8)
+            {
+                order = Model.Orders[events.id - 8];
+            }
+            else
+            {
+                order = Model.Orders[events.id - 9];
+            }
             LoginUser client = new LoginUser();
             if (order.IsWorker)
             {
@@ -43,22 +51,14 @@
                     <h2 class="eventInfo">האירוע של:@client.FirstName @client.LastName</h2>
                     <h2 class="eventInfo">תאריך:@order.OrderDate</h2>
                     <h2 class="eventInfo">בשעה-@order.OrderTime</h2>
-                    @if (order.EmployeeIDs.Count != 0)
-                    {
-                        <h2 class="eventInfo" style="text-decoration:underline">עובדים:</h2>
+                    <h2 class="eventInfo" style="text-decoration:underline">עובדים:</h2>
+                    @{
                         int count = 1;
-                        foreach (Employee employee in Model.employees)
+                        foreach(int id in order.EmployeeIDs)
                         {
-                            if (order.EmployeeIDs.Contains(employee.id))
-                            {
-                                <h2 class="eventInfo">@count ) @employee.FirstName @employee.LastName</h2>
-                                count++;
-                            }
+                            <h2 class="eventInfo">@count ) @Model.employees[id-1].FirstName @Model.employees[id-1].LastName</h2>
+                            count++;
                         }
-                    }
-                    else
-                    {
-                        <h2>לא נרשמו לעבוד.</h2>
                     }
                 </label>
             </div>

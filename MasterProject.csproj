@@ -144,6 +144,9 @@
     <Content Include="bin\roslyn\vbc.exe.config" />
     <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
+    <Content Include="Connected Services\FoodSupplier\MasterProject.FoodSupplier.Order.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\FoodSupplier\Service.disco" />
     <None Include="Connected Services\FoodSupplier\configuration91.svcinfo" />
     <None Include="Connected Services\FoodSupplier\configuration.svcinfo" />
@@ -242,6 +245,7 @@
     <Compile Include="ViewModels\EventOrderViewModel.cs" />
     <Compile Include="ViewModels\FoodViewModel.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
+    <Compile Include="ViewModels\SupplierOrderViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -254,6 +258,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\FoodSupplier\Service2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\FoodSupplier\Service3.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
@@ -270,10 +277,11 @@
     <Content Include="Views\Employee\AddFoodForm.cshtml" />
     <Content Include="Views\Employee\MyEventOrders.cshtml" />
     <Content Include="Views\FoodByFoodType\GetFoodByType.cshtml" />
-    <Content Include="Views\FoodSupply\FoodSupplyForm.cshtml" />
     <Content Include="Views\Employee\ManagerEventOrder.cshtml" />
     <Content Include="Views\SpecificFood\GetSpecificFood.cshtml" />
     <Content Include="Views\EventRequests\MyEventRequests.cshtml" />
+    <Content Include="Views\FoodSupply\FoodSupplyForm.cshtml" />
+    <Content Include="Views\FoodSupply\MySupplyOrders.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -287,9 +295,7 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\FoodSupplier\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\OrderFoodSupply\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

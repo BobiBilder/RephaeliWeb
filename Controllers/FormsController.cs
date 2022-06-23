@@ -36,7 +36,7 @@ namespace MasterProject.Controllers
         }
         
         [HttpPost]
-        public ActionResult EventForm(string EventTypeID, string Invitations, string year, string month, string day, string notes)
+        public ActionResult EventForm(string EventTypeID, string Invitations, string year, string month, string day, string notes)//getting everything from the form in the view that needs to be added
         {
             string date = day + "/" + month + "/" + year;
             OrderEvent order = new OrderEvent();
@@ -70,7 +70,7 @@ namespace MasterProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteMyEvent(string orderID, string eventID)
+        public ActionResult DeleteMyEvent(string orderID, string eventID)//only getting the id's because its all that is needed
         {
             OrderEvent order = new OrderEvent();
             order.id = int.Parse(orderID);
@@ -87,7 +87,7 @@ namespace MasterProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdateMyEvent(string EventTypeID, string Invitations, string year, string month, string day, string notes, string orderID, string eventID)
+        public ActionResult UpdateMyEvent(string EventTypeID, string Invitations, string year, string month, string day, string notes, string orderID, string eventID)//getting everything from the form in the view that needs to be updated
         {
             string date = day + "/" + month + "/" + year;
             OrderEvent order = new OrderEvent();

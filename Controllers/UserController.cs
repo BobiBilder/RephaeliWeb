@@ -16,7 +16,6 @@ namespace MasterProject.Controllers
         {
             return View();
         }
-
         [HttpPost]
         public ActionResult Login(string IDnum, string userPass, bool isWorker)
         {

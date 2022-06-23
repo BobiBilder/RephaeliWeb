@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MasterProject.ViewModels;
 using MasterProject.FoodSupplier;
 
 namespace MasterProject.Controllers
@@ -12,37 +13,37 @@ namespace MasterProject.Controllers
         // GET: FoodSupply
         public ActionResult FoodSupplyForm()
         {
-            return View(0.0);
+            ServiceClient serviceClient = new ServiceClient();
+            Food[] food = serviceClient.GetAllFood();
+            return View(food);
         }
 
-        public ActionResult GetFood()
+        [HttpPost]
+        public ActionResult AddNewOrder(int[] FoodID)
         {
-            //ServiceClient service = new ServiceClient();
-            //FoodSupplier.Food[] list = ServiceClient.GetAllFood();
-            //return View(list);
-            return View();
+            ServiceClient serviceClient = new ServiceClient();
+            MasterProject.FoodSupplier.Order order = new Order();
+            order.buisnessID = "1";
+            order.Date = DateTime.Now.ToString("dd/MM/yyyy");
+            order.FoodIDs = FoodID;
+            order.IsPaid = false;
+            if (serviceClient.PutOrder(order))
+            {
+                TempData["message"] = "ההזמנה נעשתה בהצלחה";
+                return RedirectToAction("FoodSupplyForm", "FoodSupply");
+            }
+            TempData["message"] = "אירעה שגיאה בהזמנה";
+            return RedirectToAction("FoodSupplyForm", "FoodSupply");
         }
 
-        public ActionResult PutSupply(int num1, int num2, int action)
+
+        public ActionResult MySupplyOrders()
         {
-            ServiceClient service = new ServiceClient();
-            //double sum = 0;
-            //switch (action)
-            //{
-            //    case 1:
-            //        sum = service.Plus(num1, num2);
-            //        break;
-            //    case 2:
-            //        sum = service.Minus(num1, num2);
-            //        break;
-            //    case 3:
-            //        sum = service.Multi(num1, num2);
-            //        break;
-            //    case 4:
-            //        sum = service.Divide(num1, num2);
-            //        break;
-            //}
-            return View("FoodSupplyForm"/*, sum*/);
+            ServiceClient serviceClient = new ServiceClient();
+            SupplierOrderViewModel supplierOrderViewModel = new SupplierOrderViewModel();
+            supplierOrderViewModel.orders = serviceClient.GetAllOrders("1");
+            supplierOrderViewModel.food = serviceClient.GetAllFood();
+            return View(supplierOrderViewModel);
         }
     }
 }

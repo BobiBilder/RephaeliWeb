@@ -1,31 +1,39 @@
-﻿
-@*@{
+﻿@using MasterProject.FoodSupplier
+@model MasterProject.FoodSupplier.Food[]
+@{
     ViewBag.Title = "FoodSupplyForm";
     Layout = "~/Views/Share/ViewWorker.cshtml";
-}*@
-
-@model double
-<link href="~/Content/Styles/Style-EventsRequest.css" rel="stylesheet" />
-
+}
+<link href="~/Content/Styles/Style-Food.css" rel="stylesheet" />
+<script src="~/Content/Scripts/Food-Script.js"></script>
 <div class="wrapper">
-    <div class="personal-input">
-        <form class="supplyForm" action="~/FoodSupply/PutSupply" method="post">
-            <label>first number</label><br><br>
-            <input type="text" name="num1" /><br><br><br><br>
-            <label>second number</label><br><br>
-            <input type="text" name="num2" /><br><br>
-            <label>Action</label><br><br>
-            <select name="operator">
-                <option value="1">+</option>
-                <option value="2">-</option>
-                <option value="3">*</option>
-                <option value="4s">/</option>
-            </select><br><br>
-            <button type="submit">Calculate</button>
-        </form>
-        @if(Model != 0)
+    <div class="foodWrapper">
+        <form method="post" action="~/FoodSupply/AddNewOrder">
+            @foreach (Food food in Model)
             {
-                <h1>=@Model</h1>
+                <div class="foodBlock">
+                    <label class="container">
+                        <input type="checkbox" id="foodID" name="FoodID" value="@food.id">
+                        <span class="checkmark"></span>
+                        <h1 class="foodName">@food.FoodName</h1>
+                        <img class="foodPicture" src="~/Content/Images/Food/@food.FoodPicture" />
+                        <h3 class="foodPrice">@food.FoodPrice ₪ לקילו </h3>
+                    </label>
+                </div>
             }
+            <br>
+            <span class="span" id="emptyCheckbox">נא לבחור אוכל להזמנה</span>
+            <br>
+            <input type="button" onclick="OrderSupply()" class="button-order" value="שליחת הזמנה">
+        </form>
+    </div>
+    
+    <div class="typesBlock-supplier">
+        <a href="~/FoodSupply/FoodSupplyForm">
+            <h1 class="types">הזמנה מהספק</h1>
+        </a>
+        <a href="~/FoodSupply/MySupplyOrders">
+            <h1 class="types">ההזמנות שלי</h1>
+        </a>
     </div>
 </div>

@@ -15,76 +15,6 @@ namespace MasterProject.FoodSupplier {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="BaseModel", Namespace="http://schemas.datacontract.org/2004/07/")]
-    [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(MasterProject.FoodSupplier.FoodType))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(MasterProject.FoodSupplier.Food))]
-    public partial class BaseModel : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int idField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int id {
-            get {
-                return this.idField;
-            }
-            set {
-                if ((this.idField.Equals(value) != true)) {
-                    this.idField = value;
-                    this.RaisePropertyChanged("id");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="FoodType", Namespace="http://schemas.datacontract.org/2004/07/")]
-    [System.SerializableAttribute()]
-    public partial class FoodType : MasterProject.FoodSupplier.BaseModel {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string FoodTypeNameField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string FoodTypeName {
-            get {
-                return this.FoodTypeNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.FoodTypeNameField, value) != true)) {
-                    this.FoodTypeNameField = value;
-                    this.RaisePropertyChanged("FoodTypeName");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Food", Namespace="http://schemas.datacontract.org/2004/07/")]
     [System.SerializableAttribute()]
     public partial class Food : MasterProject.FoodSupplier.BaseModel {
@@ -170,33 +100,175 @@ namespace MasterProject.FoodSupplier {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="BaseModel", Namespace="http://schemas.datacontract.org/2004/07/")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(MasterProject.FoodSupplier.FoodType))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(MasterProject.FoodSupplier.Order))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(MasterProject.FoodSupplier.Food))]
+    public partial class BaseModel : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="FoodType", Namespace="http://schemas.datacontract.org/2004/07/")]
+    [System.SerializableAttribute()]
+    public partial class FoodType : MasterProject.FoodSupplier.BaseModel {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FoodTypeNameField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FoodTypeName {
+            get {
+                return this.FoodTypeNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FoodTypeNameField, value) != true)) {
+                    this.FoodTypeNameField = value;
+                    this.RaisePropertyChanged("FoodTypeName");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Order", Namespace="http://schemas.datacontract.org/2004/07/")]
+    [System.SerializableAttribute()]
+    public partial class Order : MasterProject.FoodSupplier.BaseModel {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int[] FoodIDsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsPaidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string buisnessIDField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Date {
+            get {
+                return this.DateField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DateField, value) != true)) {
+                    this.DateField = value;
+                    this.RaisePropertyChanged("Date");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int[] FoodIDs {
+            get {
+                return this.FoodIDsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FoodIDsField, value) != true)) {
+                    this.FoodIDsField = value;
+                    this.RaisePropertyChanged("FoodIDs");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsPaid {
+            get {
+                return this.IsPaidField;
+            }
+            set {
+                if ((this.IsPaidField.Equals(value) != true)) {
+                    this.IsPaidField = value;
+                    this.RaisePropertyChanged("IsPaid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string buisnessID {
+            get {
+                return this.buisnessIDField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.buisnessIDField, value) != true)) {
+                    this.buisnessIDField = value;
+                    this.RaisePropertyChanged("buisnessID");
+                }
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="FoodSupplier.IService")]
     public interface IService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAllFood", ReplyAction="http://tempuri.org/IService/GetAllFoodResponse")]
-        MasterProject.FoodSupplier.Food GetAllFood(MasterProject.FoodSupplier.Food food);
+        MasterProject.FoodSupplier.Food[] GetAllFood();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAllFood", ReplyAction="http://tempuri.org/IService/GetAllFoodResponse")]
-        System.Threading.Tasks.Task<MasterProject.FoodSupplier.Food> GetAllFoodAsync(MasterProject.FoodSupplier.Food food);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Supply", ReplyAction="http://tempuri.org/IService/SupplyResponse")]
-        int Supply(int num1, int num2);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Supply", ReplyAction="http://tempuri.org/IService/SupplyResponse")]
-        System.Threading.Tasks.Task<int> SupplyAsync(int num1, int num2);
+        System.Threading.Tasks.Task<MasterProject.FoodSupplier.Food[]> GetAllFoodAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/IsPaid", ReplyAction="http://tempuri.org/IService/IsPaidResponse")]
-        int IsPaid(int num1, int num2);
+        bool IsPaid(MasterProject.FoodSupplier.Order order);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/IsPaid", ReplyAction="http://tempuri.org/IService/IsPaidResponse")]
-        System.Threading.Tasks.Task<int> IsPaidAsync(int num1, int num2);
+        System.Threading.Tasks.Task<bool> IsPaidAsync(MasterProject.FoodSupplier.Order order);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Divide", ReplyAction="http://tempuri.org/IService/DivideResponse")]
-        double Divide(int num1, int num2);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAllOrders", ReplyAction="http://tempuri.org/IService/GetAllOrdersResponse")]
+        MasterProject.FoodSupplier.Order[] GetAllOrders(string businessID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Divide", ReplyAction="http://tempuri.org/IService/DivideResponse")]
-        System.Threading.Tasks.Task<double> DivideAsync(int num1, int num2);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAllOrders", ReplyAction="http://tempuri.org/IService/GetAllOrdersResponse")]
+        System.Threading.Tasks.Task<MasterProject.FoodSupplier.Order[]> GetAllOrdersAsync(string businessID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/PutOrder", ReplyAction="http://tempuri.org/IService/PutOrderResponse")]
+        bool PutOrder(MasterProject.FoodSupplier.Order order);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/PutOrder", ReplyAction="http://tempuri.org/IService/PutOrderResponse")]
+        System.Threading.Tasks.Task<bool> PutOrderAsync(MasterProject.FoodSupplier.Order order);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -226,36 +298,36 @@ namespace MasterProject.FoodSupplier {
                 base(binding, remoteAddress) {
         }
         
-        public MasterProject.FoodSupplier.Food GetAllFood(MasterProject.FoodSupplier.Food food) {
-            return base.Channel.GetAllFood(food);
+        public MasterProject.FoodSupplier.Food[] GetAllFood() {
+            return base.Channel.GetAllFood();
         }
         
-        public System.Threading.Tasks.Task<MasterProject.FoodSupplier.Food> GetAllFoodAsync(MasterProject.FoodSupplier.Food food) {
-            return base.Channel.GetAllFoodAsync(food);
+        public System.Threading.Tasks.Task<MasterProject.FoodSupplier.Food[]> GetAllFoodAsync() {
+            return base.Channel.GetAllFoodAsync();
         }
         
-        public int Supply(int num1, int num2) {
-            return base.Channel.Supply(num1, num2);
+        public bool IsPaid(MasterProject.FoodSupplier.Order order) {
+            return base.Channel.IsPaid(order);
         }
         
-        public System.Threading.Tasks.Task<int> SupplyAsync(int num1, int num2) {
-            return base.Channel.SupplyAsync(num1, num2);
+        public System.Threading.Tasks.Task<bool> IsPaidAsync(MasterProject.FoodSupplier.Order order) {
+            return base.Channel.IsPaidAsync(order);
         }
         
-        public int IsPaid(int num1, int num2) {
-            return base.Channel.IsPaid(num1, num2);
+        public MasterProject.FoodSupplier.Order[] GetAllOrders(string businessID) {
+            return base.Channel.GetAllOrders(businessID);
         }
         
-        public System.Threading.Tasks.Task<int> IsPaidAsync(int num1, int num2) {
-            return base.Channel.IsPaidAsync(num1, num2);
+        public System.Threading.Tasks.Task<MasterProject.FoodSupplier.Order[]> GetAllOrdersAsync(string businessID) {
+            return base.Channel.GetAllOrdersAsync(businessID);
         }
         
-        public double Divide(int num1, int num2) {
-            return base.Channel.Divide(num1, num2);
+        public bool PutOrder(MasterProject.FoodSupplier.Order order) {
+            return base.Channel.PutOrder(order);
         }
         
-        public System.Threading.Tasks.Task<double> DivideAsync(int num1, int num2) {
-            return base.Channel.DivideAsync(num1, num2);
+        public System.Threading.Tasks.Task<bool> PutOrderAsync(MasterProject.FoodSupplier.Order order) {
+            return base.Channel.PutOrderAsync(order);
         }
     }
 }

@@ -513,17 +513,17 @@ namespace MasterProject.BLL
             EventDB eventDB = new EventDB();
             return eventDB.RemoveWork(EventID, user) > 0;
         }
-        public bool NewEvent(OrderEvent order)
+        public bool NewEvent(OrderEvent order)//passing the event+order to the DB
         {
             EventDB eventDB = new EventDB();
             return eventDB.ChangeBaseModel(order, 1) > 0;
         }
-        public bool DeleteMyEvent(OrderEvent order)
+        public bool DeleteMyEvent(OrderEvent order)//passing the ID'S of the event+order to the DB
         {
             EventDB eventDB = new EventDB();
             return eventDB.ChangeBaseModel(order, 2) > 0;
         }
-        public bool UpdateMyEvent(OrderEvent order)
+        public bool UpdateMyEvent(OrderEvent order)//passing the event+order to the DB
         {
             EventDB eventDB = new EventDB();
             return eventDB.ChangeBaseModel(order, 3) > 0;

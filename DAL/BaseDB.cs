@@ -167,7 +167,7 @@ namespace MasterProject.DAL
             return rows;
         }
 
-        public int ChangeBaseModel(BaseModel baseModel, int action)
+        public int ChangeBaseModel(BaseModel baseModel, int action)//chainging the DataBase in 3 different ways, adding/deleting/updating
         {
             OleDbTransaction transaction = null;
             try
@@ -206,15 +206,15 @@ namespace MasterProject.DAL
             }
         }
 
-        public virtual int AddModel(BaseModel baseModel)
+        public virtual int AddModel(BaseModel baseModel)//nothing much to explain here, its getting overridden (override) in the DAL
         {
             return 0;
         }
-        public virtual int DeleteModel(BaseModel baseModel)
+        public virtual int DeleteModel(BaseModel baseModel)//nothing much to explain here, its getting overridden (override) in the DAL
         {
             return 0;
         }
-        public virtual int UpdateModel(BaseModel baseModel)
+        public virtual int UpdateModel(BaseModel baseModel)//nothing much to explain here, its getting overridden (override) in the DAL
         {
             return 0;
         }
