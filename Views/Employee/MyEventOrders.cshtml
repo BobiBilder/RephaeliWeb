@@ -13,54 +13,46 @@
 <div class="wrapper">
     @if (!user.IsManager)
     {
-    <form class="EventWrapper" method="post" action="~/Employee/RemoveWorkEvent">
-        @for (int i = 0; i < Model.Events.Count(); i++)
-        {
-            Event events = Model.Events[i];
-            Order order = new Order();
-            if (events.id == 8)
+        <form class="EventWrapper" method="post" action="~/Employee/RemoveWorkEvent">
+            @for (int i = 0; i < Model.Events.Count(); i++)
             {
-                order = Model.Orders[events.id - 8];
-            }
-            else
-            {
-                order = Model.Orders[events.id - 9];
-            }
-            LoginUser client = new LoginUser();
-            if (order.IsWorker)
-            {
-                client = Model.employees[(order.ClientID - 1)];
-            }
-            else
-            {
-                if (order.ClientID < 17)
+                Event events = Model.Events[i];
+                Order order = Model.Orders[i];
+                LoginUser client = new LoginUser();
+                if (order.IsWorker)
                 {
-                    client = Model.Clients[(order.ClientID - 1)];
+                    client = Model.employees[(order.ClientID - 1)];
                 }
                 else
                 {
-                    client = Model.Clients[(order.ClientID - 5)];
+                    if (order.ClientID < 17)
+                    {
+                        client = Model.Clients[(order.ClientID - 1)];
+                    }
+                    else
+                    {
+                        client = Model.Clients[(order.ClientID - 5)];
+                    }
                 }
+                events.EventType.EventTypeName = Model.EventTypes[events.EventType.id - 1].EventTypeName;
+                <div class="eventBlock">
+                    <label class="container">
+                        <input type="checkbox" id="orderID" name="EventID" value="@events.id">
+                        <span class="checkmark"></span>
+                        <h1 class="eventInfo">@events.EventType.EventTypeName</h1>
+                        <h2 class="eventInfo">מוזמנים:@events.Invitations</h2>
+                        <h2 class="eventInfo">האירוע של:@client.FirstName @client.LastName</h2>
+                        <h2 class="eventInfo">תאריך:@order.OrderDate</h2>
+                        <h2 class="eventInfo">בשעה-@order.OrderTime</h2>
+                    </label>
+                </div>
             }
-            events.EventType.EventTypeName = Model.EventTypes[events.EventType.id - 1].EventTypeName;
-            <div class="eventBlock">
-                <label class="container">
-                    <input type="checkbox" id="orderID" name="EventID" value="@events.id">
-                    <span class="checkmark"></span>
-                    <h1 class="eventInfo">@events.EventType.EventTypeName</h1>
-                    <h2 class="eventInfo">מוזמנים:@events.Invitations</h2>
-                    <h2 class="eventInfo">האירוע של:@client.FirstName @client.LastName</h2>
-                    <h2 class="eventInfo">תאריך:@order.OrderDate</h2>
-                    <h2 class="eventInfo">בשעה-@order.OrderTime</h2>
-                </label>
-            </div>
-        }
-        <br>
-        <span class="span" id="emptyCheckbox">נא לבחור אירוע בכדי לצאת מהעבודה</span>
-        <br>
-        <input type="button" onclick="WorkAssign()" class="button-order" value="יציאה מהעבודה">
+            <br>
+            <span class="span" id="emptyCheckbox">נא לבחור אירוע בכדי לצאת מהעבודה</span>
+            <br>
+            <input type="button" onclick="WorkAssign()" class="button-order" value="יציאה מהעבודה">
 
-    </form>
+        </form>
     }
     else
     {

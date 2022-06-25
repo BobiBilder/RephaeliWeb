@@ -123,7 +123,6 @@ namespace MasterProject.DAL
                 foreach (string sql in sqls)
                 {
                     this.command.CommandText = sql;
-
                     rows = rows + this.command.ExecuteNonQuery();
                 }
                 transaction.Commit();
@@ -172,7 +171,6 @@ namespace MasterProject.DAL
             OleDbTransaction transaction = null;
             try
             {
-
                 this.connection.Open();
                 transaction = this.connection.BeginTransaction();
                 this.command.Transaction = transaction;

@@ -8,7 +8,6 @@
     Layout = "~/Views/Share/ViewWorker.cshtml";
     LoginUser user = Session["User"] as LoginUser;
 }
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <link href="~/Content/Styles/Style-Food.css" rel="stylesheet" />
 <script src="~/Content/Scripts/Events-Script.js"></script>
 <div class="wrapper">
@@ -18,7 +17,7 @@
             @for (int i = 0; i < Model.Events.Count(); i++)
             {
                 Event events = Model.Events[i];
-                Order order = Model.Orders[events.id - 9];
+                Order order = Model.Orders[i];
                 LoginUser client = new LoginUser();
                 if (order.IsWorker)
                 {
@@ -61,15 +60,7 @@
             @for (int i = 0; i < Model.Events.Count(); i++)
             {
                 Event events = Model.Events[i];
-                Order order = new Order();
-                if(events.id == 8)
-                {
-                    order = Model.Orders[events.id - 8];
-                }
-                else
-                {
-                    order = Model.Orders[events.id - 9];
-                }
+                Order order = Model.Orders[i];
                 LoginUser client = new LoginUser();
                 if (order.IsWorker)
                 {

@@ -20,6 +20,7 @@ namespace MasterProject.DAL
             selectsql.Sql = "select * from Clients";
             return this.Select(this.selectsql);
         }
+
         public int InsertNewClient(Clients client)
         {
             string sql = string.Format(@"insert into Clients(FirstName, LastName, PhoneNumber ,[Email], [IDnum], [Password])

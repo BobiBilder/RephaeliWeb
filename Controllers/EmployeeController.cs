@@ -76,9 +76,6 @@ namespace MasterProject.Controllers
             TempData["message"] = "אירעה שגיאה ביציאה מהעבודה";
             return RedirectToAction("MyEventOrders", "Employee");
         }
-
-
-
         public ActionResult AddFoodForm()
         {
             EmployeeBLL employeeBll = new EmployeeBLL();

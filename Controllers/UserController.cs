@@ -16,6 +16,7 @@ namespace MasterProject.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult Login(string IDnum, string userPass, bool isWorker)
         {
@@ -42,6 +43,8 @@ namespace MasterProject.Controllers
             TempData["message"] = "אירעה שגיאה בהרשמה";
             return RedirectToAction("Wanted", "Wanted");
         }
+
+
         public ActionResult Logout()
         {
             Session["User"] = null;

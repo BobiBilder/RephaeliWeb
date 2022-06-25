@@ -5,13 +5,16 @@
     ViewBag.Title = "MySupplyOrders";
     Layout = "~/Views/Share/ViewWorker.cshtml";
 }
+<script src="~/Content/Scripts/Food-Script.js"></script>
 <link href="~/Content/Styles/Style-Food.css" rel="stylesheet" />
 <div class="wrapper">
-    <div class="EventWrapper">
+    <form class="EventWrapper" method="post" action="~/FoodSupply/DeleteOrder">
         @foreach (Order order in Model.orders)
         {
             <div class="eventBlock">
                 <label class="container">
+                    <input type="checkbox" id="orderID" name="OrderID" value="@order.id">
+                    <span class="checkmark"></span>
                     <h1 class="eventInfo">@order.Date</h1>
                     @if (order.IsPaid)
                     {
@@ -36,10 +39,11 @@
                 </label>
             </div>
         }
-    </div>
-
-
-
+        <br>
+        <span class="span" id="emptyCheckbox">נא לבחור הזמנה בכדי למחוק</span>
+        <br>
+        <input type="button" onclick="DeleteOrderSupply()" class="button-order" value="מחיקת הזמנות">
+    </form>
     <div class="typesBlock-supplier">
         <a href="~/FoodSupply/FoodSupplyForm">
             <h1 class="types">הזמנה מהספק</h1>

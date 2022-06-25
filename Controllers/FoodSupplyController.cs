@@ -36,7 +36,6 @@ namespace MasterProject.Controllers
             return RedirectToAction("FoodSupplyForm", "FoodSupply");
         }
 
-
         public ActionResult MySupplyOrders()
         {
             ServiceClient serviceClient = new ServiceClient();
@@ -44,6 +43,19 @@ namespace MasterProject.Controllers
             supplierOrderViewModel.orders = serviceClient.GetAllOrders("1");
             supplierOrderViewModel.food = serviceClient.GetAllFood();
             return View(supplierOrderViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteOrder(string[] OrderID)
+        {
+            ServiceClient serviceClient = new ServiceClient();
+            if (serviceClient.DeleteOrder(OrderID))
+            {
+                TempData["message"] = "המחיקה נעשתה בהצלחה";
+                return RedirectToAction("FoodSupplyForm", "FoodSupply");
+            }
+            TempData["message"] = "אירעה שגיאה במחיקה";
+            return RedirectToAction("FoodSupplyForm", "FoodSupply");
         }
     }
 }

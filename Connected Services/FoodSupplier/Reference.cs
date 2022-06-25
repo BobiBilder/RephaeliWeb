@@ -252,11 +252,11 @@ namespace MasterProject.FoodSupplier {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAllFood", ReplyAction="http://tempuri.org/IService/GetAllFoodResponse")]
         System.Threading.Tasks.Task<MasterProject.FoodSupplier.Food[]> GetAllFoodAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/IsPaid", ReplyAction="http://tempuri.org/IService/IsPaidResponse")]
-        bool IsPaid(MasterProject.FoodSupplier.Order order);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/DeleteOrder", ReplyAction="http://tempuri.org/IService/DeleteOrderResponse")]
+        bool DeleteOrder(string[] orderIDs);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/IsPaid", ReplyAction="http://tempuri.org/IService/IsPaidResponse")]
-        System.Threading.Tasks.Task<bool> IsPaidAsync(MasterProject.FoodSupplier.Order order);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/DeleteOrder", ReplyAction="http://tempuri.org/IService/DeleteOrderResponse")]
+        System.Threading.Tasks.Task<bool> DeleteOrderAsync(string[] orderIDs);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAllOrders", ReplyAction="http://tempuri.org/IService/GetAllOrdersResponse")]
         MasterProject.FoodSupplier.Order[] GetAllOrders(string businessID);
@@ -306,12 +306,12 @@ namespace MasterProject.FoodSupplier {
             return base.Channel.GetAllFoodAsync();
         }
         
-        public bool IsPaid(MasterProject.FoodSupplier.Order order) {
-            return base.Channel.IsPaid(order);
+        public bool DeleteOrder(string[] orderIDs) {
+            return base.Channel.DeleteOrder(orderIDs);
         }
         
-        public System.Threading.Tasks.Task<bool> IsPaidAsync(MasterProject.FoodSupplier.Order order) {
-            return base.Channel.IsPaidAsync(order);
+        public System.Threading.Tasks.Task<bool> DeleteOrderAsync(string[] orderIDs) {
+            return base.Channel.DeleteOrderAsync(orderIDs);
         }
         
         public MasterProject.FoodSupplier.Order[] GetAllOrders(string businessID) {

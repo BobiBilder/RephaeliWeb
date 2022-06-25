@@ -142,19 +142,6 @@ namespace MasterProject.BLL
             DataSet dsEvent = eventDB.GetAllEvent();
             EventOrderViewModel eventOrderViewModel = new EventOrderViewModel();
 
-            eventOrderViewModel.Orders = new List<Order>();
-            foreach (DataRow dr in dsEvent.Tables["Orders"].Rows)
-            {
-                Order order = new Order();
-                order.IsPayed = bool.Parse(dr["IsPayed"].ToString());
-                order.OrderDate = dr["OrderDate"].ToString();
-                order.ClientID = int.Parse(dr["ClientID"].ToString());
-                order.id = int.Parse(dr["OrderID"].ToString());
-                order.OrderTime = dr["OrderTime"].ToString();
-                order.IsWorker = bool.Parse(dr["IsWorker"].ToString());
-                eventOrderViewModel.Orders.Add(order);
-            }
-
             eventOrderViewModel.Events = new List<Event>();
             foreach (DataRow dr in dsEvent.Tables["Events"].Rows)
             {
@@ -168,6 +155,24 @@ namespace MasterProject.BLL
                     events.EventType = new EventType();
                     events.EventType.id = int.Parse(dr["EventTypeID"].ToString());
                     eventOrderViewModel.Events.Add(events);
+                }
+            }
+            int count = 0;
+            eventOrderViewModel.Orders = new List<Order>();
+            foreach (DataRow dr in dsEvent.Tables["Orders"].Rows)
+            {
+                if(eventOrderViewModel.Events.Count > count) { 
+                    if(int.Parse(dr["OrderID"].ToString()) == (eventOrderViewModel.Events.ElementAt(count)).OrderID) { 
+                        Order order = new Order();
+                        order.IsPayed = bool.Parse(dr["IsPayed"].ToString());
+                        order.OrderDate = dr["OrderDate"].ToString();
+                        order.ClientID = int.Parse(dr["ClientID"].ToString());
+                        order.id = int.Parse(dr["OrderID"].ToString());
+                        order.OrderTime = dr["OrderTime"].ToString();
+                        order.IsWorker = bool.Parse(dr["IsWorker"].ToString());
+                        eventOrderViewModel.Orders.Add(order);
+                        count++;
+                    }
                 }
             }
 
@@ -211,20 +216,6 @@ namespace MasterProject.BLL
             EventDB eventDB = new EventDB();
             DataSet dsEvent = eventDB.GetAllEvent();
             EventOrderViewModel eventOrderViewModel = new EventOrderViewModel();
-
-            eventOrderViewModel.Orders = new List<Order>();
-            foreach (DataRow dr in dsEvent.Tables["Orders"].Rows)
-            {
-                Order order = new Order();
-                order.IsPayed = bool.Parse(dr["IsPayed"].ToString());
-                order.OrderDate = dr["OrderDate"].ToString();
-                order.ClientID = int.Parse(dr["ClientID"].ToString());
-                order.id = int.Parse(dr["OrderID"].ToString());
-                order.OrderTime = dr["OrderTime"].ToString();
-                order.IsWorker = bool.Parse(dr["IsWorker"].ToString());
-                eventOrderViewModel.Orders.Add(order);
-            }
-
             eventOrderViewModel.Events = new List<Event>();
             foreach (DataRow dr in dsEvent.Tables["Events"].Rows)
             {
@@ -238,6 +229,27 @@ namespace MasterProject.BLL
                     events.EventType = new EventType();
                     events.EventType.id = int.Parse(dr["EventTypeID"].ToString());
                     eventOrderViewModel.Events.Add(events);
+                }
+            }
+
+            int count = 0;
+            eventOrderViewModel.Orders = new List<Order>();
+            foreach (DataRow dr in dsEvent.Tables["Orders"].Rows)
+            {
+                if (eventOrderViewModel.Events.Count > count)
+                {
+                    if (int.Parse(dr["OrderID"].ToString()) == (eventOrderViewModel.Events.ElementAt(count)).OrderID)
+                    {
+                        Order order = new Order();
+                        order.IsPayed = bool.Parse(dr["IsPayed"].ToString());
+                        order.OrderDate = dr["OrderDate"].ToString();
+                        order.ClientID = int.Parse(dr["ClientID"].ToString());
+                        order.id = int.Parse(dr["OrderID"].ToString());
+                        order.OrderTime = dr["OrderTime"].ToString();
+                        order.IsWorker = bool.Parse(dr["IsWorker"].ToString());
+                        eventOrderViewModel.Orders.Add(order);
+                        count++;
+                    }
                 }
             }
 
@@ -349,21 +361,7 @@ namespace MasterProject.BLL
             EventDB eventDB = new EventDB();
             DataSet dsEvent = eventDB.GetAllEvent();
             EventOrderViewModel eventOrderViewModel = new EventOrderViewModel();
-            eventOrderViewModel.Orders = new List<Order>();
-            foreach (DataRow dr in dsEvent.Tables["Orders"].Rows)
-            {
-                Order order = new Order();
-                order.IsPayed = bool.Parse(dr["IsPayed"].ToString());
-                order.OrderDate = dr["OrderDate"].ToString();
-                order.ClientID = int.Parse(dr["ClientID"].ToString());
-                order.id = int.Parse(dr["OrderID"].ToString());
-                order.OrderTime = dr["OrderTime"].ToString();
-                order.IsWorker = bool.Parse(dr["IsWorker"].ToString());
-                order.EmployeeIDs = helper3(order.id);
-
-                eventOrderViewModel.Orders.Add(order);
-            }
-
+            
             eventOrderViewModel.Events = new List<Event>();
             foreach (DataRow dr in dsEvent.Tables["Events"].Rows)
             {
@@ -379,6 +377,28 @@ namespace MasterProject.BLL
                     eventOrderViewModel.Events.Add(events);
                 }
 
+            }
+
+            int count = 0;
+            eventOrderViewModel.Orders = new List<Order>();
+            foreach (DataRow dr in dsEvent.Tables["Orders"].Rows)
+            {
+                if (eventOrderViewModel.Events.Count > count)
+                {
+                    if (int.Parse(dr["OrderID"].ToString()) == (eventOrderViewModel.Events.ElementAt(count)).OrderID)
+                    {
+                        Order order = new Order();
+                        order.IsPayed = bool.Parse(dr["IsPayed"].ToString());
+                        order.OrderDate = dr["OrderDate"].ToString();
+                        order.ClientID = int.Parse(dr["ClientID"].ToString());
+                        order.id = int.Parse(dr["OrderID"].ToString());
+                        order.OrderTime = dr["OrderTime"].ToString();
+                        order.IsWorker = bool.Parse(dr["IsWorker"].ToString());
+                        order.EmployeeIDs = helper3(order.id);
+                        eventOrderViewModel.Orders.Add(order);
+                        count++;
+                    }
+                }
             }
 
             eventOrderViewModel.Clients = new List<Clients>();
